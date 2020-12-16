@@ -1,0 +1,29 @@
+REtail PRO
+Nuevo usuario 1hr	
+Verificación de documentos de venta 5hr
+Emisión de nota de crédito 1hr
+Problema con impresión de boleta 3hr
+
+SISAP
+Nuevo usuario 1hr 
+Problema de visualización 3hr
+
+Otros
+Office 3hr
+Sistema operativo (formateo) 48hr
+
+SOPORTE HARDWARE
+Equipos 16hr
+Perifericos externos 45hr
+
+REPORTES
+Ajustes 16hr (2 dias)
+Nuevo reporte 90hr (2 semanas)
+
+SOLICITUD DE RECURSOS
+Nuevo punto de red EXTERNO
+Perifericos externos 3hr
+
+DESARROLLO
+Editar módulo 16hr (2 dias)
+Agregar módulo 90hr (2 semanas)

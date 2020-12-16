@@ -1,0 +1,1 @@
+Carpeta para guardar logs de eventos , estos archivos estan incluido en .gitignore

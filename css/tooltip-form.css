@@ -1,0 +1,70 @@
+p {
+color:#000;
+font-size:16px;
+font-weight:700
+}
+#button {
+	border:5px solid #0c799e;
+	width:250px;
+	padding:10px;
+	font-size:16px;
+	font-weight:700;
+	color:#fff;
+	border-radius:3px;
+	background:linear-gradient(to bottom,#59d0f8 5%,#49c0e8 100%);
+	cursor:pointer
+}
+#button:hover {
+	background:linear-gradient(to bottom,#49c0e8 5%,#59d0f8 100%)
+}
+input[type=text] {
+	margin-top:5px;
+	margin-bottom:20px;
+	width:96%;
+	border-radius:5px;
+	border:1;
+	/*padding:5px 0*/
+}
+
+#areaSolicitaDesc{
+	margin-bottom:20px;
+	width:96%;
+	border-radius:5px;
+	border:1;
+	padding:5px 0;
+	text-align:left;
+	padding-left:10px;
+}
+#title{
+	padding-left:10px
+}
+#description{
+	
+	resize: vertical;
+	margin-bottom:20px;
+	width:96%;
+	border-radius:5px;
+	border:1;
+	padding:5px 0;
+	text-align:left;
+}
+#aceptar{
+	width:30%;
+	border:1px solid #59b4d4;
+	background:#649ebf;
+	color:#fff;
+	padding:3px 0;
+	border-radius:5px;
+	border-color:#c9c9c9;
+	margin-left:33%;
+	cursor:pointer;
+	margin-top:20px;
+}
+#aceptar:hover{
+	border:1px solid #666;
+	background:#555;
+	color:#fff
+}
+.ui-dialog .ui-dialog-content {
+padding:2em
+}
