@@ -42,7 +42,7 @@ function int_rut($rut_param){
 
 function getmodulo ($a)
 {
-	 if( ($a == 000) || ($a == 008) || ($a == 8) )return "Modulo 2077";
+	 if( ($a == "000") || ($a == "008") || ($a == "8") )return "Modulo 2077";
 	 else if($a == 001)return "Modulo 1010";
 	 else if($a == 002)return "Modulo 1132";
 	 else if($a == 003)return "Modulo 181";
