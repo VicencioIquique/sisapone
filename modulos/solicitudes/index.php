@@ -90,7 +90,7 @@ if (isset($_GET['criterio'])){
                       dbo.sisap_solicitudes.cantidad_total, dbo.sisap_solicitudes.modulo, dbo.sisap_solicitudes.vendedor_id, dbo.sisap_solicitudes.recepcion_id, 
                       dbo.sisap_usuarios.usuario_nombre
 FROM         dbo.sisap_solicitudes LEFT OUTER JOIN
-                      dbo.sisap_usuarios ON dbo.sisap_solicitudes.vendedor_id = dbo.sisap_usuarios.usuario_id WHERE  ".$_SESSION["usuario_modulo"]." LIKE  dbo.sisap_solicitudes.modulo and fecha_estado>'2020-07-01'
+                      dbo.sisap_usuarios ON dbo.sisap_solicitudes.vendedor_id = dbo.sisap_usuarios.usuario_id WHERE  ".$_SESSION["usuario_modulo"]." LIKE  dbo.sisap_solicitudes.modulo and (fecha_estado>'2020-07-01'or fecha_estado is null)
 					ORDER BY estado, dbo.sisap_solicitudes.solicitud_id DESC";
 
 					
