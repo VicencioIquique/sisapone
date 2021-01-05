@@ -252,7 +252,7 @@ $(document).ready(function() {
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
 						$("#caja").append('<option value="1">1</option>');
-						$("#caja").append('<option value="1">2</option>');
+						$("#caja").append('<option value="2">2</option>');
 					}else if(modulo == '002'){
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
