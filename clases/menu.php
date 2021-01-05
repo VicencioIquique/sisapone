@@ -100,7 +100,8 @@ class menu{
 					     	<li><a href='#'>Brand Manager</a>
 								 <ul class='children'>
 										<li><a href='index.php?opc=ventasBM'>Ventas BM</a></li>
-							 </ul>
+										<li><a href='index.php?opc=mantenedorProm'>Promociones</a></li>
+							 	</ul>
 							 
 							 <!--<li><a href='#'>DSM</a>
 								 <ul class='children'>

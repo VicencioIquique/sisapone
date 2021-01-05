@@ -99,6 +99,9 @@ require_once("clases/registroLogs.php");
 							case 'notaCredito':
 								 include("modulos/vendedor/notasCpro.php");
 							   break;
+							 case 'mantenedorProm':
+								include("modulos/promociones/mantenedorPromociones.php");
+							 break;
 							case 'ventasBM':
 								 include("modulos/vendedor/ventasBrand.php");
 							   break;
