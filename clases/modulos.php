@@ -616,6 +616,9 @@ require_once("clases/registroLogs.php");
 							 case 'buscarCodigoBodega':
 								 include("modulos/vendedor/buscarCodigoBodega.php");
 							   break;
+							   case 'mantenedorProm':
+								include("modulos/promociones/mantenedorPromociones.php");
+							 break;
 
 							case 'ventasdet':
 								 include("modulos/vendedor/ventasprodet.php");

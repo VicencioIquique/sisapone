@@ -525,8 +525,7 @@ class menu{
 							
 							<li><a href='index.php?opc=nuevaSolicitudbrand' >Solicitudes <span class='burbuja'>0</span></a>
 							</li>
-							<li><a href='index.php?opc=nuevaSolicitudbrandAir' >Solicitudes Aero. <span class='burbujaAir'>0</span></a>
-							</li>
+							<li><a href='index.php?opc=mantenedorProm'>Promociones</a></li>
 							
 							  <li><a href='#'>Reportes Comerciales</a>
 								 <ul class='children'>
@@ -663,7 +662,8 @@ class menu{
 												</ul>
 											</li>
 										</ul>
-									</li>
+							</li>
+							
 					   </ul>
 				</div> <!-- Menu Brand Manager --> ";
 				
