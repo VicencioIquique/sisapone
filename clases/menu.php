@@ -261,9 +261,9 @@ class menu{
 												
 												<li><a href='index.php?opc=estAuto'>Año 2020</a>
 													<ul class='children'>
-													 <li><a target'_blank' href='../sisap/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
-													 <li><a target'_blank' href='../sisap/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
-													 
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
 												    </ul>
 												</li>
 										    
@@ -424,11 +424,11 @@ class menu{
 							 <li><a href='#'>Reportes Comerciales</a>
 								 <ul class='children'>
 										<li><a href='index.php?opc=estAuto'>Año 2020</a>
-											<ul class='children'>
-											 <li><a target'_blank' href='../sisap/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
-											 <li><a target'_blank' href='../sisap/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
-											 
-											</ul>
+										<ul class='children'>
+										<li><a target'_blank' href='../sisapone/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
+										<li><a target'_blank' href='../sisapone/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
+										<li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
+									   </ul>
 										</li>
 
 										<li><a href='index.php?opc=maestroArticulos'>Maestro de Articulos</a></li>
@@ -594,10 +594,11 @@ class menu{
 												    </ul>
 												</li>
 												<li><a href='index.php?opc=estAuto'>Año 2020</a>
-													<ul class='children'>
-													 <li><a target'_blank' href='../sisap/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
-													 <li><a target'_blank' href='../sisap/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
-													</ul>
+												<ul class='children'>
+												<li><a target'_blank' href='../sisapone/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
+												<li><a target'_blank' href='../sisapone/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
+												<li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
+											   </ul>
 												</li>
 										    </ul>
 										</li>
@@ -1071,11 +1072,11 @@ class menu{
 												</li>
 												
 												<li><a href='index.php?opc=estAuto'>Año 2020</a>
-													<ul class='children'>
-													 <li><a target'_blank' href='../sisap/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
-													 <li><a target'_blank' href='../sisap/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
-													 
-												    </ul>
+												<ul class='children'>
+												<li><a target'_blank' href='../sisapone/archivos/Oct2020.xlsx'>Oct. 2020</a></li>
+												<li><a target'_blank' href='../sisapone/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
+												<li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
+											   </ul>
 												</li>
 										    
 										    </ul>
