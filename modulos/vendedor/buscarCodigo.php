@@ -83,7 +83,14 @@ FROM         dbo.RP_Articulos LEFT OUTER JOIN
 WHERE     (dbo.RP_Articulos.ALU ='".$codbarra."') ";
 							
 						//echo $sql;
-					 
+			
+
+		$SQLEC ="SELECT ItemCode,sum(Quantity) as cant FROM [SBO_Imp_Eximben_SAC].[dbo].[SI_Stock_Bodega_SAPJC]
+		WHERE ItemCode = '".$codbarra."' AND(WhsCode IN ('ECM.2002'))
+		group BY ItemCode";
+					$rsStockEC = odbc_exec( $conn, $SQLEC );
+					$resultadoEC = odbc_fetch_array($rsStockEC);
+			
 					 $stock = explode("-",stockModulos($codbarra));
 					 $stockAir = explode("-",stockAeropuerto($codbarra));
 							//echo $sql;	
@@ -119,7 +126,7 @@ WHERE     (dbo.RP_Articulos.ALU ='".$codbarra."') ";
 								<a href="modulos/indicadores/rotacion.php?sku='.$codbarra.'&bodega=2" onclick="$(this).modal({width:1110, height:445}).open(); return false;"><span>1132</span></a>
 						</div>
 						<div id="muestraPrecio" class="caja2" style="margin-top:10px; font-size:24px; text-align:center; padding-top:10px;float:left;width:7%; height:10px;  background-color: #054950;border: 1px solid #d5d5d5;">
-								<a href="modulos/indicadores/rotacion.php?sku='.$codbarra.'&bodega=3" onclick="$(this).modal({width:1110, height:445}).open(); return false;"><span>181</span></a>
+								<a href="modulos/indicadores/rotacion.php?sku='.$codbarra.'&bodega=3" onclick="$(this).modal({width:1110, height:445}).open(); return false;"><span>E-C</span></a>
 						</div>
 						<div id="muestraPrecio" class="caja2" style="margin-top:10px; font-size:24px; text-align:center; padding-top:10px;float:left;width:7%;height:10px;  background-color: #054950;border: 1px solid #d5d5d5;">
 								<a href="modulos/indicadores/rotacion.php?sku='.$codbarra.'&bodega=4" onclick="$(this).modal({width:1110, height:445}).open(); return false;"><span>184</span></a>
@@ -146,7 +153,7 @@ WHERE     (dbo.RP_Articulos.ALU ='".$codbarra."') ";
 								<span style="font-size:55px; text-shadow: #000 0px 0px 10px; text-shadow: #000 0px 0px 10px 10px;">'.$stock[1].'</span>	
 						</div>
 						<div id="muestraPrecio" class="caja2" style="margin-top:1px; font-size:24px; text-align:center; padding-top:10px;float:left;width:7%; height:80px;  background-color: #054950;border: 1px solid #d5d5d5;">
-								<span style="font-size:55px; text-shadow: #000 0px 0px 10px; text-shadow: #000 0px 0px 10px 10px;">'.$stock[2].'</span>	
+								<span style="font-size:55px; text-shadow: #000 0px 0px 10px; text-shadow: #000 0px 0px 10px 10px;">'.(int)$resultadoEC["cant"].'</span>	
 						</div>
 						<div id="muestraPrecio" class="caja2" style="margin-top:1px; font-size:24px; text-align:center; padding-top:10px;float:left;width:7%;height:80px;  background-color: #054950;border: 1px solid #d5d5d5;">
 								<span style="font-size:55px; text-shadow: #000 0px 0px 10px; text-shadow: #000 0px 0px 10px 10px;">'.$stock[3].'</span>	
@@ -274,7 +281,7 @@ echo'</br>
       ,[ExpensesAc]
       ,[grupo_bodega]
   FROM [SBO_Imp_Eximben_SAC].[dbo].[SI_Stock_Bodega_SAPJC]
-  WHERE ItemCode = '".$codbarra."' AND(WhsCode IN ('ZFI.1010', 'ZFI.181', 'ZFI.184', 'ZFI.2002', 'ZFI.1132', 'ZFI.6130', 'ZFI.6115'))
+  WHERE ItemCode = '".$codbarra."' AND(WhsCode IN ('ZFI.1010','ECM.2002', 'ZFI.184', 'ZFI.2002', 'ZFI.1132', 'ZFI.6130', 'ZFI.6115'))
 ORDER BY WhsCode  ";
 
      //echo $sql2;	
