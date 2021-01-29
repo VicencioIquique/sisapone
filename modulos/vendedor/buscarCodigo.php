@@ -84,10 +84,10 @@ WHERE     (dbo.RP_Articulos.ALU ='".$codbarra."') ";
 							
 						//echo $sql;
 			
+		$SQLEC ="select sum(Cantidad) as cant,ItemCode from rp_vicencio.dbo.SI_LotesDisponibles  where itemcode ='".$codbarra."' and bodega ='009'group by ItemCode ";
 
-		$SQLEC ="SELECT ItemCode,sum(Quantity) as cant FROM [SBO_Imp_Eximben_SAC].[dbo].[SI_Stock_Bodega_SAPJC]
-		WHERE ItemCode = '".$codbarra."' AND(WhsCode IN ('ECM.2002'))
-		group BY ItemCode";
+
+
 					$rsStockEC = odbc_exec( $conn, $SQLEC );
 					$resultadoEC = odbc_fetch_array($rsStockEC);
 			
