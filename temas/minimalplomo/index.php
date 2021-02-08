@@ -59,35 +59,35 @@ require_once("clases/funciones.php");
  $.datepicker.setDefaults($.datepicker.regional['es']);
  </script>
  <script>
-	function alertas(){
-		$.post('modulos/requerimientos/obtenerSolicitudes.php',function(resPHP){
-			var fechaActual = new Date();
-			var diaActual = fechaActual.getDate(); 
-			res = $.parseJSON(resPHP);
-			for(i=0;i<res.length;i++){
-				/*
-					Estados:
-					1: Sin alerta
-					2: Con alerta y correo mandado
-				*/
-				$.post('modulos/requerimientos/obtenerEstadoAlerta.php',{idReq:res[i]['idRequerimiento']},function(resPHP){
-					var resAlert = $.parseJSON(resPHP);
-					if((resAlert[0]['estadoAlerta'] == '1') && (diaActual%3 == 0)){
-						/*CAMBIAR A ESTADO 2 Y MANDAR EMAIL*/
-						$.post('modulos/requerimientos/actualizarEstadoAlarmaUno.php',{idReq:resAlert[0]['idRequerimiento']});
-					}else if((resAlert[0]['estadoAlerta'] == '2') && (diaActual%3 == 0)){
-						/*DEJAR EN ESTADO 2 Y NO MANDAR EMAIL*/
-						//$.post('modulos/requerimientos/actualizarEstadoAlarmaDos.php',{idReq:resAlert[0]['idRequerimiento']});
-					}else if(diaActual%3 != 0){
-						/*CAMBIAR A ESTADO 1 PARA REINICIAR EL ESTADO Y MANDAR EMAIL EN LOS DÍAS HÁBILES*/
-						$.post('modulos/requerimientos/actualizarEstadoAlarmaSinAlerta.php',{idReq:resAlert[0]['idRequerimiento']});
-					}
-				});
-			}
-		});
-	};
+	// function alertas(){
+	// 	$.post('modulos/requerimientos/obtenerSolicitudes.php',function(resPHP){
+	// 		var fechaActual = new Date();
+	// 		var diaActual = fechaActual.getDate(); 
+	// 		res = $.parseJSON(resPHP);
+	// 		for(i=0;i<res.length;i++){
+	// 			/*
+	// 				Estados:
+	// 				1: Sin alerta
+	// 				2: Con alerta y correo mandado
+	// 			*/
+	// 			$.post('modulos/requerimientos/obtenerEstadoAlerta.php',{idReq:res[i]['idRequerimiento']},function(resPHP){
+	// 				var resAlert = $.parseJSON(resPHP);
+	// 				if((resAlert[0]['estadoAlerta'] == '1') && (diaActual%3 == 0)){
+	// 					/*CAMBIAR A ESTADO 2 Y MANDAR EMAIL*/
+	// 					$.post('modulos/requerimientos/actualizarEstadoAlarmaUno.php',{idReq:resAlert[0]['idRequerimiento']});
+	// 				}else if((resAlert[0]['estadoAlerta'] == '2') && (diaActual%3 == 0)){
+	// 					/*DEJAR EN ESTADO 2 Y NO MANDAR EMAIL*/
+	// 					//$.post('modulos/requerimientos/actualizarEstadoAlarmaDos.php',{idReq:resAlert[0]['idRequerimiento']});
+	// 				}else if(diaActual%3 != 0){
+	// 					/*CAMBIAR A ESTADO 1 PARA REINICIAR EL ESTADO Y MANDAR EMAIL EN LOS DÍAS HÁBILES*/
+	// 					$.post('modulos/requerimientos/actualizarEstadoAlarmaSinAlerta.php',{idReq:resAlert[0]['idRequerimiento']});
+	// 				}
+	// 			});
+	// 		}
+	// 	});
+	// };
 	$(document).ready(function(){
-		alertas();
+		// alertas();
 		$("#largo").focus();
 	});
  </script>
