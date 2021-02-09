@@ -266,6 +266,11 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
 												    </ul>
 												</li>
+												<li><a href='index.php?opc=estAuto'>Año 2021</a>
+													<ul class='children'>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2021.xlsx'>Ene. 2021</a></li>
+													</ul>
+												</li>
 										    
 										    </ul>
 										</li>
@@ -430,6 +435,11 @@ class menu{
 										<li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
 									   </ul>
 										</li>
+										<li><a href='index.php?opc=estAuto'>Año 2021</a>
+													<ul class='children'>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2021.xlsx'>Ene. 2021</a></li>
+													</ul>
+												</li>
 
 										<li><a href='index.php?opc=maestroArticulos'>Maestro de Articulos</a></li>
 										<li><a href='index.php?opc=unidadesVendidasMes'>Venta Unidades Mes</a></li>
@@ -598,6 +608,11 @@ class menu{
 												<li><a target'_blank' href='../sisapone/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
 												<li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
 											   </ul>
+												</li>
+												<li><a href='index.php?opc=estAuto'>Año 2021</a>
+													<ul class='children'>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2021.xlsx'>Ene. 2021</a></li>
+													</ul>
 												</li>
 										    </ul>
 										</li>
@@ -1077,6 +1092,11 @@ class menu{
 												<li><a target'_blank' href='../sisapone/archivos/Nov2020.xlsx'>Nov. 2020</a></li>
 												<li><a target'_blank' href='../sisapone/archivos/Dic2020.xlsx'>Dic. 2020</a></li>
 											   </ul>
+												</li>
+												<li><a href='index.php?opc=estAuto'>Año 2021</a>
+													<ul class='children'>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2021.xlsx'>Ene. 2021</a></li>
+													</ul>
 												</li>
 										    
 										    </ul>

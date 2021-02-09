@@ -8,25 +8,25 @@
  *
  */
 
-(function ($) {
+(function($) {
 
     $datatype = {
-        Table: 1
-        , Json: 2
-        , Xml: 3
-        , JqGrid: 4
+        Table: 1,
+        Json: 2,
+        Xml: 3,
+        JqGrid: 4
     }
 
     var $defaults = {
-        containerid: null
-        , datatype: $datatype.Table
-        , dataset: null
-        , columns: null
+        containerid: null,
+        datatype: $datatype.Table,
+        dataset: null,
+        columns: null
     };
 
     var $settings = $defaults;
 
-    $.fn.btechco_excelexport = function (options) {
+    $.fn.btechco_excelexport = function(options) {
         $settings = $.extend({}, $defaults, options);
 
         switch ($settings.datatype) {
@@ -48,7 +48,7 @@
             var result = "<table>";
 
             result += "<thead><tr>";
-            $($settings.columns).each(function (key, value) {
+            $($settings.columns).each(function(key, value) {
                 if (this.ishidden != true) {
                     result += "<th";
                     if (this.width != null) {
@@ -62,9 +62,9 @@
             result += "</tr></thead>";
 
             result += "<tbody>";
-            $($settings.dataset).each(function (key, value) {
+            $($settings.dataset).each(function(key, value) {
                 result += "<tr>";
-                $($settings.columns).each(function (k, v) {
+                $($settings.columns).each(function(k, v) {
                     if (value.hasOwnProperty(this.datafield)) {
                         if (this.ishidden != true) {
                             result += "<td";
@@ -89,7 +89,7 @@
             var result = "<table>";
 
             result += "<thead><tr>";
-            $($settings.columns).each(function (key, value) {
+            $($settings.columns).each(function(key, value) {
                 if (this.ishidden != true) {
                     result += "<th";
                     if (this.width != null) {
@@ -103,9 +103,9 @@
             result += "</tr></thead>";
 
             result += "<tbody>";
-            $($settings.dataset).find("row").each(function (key, value) {
+            $($settings.dataset).find("row").each(function(key, value) {
                 result += "<tr>";
-                $($settings.columns).each(function (k, v) {
+                $($settings.columns).each(function(k, v) {
                     if ($(value).attr(this.datafield)) {
                         if (this.ishidden != true) {
                             result += "<td";
@@ -130,7 +130,7 @@
             var result = "<table>";
 
             result += "<thead><tr>";
-            $($settings.columns).each(function (key, value) {
+            $($settings.columns).each(function(key, value) {
                 if (this.ishidden != true) {
                     result += "<th";
                     if (this.width != null) {
@@ -144,9 +144,9 @@
             result += "</tr></thead>";
             result += "<tbody>";
 
-            $($settings.dataset).find("rows > row").each(function (key, value) {
+            $($settings.dataset).find("rows > row").each(function(key, value) {
                 result += "<tr>";
-                $($settings.columns).each(function (k, v) {
+                $($settings.columns).each(function(k, v) {
                     if ($(value).find(this.datafield)) {
                         if (this.ishidden != true) {
                             result += "<td";
@@ -188,7 +188,7 @@
             excelFile += "<![endif]-->";
             excelFile += "</head>";
             excelFile += "<body>";
-            excelFile += htmltable.replace(/"/g, '\'');
+            //excelFile += htmltable.replace(/"/g, '\'');
             excelFile += "</body>";
             excelFile += "</html>";
 
