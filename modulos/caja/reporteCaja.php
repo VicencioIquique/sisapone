@@ -258,6 +258,7 @@ $(document).ready(function() {
 						$("#caja").append('<option value="3">3</option>');
 						$("#caja").append('<option value="4">4</option>');
 						$("#caja").append('<option value="5">5</option>');
+						$("#caja").append('<option value="6">6</option>');
 					}else if(modulo == '003'){
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
