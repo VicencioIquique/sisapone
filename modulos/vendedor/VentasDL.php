@@ -131,7 +131,7 @@ if($consultar)
 					  ,[RetencionDL]
     			FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
 				WHERE 1=1
-				AND Year = '2020'
+				AND Year = '2021'
 				AND CONVERT(date,[DocDate]) = '".$finicio."'
 			) AS TABLA
 			GROUP BY TABLA.WhsCode 
@@ -141,7 +141,7 @@ if($consultar)
       			,SUM(TotalCLP) [Total]
   			FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
 			WHERE 1=1
-			  AND Year = '2020'
+			  AND Year = '2021'
 			  AND CONVERT(date,[DocDate]) = '".$finicio."'
 			GROUP BY WhsCode) T2 ON T1.Local = T2.WhsCode
 		";
