@@ -269,6 +269,10 @@ class menu{
 												<li><a href='index.php?opc=estAuto'>Año 2021</a>
 													<ul class='children'>
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2021.xlsx'>Ene. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2021.xlsx'>Feb. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Mar2021.xlsx'>Mar. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Abr2021.xlsx'>Abr. 2021</a></li>
+
 													</ul>
 												</li>
 										    
@@ -612,6 +616,10 @@ class menu{
 												<li><a href='index.php?opc=estAuto'>Año 2021</a>
 													<ul class='children'>
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2021.xlsx'>Ene. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2021.xlsx'>Feb. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Mar2021.xlsx'>Mar. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Abr2021.xlsx'>Abr. 2021</a></li>
+
 													</ul>
 												</li>
 										    </ul>
@@ -1096,6 +1104,10 @@ class menu{
 												<li><a href='index.php?opc=estAuto'>Año 2021</a>
 													<ul class='children'>
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2021.xlsx'>Ene. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2021.xlsx'>Feb. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Mar2021.xlsx'>Mar. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Abr2021.xlsx'>Abr. 2021</a></li>
+
 													</ul>
 												</li>
 										    
