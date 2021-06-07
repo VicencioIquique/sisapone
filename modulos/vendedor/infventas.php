@@ -74,6 +74,7 @@ $ffin = $_GET['fin'];
 									<option value="005">Modulo 2002</option>
 									<option value="006">Modulo 6115</option>
 									<option value="007">Modulo 6130</option>
+									<option value="009">E-Commerce</option>
 									</select>
 				            </label>';
 								}
@@ -122,7 +123,7 @@ ORDER BY NRODOCTO";
 
 
 					
-						//echo $sql;
+						echo $sql;
 							//echo " Aqui hay un error que se genera porque son muchos registros que se solicitan, y el tipo de variable solo permite ciertos byte mañana se analizará";	
 							$rs = odbc_exec( $conn, $sql );
 							if ( !$rs )
