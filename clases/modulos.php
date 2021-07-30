@@ -102,6 +102,9 @@ require_once("clases/registroLogs.php");
 							 case 'mantenedorProm':
 								include("modulos/promociones/mantenedorPromociones.php");
 							 break;
+							 case 'familyF':
+								include("modulos/family_friends/familyF.php");
+							 break;
 							case 'ventasBM':
 								 include("modulos/vendedor/ventasBrand.php");
 							   break;
@@ -691,6 +694,9 @@ require_once("clases/registroLogs.php");
 							case 'reporteHistorico':
 								 include("modulos/vendedor/reporteHistorico.php");
 							   break;
+							case 'familyF':
+								include("modulos/family_friends/familyF.php");
+							 break;
 							case 'listaPrecio':
 								 include("modulos/vendedor/listaPrecio.php");
 							   break;

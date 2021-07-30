@@ -541,7 +541,13 @@ class menu{
 							
 							<li><a href='index.php?opc=nuevaSolicitudbrand' >Solicitudes <span class='burbuja'>0</span></a>
 							</li>
-							<li><a href='index.php?opc=mantenedorProm'>Promociones</a></li>
+							<li><a href='#'>Promociones</a>
+								<ul class='children'>
+								<li><a href='index.php?opc=mantenedorProm'>Promociones</a></li>
+								<li><a href='index.php?opc=familyF'>Family and Friends</a></li>
+								</ul>
+							</li>
+							
 							
 							  <li><a href='#'>Reportes Comerciales</a>
 								 <ul class='children'>
