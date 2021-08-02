@@ -48,7 +48,7 @@ $productos[5]= new Producto ('CHANEL','Labial Impressive Rouge Allure Velvet Ext
 
 
 $productos[6]= new Producto ('DIOR','skin Polvo Nude Luminizer','3348901399906','01/07/2021',2,29990,18900);
-$productos[7]= new Producto ('DIOR','Rouge Labial Ultra Rouge Hidratante','3348901408813','01/08/2021',2,23990,14900);
+$productos[7]= new Producto ('DIOR','Rouge Labial Ultra Rouge Hidratante','3348901408813','01/08/2021',1,23990,14900);
 $productos[8]= new Producto ('DIOR','Rouge Labial Ultra Rouge Hidratante','3348901408714','01/08/2021',2,23990,14900);
 $productos[9]= new Producto ('DIOR','Addict Labial Líquido Larga Duración','3348901404990','01/08/2021',3,23990,14900);
 $productos[10]= new Producto ('DIOR','Diorskin Nude Polvo Iluminador','3348901399937','01/08/2021',3,29990,19500);
@@ -56,7 +56,7 @@ $productos[11]= new Producto ('DIOR','Rouge Labial Ultra Rouge Pigmented Hydra',
 $productos[12]= new Producto ('DIOR','Capture Youth Serum Age-delay Anti-redness 30ml','3348901377898','01/09/2021',2,58990,37900);
 $productos[13]= new Producto ('DIOR','Rouge Labial Ultra Rouge Pigmented Hydra','3348901408899','01/10/2021',8,23990,14900);
 $productos[14]= new Producto ('DIOR','Rouge Labial Ultra Rouge Hidratante','3348901408820','01/10/2021',5,23990,14900);
-$productos[15]= new Producto ('DIOR','Rouge Labial Ultra Rouge Pigmented Hydra','3348901408752','01/10/2021',8,23990,14900);
+$productos[15]= new Producto ('DIOR','Rouge Labial Ultra Rouge Pigmented Hydra','3348901408752','01/10/2021',7,23990,14900);
 //$fileObjeto = json_decode(json_encode($productos, JSON_FORCE_OBJECT));
 echo (json_encode($productos))
 ?>
