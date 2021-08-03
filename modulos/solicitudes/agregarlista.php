@@ -7,7 +7,7 @@ $sku = $_POST['sku'];
 $stock = $_POST['stock'];
 $cant = $_POST['cant'];
 $descrip = $_POST['descrip'];
-$descrip = str_replace("\'","''",$descrip);
+$descrip = str_replace("'"," ",$descrip);
 
 
 echo $sql2="SELECT  [Bodega]
