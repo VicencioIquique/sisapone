@@ -114,7 +114,7 @@ else
 					 GROUP BY  [BManager]";
 
 
-//echo $sql;
+echo $sql;
 										
 							//echo $sql;	
 							$rs = odbc_exec( $conn, $sql );

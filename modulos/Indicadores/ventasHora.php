@@ -64,7 +64,7 @@ $sql = "SELECT SUM([total])AS TOTAL
 
 
 
-//echo $sql;			
+echo $sql;			
 	echo'  <script src="graficos/amcharts/amcharts.js" type="text/javascript"></script> ';//incluyo la librería para generar graficos	
 	include("graficos/ventaHora.php");// grafico que mustra las ventas por marcas en peso 
 ?>
