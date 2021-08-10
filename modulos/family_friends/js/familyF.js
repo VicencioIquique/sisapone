@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $.post('modulos/family_friends/scripts/buscarBoletas.php', function(res){
         var resInfo = $.parseJSON(res);
-        console.log(resInfo[1]);
+        console.log(resInfo);
         $("#ssptable2 tbody tr").remove();
         resInfo.map((i)=>{
             //console.log(i.nombre);
