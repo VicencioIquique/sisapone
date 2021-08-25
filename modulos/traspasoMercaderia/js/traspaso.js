@@ -1,3 +1,5 @@
+const url = "http://192.168.3.41:9095";//productiva
+//const url = "https://localhost:44397";//prueba
 $(document).ready(function(){
     $("#validar").hide();
 	$("#consultar").click(async function (){
@@ -16,10 +18,8 @@ $(document).ready(function(){
 });
 
 const buscarDsm = async(dsm,codModulo)=>{
-	const urlProd = "http://192.168.3.41:9095";
-	const urlDev = "https://localhost:44397";
 	try{
-		const respuesta = await fetch(`${urlProd}/api/rp_dsm/${dsm},${codModulo}`);
+		const respuesta = await fetch(`${url}/api/rp_dsm/${dsm},${codModulo}`);
 		console.log (respuesta);
 		if(respuesta.ok){
 			$("#validar").show();
@@ -45,11 +45,9 @@ const buscarDsm = async(dsm,codModulo)=>{
 }
 
 const validarTraspaso = async (data)=>{
-	const urlProd = "http://192.168.3.41:9095";
-	const urlDev = "https://localhost:44397"; // EJECUCION EN desarrollo V.S 19
 	//console.log(data);
 	try{
-		const respuesta = await fetch(`${urlProd}/api/TraspasoMercaderia`,{
+		const respuesta = await fetch(`${url}/api/TraspasoMercaderia`,{
 			method:'POST',
 			body :JSON.stringify(data),
 			headers:{ 'Accept':'application/json','Content-Type': 'application/json'}	
