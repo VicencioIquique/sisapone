@@ -82,7 +82,7 @@ $sql="SELECT
 
 
 
-//echo $sql;
+echo $sql;
 
 							
 	echo'  <script src="graficos/amcharts/amcharts.js" type="text/javascript"></script>   ';	
