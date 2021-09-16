@@ -166,7 +166,7 @@ if ( !$rs){
 	exit( "Error en la consulta SQL" );
 }
 while($resultado = odbc_fetch_array($rs)){
-	list($periodoAnio, $periodoMes) = split('[-]', $resultado["Periodo"]);
+	list($periodoAnio, $periodoMes) = explode('[-]', $resultado["Periodo"]);
 	$periodoMes=(string)(int)$periodoMes; //QUITAMOS EL CERO DEL MES ES DECIR 01 queda en 1
 	switch($resultado["WhsCode"]){
 		case 'LOCAL.2':
@@ -212,7 +212,7 @@ while($resultado = odbc_fetch_array($rs)){
 	}
 	 
 }
-
+//echo $sql;
 //TOTALES
 $TOTAL_ZFI181 = array();
 $TOTAL_ZFI184 = array();

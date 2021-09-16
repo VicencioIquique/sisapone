@@ -237,7 +237,7 @@ SELECT
 ";
 
 
-//echo $sql5;
+echo $sql;
 
 	
 
@@ -512,7 +512,7 @@ SELECT
 
 ";
 
-echo $sql7;
+//echo $sql7;
 
 /* MODULPS AEROPUERTO */
                 $rs7 = odbc_exec( $conn, $sql7 );
