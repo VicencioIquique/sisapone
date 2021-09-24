@@ -166,8 +166,12 @@ SELECT
   
       ,SUM([Cantidad]) [Cantidad]
       ,SUM([TotalCLP]) [TotalCLP]
-      ,(SUM([TotalCLP])/SUM([Cantidad])) [Media]
-      ,SUM([TotalCIF]) [TotalCIF]
+      ,CASE
+	  WHEN SUM([Cantidad]) = 0
+	 	THEN SUM([TotalCLP])
+	  	ELSE (SUM([TotalCLP])/SUM([Cantidad]))
+  		END AS [Media] 
+  ,SUM([TotalCIF]) [TotalCIF]
       ,SUM([TotalUSD]) [TotalUSD]
       ,SUM(RetencionDL)[RetencionDL]
   FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
@@ -237,7 +241,7 @@ SELECT
 ";
 
 
-echo $sql;
+//echo $sql;
 
 	
 
