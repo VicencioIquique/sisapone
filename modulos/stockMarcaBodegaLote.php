@@ -112,6 +112,7 @@ if ($uNegocio)
 				// calendarios en text de fecha inicio fin
 				$( "#inicio" ).datepicker( );
 				//formatos de las fechas
+				
 			   // $('#inicio').datepicker('option', {dateFormat: 'dd-mm-yy'});
 				$( "#fin" ).datepicker(  );
 				//$('#fin').datepicker('option', {dateFormat: 'dd-mm-yy'});
@@ -139,7 +140,7 @@ $(document).ready(function() {
 					
 		if($finicio2){
 		
-			echo'<form action="/sisap/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
+			echo'<form action="/sisapone/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
 			<center><img src="images/excel.png" width="30px" height="30px" class="botonExcel"  /> </center>
 			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" /> 
 			</form> ';

@@ -158,7 +158,7 @@ $(document).ready(function() {
 					
 		if($periodo3){
 		
-			echo'<form action="/sisap/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
+			echo'<form action="/sisapone/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
 			<center><img src="images/excel.png" width="30px" height="30px" class="botonExcel"  /> </center>
 			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" /> 
 			</form> ';
@@ -213,7 +213,7 @@ $(document).ready(function() {
   <table  id="ssptable2" class="t1" >
             <thead>
                     <tr>
-                        <th><form action="/sisap/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
+                        <th><form action="/sisapone/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
 			<center><img src="images/excel.png" width="25px" height="25px" class="botonExcel1"  /> </center>
 			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" /> 
 			</form></th>

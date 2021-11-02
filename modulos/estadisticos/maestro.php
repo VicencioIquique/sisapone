@@ -129,7 +129,7 @@ $(document).ready(function() {
 					
 		if($consultar){
 		
-			echo'<form action="/sisap/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
+			echo'<form action="/sisapone/clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
 			<center><img src="images/excel.png" width="30px" height="30px" class="botonExcel"  /> </center>
 			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" /> 
 			</form> ';
