@@ -590,8 +590,8 @@ overflow-y:hidden;">
 						<td ><strong>'.number_format($tagosto, 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($tseptiembre, 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($toctubre, 0, '', '.').'</strong></td>
-						<td ><strong>'.number_format($tdiciembre, 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($tnoviembre, 0, '', '.').'</strong></td>
+						<td ><strong>'.number_format($tdiciembre, 0, '', '.').'</strong></td>
 						
 						<td style=" border-left:1px solid #575757;"><strong >'.number_format($ttrim1, 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($ttrim2, 0, '', '.').'</strong></td>
