@@ -527,8 +527,8 @@ overflow-y:hidden;">
 						<td ><strong>'.number_format($resultado["Agosto"], 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($resultado["Septiembre"], 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($resultado["Octubre"], 0, '', '.').'</strong></td>
-						<td ><strong>'.number_format($resultado["Diciembre"], 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($resultado["Noviembre"], 0, '', '.').'</strong></td>
+						<td ><strong>'.number_format($resultado["Diciembre"], 0, '', '.').'</strong></td>
 						
 						<td style=" border-left:1px solid #575757;"><strong >'.number_format($resultado["1er_Trim"], 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($resultado["2do_Trim"], 0, '', '.').'</strong></td>
