@@ -337,7 +337,7 @@ if($consultar){
 	  $periodo = 0;
 	  
 	  while($resultado = odbc_fetch_array($rs)){
-		  list($periodoAnio, $periodoMes) = split('[-]', $resultado["Periodo"]);
+		  list($periodoAnio, $periodoMes) = preg_split('[-]', $resultado["Periodo"]);
 		  $periodoMes=(string)(int)$periodoMes; //QUITAMOS EL CERO DEL MES ES DECIR 01 queda en 1
 		  $TABLA[$periodoMes][$periodoAnio] = round($resultado["TOTAL_DOLAR"]); 
 		  if($periodoAnio == $anio){
@@ -364,7 +364,7 @@ if($consultar){ ?>
 
 
 <div id="dv">
-<table id="ssptable2" class="lista" style="display:none;">
+<table id="ssptable2" class="lista" >
 	<thead>
     	<tr>
         	<th colspan="2" width="85"></th>
