@@ -21,6 +21,9 @@ require_once("clases/funciones.php");
 <script language="javascript" type="text/javascript" src="js/jquery.validate.1.5.2.js"></script>
 <script language="javascript" type="text/javascript" src="js/script.js"></script>
 <script language="javascript" type="text/javascript" src="js/jquery.idTabs.js"></script>
+<!-- <script type="text/javascript" src="js/xlsx.full.min.js"></script>
+<script type="text/javascript" src="js/FileSaver.min.js"></script>
+<script type="text/javascript" src="js/tableexport.min.js"></script> -->
 
 <!-- PRELOADER -->
 <script src="js/jquery.easing.1.3.js"></script>

@@ -1,7 +1,13 @@
+
+
 <script type="text/javascript" src="js/jquery.base64.js"></script>
 <script type="text/javascript" src="js/jquery.btechco.excelexport.js"></script>
 
 <?php
+// header('Content-type: application/vnd.ms-excel');
+// header("Content-Disposition: attachment; filename=archivo.xls");
+// header("Pragma: no-cache");
+// header("Expires: 0");
 set_time_limit(600);
 require_once("clases/conexionocdb.php");
 $consultar = $_GET['agregar'];
@@ -256,45 +262,66 @@ ORDER BY Periodo ASC;";
 ?>
 <script language="javascript">
 $(document).ready(function() {
-	 $("#descargarExcel").click(function(){
-		$("#ssptable2").btechco_excelexport({
-			containerid: "ssptable2"
-		   , datatype: $datatype.Table
-		});
-	});
-	$("#dialogDescarga").dialog({
-		autoOpen: false,
-		title: 'a',
-		resizable: false,
-		width: 200,
-		height: 205
-	}).dialog("widget").find(".ui-dialog-title").hide();
-	$("#dialogDescarga:eq(0)")
-		.dialog("widget")
-		.find(".ui-dialog-titlebar").css({ "float": "right", border: 0, padding: 0 })
-		.find(".ui-dialog-title").css({ display: "none" }).end()
-		.find(".ui-dialog-titlebar-close").css({ top: 0, right: 0, margin: 0, "z-index": 999
-	});
+	//  $("#descargarExcel").click(function(){
+	// 	$("#ssptable2").btechco_excelexport({
+	// 		containerid: "ssptable2"
+	// 	   , datatype: $datatype.Table
+	// 	});
+	//});
+	// $("#dialogDescarga").dialog({
+	// 	autoOpen: false,
+	// 	title: 'a',
+	// 	resizable: false,
+	// 	width: 200,
+	// 	height: 205
+	// }).dialog("widget").find(".ui-dialog-title").hide();
+	// $("#dialogDescarga:eq(0)")
+	// 	.dialog("widget")
+	// 	.find(".ui-dialog-titlebar").css({ "float": "right", border: 0, padding: 0 })
+	// 	.find(".ui-dialog-title").css({ display: "none" }).end()
+	// 	.find(".ui-dialog-titlebar-close").css({ top: 0, right: 0, margin: 0, "z-index": 999
+	// });
 });
 </script>
 <script type="text/javascript">
 	$(window).load(function() {
 		$('#status').fadeOut();
 		$('#preloader').delay(350).fadeOut('slow');
-		$("#dialogDescarga").dialog("close");
-		var control = <?php if($cont==1){ echo 1; } elseif($cont==0){ echo 0; } else{ echo 2;} ?>;
-		if(control == 1){
-			$("#dialogDescarga").dialog("open");
-		}else if(control == 2){
-			$('#erroConsulta').dialog("open");
-		}else if(control == 0){
-			$('body').delay(350).css({'overflow':'visible'});
-		}
+		// $("#dialogDescarga").dialog("close");
+		// var control = <?php if($cont==1){ echo 1; } elseif($cont==0){ echo 0; } else{ echo 2;} ?>;
+		// if(control == 1){
+		// 	$("#dialogDescarga").dialog("open");
+		// }else if(control == 2){
+		// 	$('#erroConsulta').dialog("open");
+		// }else if(control == 0){
+		// 	$('body').delay(350).css({'overflow':'visible'});
+		// }
 	});
 </script>
+
+<script language="javascript"> 
+$(document).ready(function() { 
+     $(".botonExcel").click(function(event) { 
+     $("#datos_a_enviar").val( $("<div>").append( $("#ssptable2").eq(0).clone()).html()); 
+     $("#FormularioExportacion").submit(); 
+	}); 
+}); 
+</script> 
+
 <div class="idTabs">
 	<ul>
 		<li><a href="#one"><img src="images/agregar.png" width="30px" height="30px" /></a></li>
+		<?php // pregunta si ha ingresado una fecha para que se muestre el imagen link de generar Excel
+		
+		// if($finicio2){
+		
+		echo'<form action="clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
+			<center><img src="images/excel.png" width="30px" height="30px" class="botonExcel"  /> </center>
+			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" /> 
+			</form> ';
+		
+		
+		?>
 	</ul>
 	<div class="items">
 		<div id="one">
@@ -321,10 +348,10 @@ $(document).ready(function() {
 	<div id="status">&nbsp;<?php if($cont == 1){echo 'Un momento por favor, estamos generando su reporte.';}?></div>
 </div>
 <!-- Formulario de descarga -->
-<div id="dialogDescarga" title="Ventas Historicas por Marca">
+<!-- <div id="dialogDescarga" title="Ventas Historicas por Marca">
 		<img src="images/export_excel.png" id="descargarExcel" style="display: block; margin-left: auto; margin-right: auto; cursor:pointer;"/>
 		<p style="text-align:center;">Click en la imagen <br>para descargar</p>
-</div>
+</div> -->
 
 
 <?php
@@ -728,5 +755,8 @@ if($consultar){ ?>
             <td width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED;"><?php echo number_format($total_prom_tres_anio[7] + $total_prom_tres_anio[8] + $total_prom_tres_anio[9]+$total_prom_tres_anio[10] + $total_prom_tres_anio[11] + $total_prom_tres_anio[12], 0, ',', '.') ."%"; ?></td>
         </tr>
     </tbody>
-</table></div>
+</table>
+
+</div>
+
 <?php odbc_close( $conn ); } ?>
