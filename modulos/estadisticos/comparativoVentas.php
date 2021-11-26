@@ -3,28 +3,36 @@
  
 <script language="javascript">
 $(document).ready(function() {
-	 $("#descargarExcel").click(function(){
-		$("#ssptable2").btechco_excelexport({
-			containerid: "ssptable2"
-		   , datatype: $datatype.Table
-		});
-	});
-	$("#dialogDescarga").dialog({
-		autoOpen: false,
-		title: 'a',
-		resizable: false,
-		width: 200,
-		height: 205
-	}).dialog("widget").find(".ui-dialog-title").hide();
-	$("#dialogDescarga:eq(0)")
-		.dialog("widget")
-		.find(".ui-dialog-titlebar").css({ "float": "right", border: 0, padding: 0 })
-		.find(".ui-dialog-title").css({ display: "none" }).end()
-		.find(".ui-dialog-titlebar-close").css({ top: 0, right: 0, margin: 0, "z-index": 999
-	});
-	$("#dialogDescarga").dialog("open");
+	//  $("#descargarExcel").click(function(){
+	// 	$("#ssptable2").btechco_excelexport({
+	// 		containerid: "ssptable2"
+	// 	   , datatype: $datatype.Table
+	// 	});
+	// });
+	// $("#dialogDescarga").dialog({
+	// 	autoOpen: false,
+	// 	title: 'a',
+	// 	resizable: false,
+	// 	width: 200,
+	// 	height: 205
+	// }).dialog("widget").find(".ui-dialog-title").hide();
+	// $("#dialogDescarga:eq(0)")
+	// 	.dialog("widget")
+	// 	.find(".ui-dialog-titlebar").css({ "float": "right", border: 0, padding: 0 })
+	// 	.find(".ui-dialog-title").css({ display: "none" }).end()
+	// 	.find(".ui-dialog-titlebar-close").css({ top: 0, right: 0, margin: 0, "z-index": 999
+	// });
+	// $("#dialogDescarga").dialog("open");
 });
 </script>
+<script language="javascript"> 
+$(document).ready(function() { 
+     $(".botonExcel").click(function(event) { 
+     $("#datos_a_enviar").val( $("<div>").append( $("#ssptable2").eq(0).clone()).html()); 
+     $("#FormularioExportacion").submit(); 
+	}); 
+}); 
+</script> 
 <?php
 require_once("clases/conexionocdb.php");
 ini_set('max_execution_time', 600);
@@ -166,7 +174,7 @@ if ( !$rs){
 	exit( "Error en la consulta SQL" );
 }
 while($resultado = odbc_fetch_array($rs)){
-	list($periodoAnio, $periodoMes) = explode('[-]', $resultado["Periodo"]);
+	list($periodoAnio, $periodoMes) = preg_split('[-]', $resultado["Periodo"]);
 	$periodoMes=(string)(int)$periodoMes; //QUITAMOS EL CERO DEL MES ES DECIR 01 queda en 1
 	switch($resultado["WhsCode"]){
 		case 'LOCAL.2':
@@ -311,10 +319,27 @@ for($imes = 1; $imes <= $mes; $imes++){
 }
 ?>
 <div id="dialogDescarga" title="Ventas Historicas por Marca">
-		<img src="images/export_excel.png" id="descargarExcel" style="display: block; margin-left: auto; margin-right: auto; cursor:pointer;"/>
-		<p style="text-align:center;">Click en la imagen <br>para descargar</p>
+		<!-- <img src="images/export_excel.png" id="descargarExcel" style="display: block; margin-left: auto; margin-right: auto; cursor:pointer;"/>
+		<p style="text-align:center;">Click en la imagen <br>para descargar</p> -->
+
+    <!-- <img src="images/export_excel.png" id="descargarExcel" style="display: block; margin-left: auto; margin-right: auto; cursor:pointer;"/>
+		<p style="text-align:center;">Click en la imagen <br>para descargar</p> -->
+
+		<?php // pregunta si ha ingresado una fecha para que se muestre el imagen link de generar Excel
+		
+		// if($finicio2){
+		
+		echo'<form action="clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
+			<center><img src="images/export_excel.png"  class="botonExcel"  /> </center>
+			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" /> 
+			<p style="text-align:center;">Click en la imagen <br>para descargar</p> -->
+			</form> ';
+		
+		
+		?>
+
 </div>
-<table id="ssptable2" class="lista" style="display:none;">
+<table id="ssptable2" class="lista" style="display: none;" > 
   <tr>
   	<td></td>
     <td colspan="15" align="center" width="608" style="border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;">INFORME: COMPARATIVO DE VENTAS MENSUALES EN PESOS * MODULOS IQUIQUE *</td>

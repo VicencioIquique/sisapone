@@ -179,6 +179,7 @@ $(document).ready(function() {
 									<option ></option>';
 									
 									echo'
+									<option value="ECM.2002">Ventas WEB</option>
 									<option value="ZFI.2077">Modulo 2077</option>
 									<option value="ZFI.1010">Modulo 1010</option>
 									<option value="ZFI.1132">Modulo 1132</option>

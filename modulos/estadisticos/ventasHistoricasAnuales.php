@@ -4,10 +4,7 @@
 <script type="text/javascript" src="js/jquery.btechco.excelexport.js"></script>
 
 <?php
-// header('Content-type: application/vnd.ms-excel');
-// header("Content-Disposition: attachment; filename=archivo.xls");
-// header("Pragma: no-cache");
-// header("Expires: 0");
+
 set_time_limit(600);
 require_once("clases/conexionocdb.php");
 $consultar = $_GET['agregar'];
@@ -348,10 +345,23 @@ $(document).ready(function() {
 	<div id="status">&nbsp;<?php if($cont == 1){echo 'Un momento por favor, estamos generando su reporte.';}?></div>
 </div>
 <!-- Formulario de descarga -->
-<!-- <div id="dialogDescarga" title="Ventas Historicas por Marca">
-		<img src="images/export_excel.png" id="descargarExcel" style="display: block; margin-left: auto; margin-right: auto; cursor:pointer;"/>
-		<p style="text-align:center;">Click en la imagen <br>para descargar</p>
-</div> -->
+<div id="dialogDescarga" title="Ventas Historicas por Marca">
+		<!-- <img src="images/export_excel.png" id="descargarExcel" style="display: block; margin-left: auto; margin-right: auto; cursor:pointer;"/>
+		<p style="text-align:center;">Click en la imagen <br>para descargar</p> -->
+
+		<?php // pregunta si ha ingresado una fecha para que se muestre el imagen link de generar Excel
+		
+		// if($finicio2){
+		
+		echo'<form action="clases/ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion"> 
+			<center><img src="images/export_excel.png"  class="botonExcel"  /> </center>
+			<input type="hidden" id="datos_a_enviar" name="datos_a_enviar" /> 
+			<p style="text-align:center;">Click en la imagen <br>para descargar</p> -->
+			</form> ';
+		
+		
+		?>
+</div>
 
 
 <?php
@@ -391,7 +401,7 @@ if($consultar){ ?>
 
 
 <div id="dv">
-<table id="ssptable2" class="lista" >
+<table id="ssptable2" class="lista" style="display: none;" >
 	<thead>
     	<tr>
         	<th colspan="2" width="85"></th>

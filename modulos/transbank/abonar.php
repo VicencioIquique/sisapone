@@ -61,6 +61,7 @@ if (isset($_GET['criterio'])){
 									<option value="ZFI.6115">Modulo 6115</option>
 									<option value="ZFI.6130">Modulo 6130</option>
 									<option value="ZFI.2077">Modulo 2077</option>
+									<option value="ECM.2002">Ventas WEB</option>
 									</select>
 					     </label>
 						 
