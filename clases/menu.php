@@ -278,6 +278,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2021.xlsx'>Ago. 2021</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2021.xlsx'>Sep. 2021</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2021.xlsx'>Oct. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2021.xlsx'>Nov. 2021</a></li>
 													</ul>
 												</li>
 										    
@@ -637,6 +638,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2021.xlsx'>Ago. 2021</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2021.xlsx'>Sep. 2021</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2021.xlsx'>Oct. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2021.xlsx'>Nov. 2021</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1130,6 +1132,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2021.xlsx'>Ago. 2021</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2021.xlsx'>Sep. 2021</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2021.xlsx'>Oct. 2021</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2021.xlsx'>Nov. 2021</a></li>
 
 													</ul>
 												</li>

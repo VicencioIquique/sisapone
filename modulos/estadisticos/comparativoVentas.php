@@ -220,7 +220,7 @@ while($resultado = odbc_fetch_array($rs)){
 	}
 	 
 }
-//echo $sql;
+echo $sql;
 //TOTALES
 $TOTAL_ZFI181 = array();
 $TOTAL_ZFI184 = array();
