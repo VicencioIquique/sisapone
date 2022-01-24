@@ -247,6 +247,7 @@ SELECT
 
 		
 //echo $sql2;
+//echo $sql5;
                         $rs = odbc_exec( $conn, $sql );
 							if ( !$rs)
 							{
@@ -517,6 +518,7 @@ SELECT
 ";
 
 //echo $sql7;
+//echo $sql8;
 
 /* MODULPS AEROPUERTO */
                 $rs7 = odbc_exec( $conn, $sql7 );

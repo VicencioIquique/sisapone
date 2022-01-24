@@ -3,7 +3,7 @@ require_once("../../clases/conexionocdb.php");
 $mes = $_POST['mes'];
 	$sql = "SELECT Monto
   FROM [RP_VICENCIO].[dbo].[RP_MONEDA]
-  WHERE YEAR(FechaModificacion) = '2018' AND MONTH(FechaModificacion)='".$mes."'";
+  WHERE YEAR(FechaModificacion) = '2022' AND MONTH(FechaModificacion)='".$mes."'";
 	$rows = array();
 	$rs = odbc_exec( $conn, $sql );
 	if ( !$rs){

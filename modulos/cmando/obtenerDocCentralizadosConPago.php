@@ -3,7 +3,7 @@ require_once("../../clases/conexionocdb.php");
 $mes = $_POST['mes'];
 	$sql = "SELECT COUNT(NumeroDocto) AS Cant_Docto, Bodega
 			FROM [RP_VICENCIO].[dbo].[RP_ReceiptsCab_SAP]
-			WHERE ((Estado='1' AND TipoDocto='3') OR (Estado ='2')) AND YEAR(fechadocto)='2016' AND MONTH(fechadocto)='".$mes."'
+			WHERE ((Estado='1' AND TipoDocto='3') OR (Estado ='2')) AND YEAR(fechadocto)='2022' AND MONTH(fechadocto)='".$mes."'
 			GROUP BY Bodega";
 			
 	$rs = odbc_exec( $conn, $sql );

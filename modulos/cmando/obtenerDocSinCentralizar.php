@@ -4,7 +4,7 @@ $mes = $_POST['mes'];
 //echo $mes['n']."as";
 	$sql = "SELECT COUNT(NumeroDocto) AS Cant_Docto, Bodega
 			FROM [RP_VICENCIO].[dbo].[RP_ReceiptsCab_SAP]
-			WHERE Estado='0' AND YEAR(fechadocto)='2016' AND MONTH(fechadocto)='".$mes."'
+			WHERE Estado='0' AND YEAR(fechadocto)='2022' AND MONTH(fechadocto)='".$mes."'
 			AND TipoDocto <> 99
 			GROUP BY Bodega";
 			
