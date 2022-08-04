@@ -92,7 +92,7 @@ WHERE [NroDSM] = '".$nDem."'
 GROUP BY NroDSM,[FechaDoc],[Bodega],[CodModulo],[TOrigen],Estado
 ORDER BY FechaDoc DESC";
 
-//echo  $sql2;//		$_SESSION["usuario_modulo"];			
+echo  $sql2;//		$_SESSION["usuario_modulo"];			
 						
 ?>
 <link type="text/css" rel="stylesheet" href="css/ui.notify.css" />

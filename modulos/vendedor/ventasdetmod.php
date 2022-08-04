@@ -241,12 +241,12 @@ SELECT
 ";
 
 
-//echo $sql;
+echo $sql;
 
 	
 
 		
-//echo $sql2;
+//echo $sql3;
 //echo $sql5;
                         $rs = odbc_exec( $conn, $sql );
 							if ( !$rs)
