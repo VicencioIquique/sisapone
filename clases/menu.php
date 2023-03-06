@@ -293,6 +293,14 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2022.xlsx'>Jul. 2022</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2022.xlsx'>Ago. 2022</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2022.xlsx'>Sep. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2022.xlsx'>Oct. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2022.xlsx'>Nov. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Dic2022.xlsx'>Dic. 2022</a></li>
+													</ul>
+												</li>
+												<li><a href='index.php?opc=estAuto'>Año 2023</a>
+													<ul class='children'>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2022</a></li>
 													</ul>
 												</li>
 										    
@@ -667,6 +675,14 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2022.xlsx'>Jul. 2022</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2022.xlsx'>Ago. 2022</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2022.xlsx'>Sep. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2022.xlsx'>Oct. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2022.xlsx'>Nov. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Dic2022.xlsx'>Dic. 2022</a></li>
+													</ul>
+												</li>
+												<li><a href='index.php?opc=estAuto'>Año 2023</a>
+													<ul class='children'>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2022</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1175,6 +1191,14 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2022.xlsx'>Jul. 2022</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2022.xlsx'>Ago. 2022</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2022.xlsx'>Sep. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2022.xlsx'>Oct. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2022.xlsx'>Nov. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Dic2022.xlsx'>Dic. 2022</a></li>
+													</ul>
+												</li>
+												<li><a href='index.php?opc=estAuto'>Año 2023</a>
+													<ul class='children'>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2022</a></li>
 													</ul>
 												</li>
 										    </ul>
