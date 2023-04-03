@@ -63,7 +63,7 @@
                     ".$resultado2["Cantidad"]."
                     ,0,0,0,0,'',0,'',
                     ".$resultado2["Item"].",
-                    ".$resultado2["Referencia"].",
+                    '".$resultado2["Referencia"]."',
                     ''),");
                     $cadena .= $sqlString;
                 }
@@ -93,6 +93,8 @@
                         ,referencia
                         ,revision)
                         VALUES ".$cadena.";";
+
+                
                 $rs3 = odbc_exec( $conn, $sql3 );
 
                 if(!$rs3){
