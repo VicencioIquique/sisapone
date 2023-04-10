@@ -303,7 +303,9 @@ require_once("clases/registroLogs.php");
 							 case 'campania':
 								 include("modulos/vendedor/campania.php"); 
 							   break;
-							   
+							case 'ingresoMerc':
+								include("modulos/ingresos/ingresoMerc.php");
+								break;
 							   /**********FIN DEM********/
 							default:
 								  include("modulos/cmando/cmandoBoletas.php");
@@ -983,7 +985,7 @@ require_once("clases/registroLogs.php");
 							case 'dem':
 								 include("modulos/dem/index.php");
 							   break;
-							 case 'validarDEM':
+							case 'validarDEM':
 								 include("modulos/dem/index2.php");
 							   break;
 							   /**********FIN DEM********/

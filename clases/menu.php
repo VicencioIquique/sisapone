@@ -180,9 +180,13 @@ class menu{
 							<!--<li><a  href='index.php?opc=verBoleta'>Ver Boleta</a></li>-->
 							<!--<li><a  href='index.php?opc=transferencias'>transferencias</a></li>-->
 							 
-							 <li><a href='#'>Pruebas</a>
+							<li><a href='#'>Pruebas</a>
 								 <ul class='children'>
+<<<<<<< HEAD
 								 		
+=======
+								 		<li><a href='index.php?opc=ingresoMerc'>Ingreso Mercadería</a></li>
+>>>>>>> b53c69cdf9439493e013551693314f66b37948bb
 										<li><a href='index.php?opc=reporteCaja'>Nuevo Reporte Caja</a></li>
 										<li><a href='index.php?opc=abastecimiento'>Reporte Abastecimiento</a></li>
 										<li><a href='index.php?opc=reporteHistorico'>Reporte Histórico</a></li>
