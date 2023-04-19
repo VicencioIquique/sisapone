@@ -78,7 +78,7 @@
 
 </style>
 
-<div class="container">
+<div class="">
     <form action="" method="GET" id="formZeta">
         <fieldset style="padding: 12px;">
             <div class="row">
@@ -98,7 +98,7 @@
         </fieldset>
     </form>
 </div>
-<div id="divBuscador" class="container row" style="padding: 5px 10px 5px 10px;">
+<div id="divBuscador" class="row" style="padding: 5px 10px 5px 10px;">
     <hr>
     <div class="col-2">
         <button id="btnExport" class="btn btn-success btn-block">Exportar Excel</button>
@@ -126,7 +126,7 @@
     
 </div>
 
-<button id="myBtn">Open Modal</button>
+<!-- <button id="myBtn">Open Modal</button> -->
 
 <div id="myModal" class="modal">
     <div class="modal-content" style="margin: 5% auto; margin-top: 5%; margin-right: auto; margin-bottom: 5%; margin-left: auto;">

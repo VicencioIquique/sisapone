@@ -42,15 +42,14 @@
 
             $cadena = "";
             
-            $resultado2 = odbc_fetch_row($rs2);
-            $largo2 = $resultado2.count();
-    
+            $largo2 = odbc_num_rows($rs2);
+
             if($largo2 == 0){ 
                 echo "error2";
                 exit;
             }else if($largo2 >= 1){
                 //echo "Obteniendo datos del Zeta. \n";
-
+                
                 while($resultado2 = odbc_fetch_array($rs2)){
                     //Quitando comillas simples a las descripciones.
                     $descripcion = str_replace("'","_",$resultado2["Descripcion"]);
@@ -67,7 +66,7 @@
                     ''),");
                     $cadena .= $sqlString;
                 }
-
+                
                 $cadena = trim($cadena, ',');
 
                 //echo "Traspasando datos en tabla Ingreso_Mercaderia. \n";
