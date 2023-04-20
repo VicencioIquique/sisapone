@@ -279,7 +279,8 @@ function agregar(x){
     $('#atotalConteo').val(totalConteo);
     $('#uFacturadas').val(totalF);
 
-    console.log("ubicacion "+ubicacion);
+    
+
     if (ubicacion == "") {
         $('#ubiactual').val("Ninguna");
     }else{
@@ -304,6 +305,7 @@ function agregar(x){
     $('#idProducto').val(datosArray2[x].id);
     $('#codigoP').val(datosArray2[x].codZ);
     window.buscador = "";
+    console.log("Cargar Datos Producto");
 }
 
 function actualizarConteo(){
@@ -577,10 +579,10 @@ function modal(){
     var span = document.getElementsByClassName("close")[0];
 
     //Botón para abrir modal
-    var btn = document.getElementById("myBtn");
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
+    // var btn = document.getElementById("myBtn");
+    // btn.onclick = function() {
+    //     modal.style.display = "block";
+    // }
 
     //Cerrar modal
     span.onclick = function() {
