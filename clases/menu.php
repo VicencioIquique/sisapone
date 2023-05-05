@@ -182,11 +182,7 @@ class menu{
 							 
 							<li><a href='#'>Pruebas</a>
 								 <ul class='children'>
-<<<<<<< HEAD
-								 		
-=======
 								 		<li><a href='index.php?opc=ingresoMerc'>Ingreso Mercadería</a></li>
->>>>>>> b53c69cdf9439493e013551693314f66b37948bb
 										<li><a href='index.php?opc=reporteCaja'>Nuevo Reporte Caja</a></li>
 										<li><a href='index.php?opc=abastecimiento'>Reporte Abastecimiento</a></li>
 										<li><a href='index.php?opc=reporteHistorico'>Reporte Histórico</a></li>
@@ -308,6 +304,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Mar2023.xlsx'>Mar. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Abr2023.xlsx'>Abr. 2023</a></li>
 													</ul>
 												</li>
 										    
@@ -692,6 +689,7 @@ class menu{
 													<li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2023</a></li>
 													<li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2023</a></li>
 													<li><a target'_blank' href='../sisapone/archivos/Mar2023.xlsx'>Mar. 2023</a></li>
+													<li><a target'_blank' href='../sisapone/archivos/Abr2023.xlsx'>Abr. 2023</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1210,6 +1208,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Mar2023.xlsx'>Mar. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Abr2023.xlsx'>Abr. 2023</a></li>
 													</ul>
 												</li>
 										    </ul>
