@@ -182,11 +182,8 @@ class menu{
 							 
 							<li><a href='#'>Pruebas</a>
 								 <ul class='children'>
-<<<<<<< HEAD
-								 		
-=======
 								 		<li><a href='index.php?opc=ingresoMerc'>Ingreso Mercadería</a></li>
->>>>>>> b53c69cdf9439493e013551693314f66b37948bb
+										<li><a href='index.php?opc=reporteIngreso'>Reporte Ingreso</a></li>
 										<li><a href='index.php?opc=reporteCaja'>Nuevo Reporte Caja</a></li>
 										<li><a href='index.php?opc=abastecimiento'>Reporte Abastecimiento</a></li>
 										<li><a href='index.php?opc=reporteHistorico'>Reporte Histórico</a></li>
@@ -305,9 +302,8 @@ class menu{
 												</li>
 												<li><a href='index.php?opc=estAuto'>Año 2023</a>
 													<ul class='children'>
-													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2023</a></li>
-													 <li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2023</a></li>
-													 <li><a target'_blank' href='../sisapone/archivos/Mar2023.xlsx'>Mar. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2022</a></li>
 													</ul>
 												</li>
 										    
@@ -346,7 +342,7 @@ class menu{
 			else if($_SESSION["usuario_rol"] == 2) //Menu para Vendedores
 		  	{ 
 		 
-			  echo "	
+			  	echo "	
 					<div class='menu-secondary-wrap'>
 							<ul class='menus menu-secondary'>
 								
@@ -400,12 +396,12 @@ class menu{
 						  </ul>
 						  
 				   </div> <!-- Menu Vendedores --> ";
-		 } // fin menu para vendedores
+		 	} // fin menu para vendedores
 			
 			
-			 else if($_SESSION["usuario_rol"] == 3) //Menu para Visador
-		 { 
-				 echo "	
+			else if($_SESSION["usuario_rol"] == 3) //Menu para Visador
+		 	{ 
+				echo "	
 				<div class='menu-secondary-wrap'>
 						<ul class='menus menu-secondary'>
 							
@@ -507,11 +503,11 @@ class menu{
 					   </ul>
 				</div> ";
 				
-		} // fin menu para Visador
+			} // fin menu para Visador
 		
-		 else if($_SESSION["usuario_rol"] == 4) //Menu para Brand Manager
-		{ 
-		   echo "	
+		 	else if($_SESSION["usuario_rol"] == 4) //Menu para Brand Manager
+			{ 
+		   		echo "	
 				<div class='menu-secondary-wrap'>
 						<ul class='menus menu-secondary'>
 							
@@ -689,9 +685,8 @@ class menu{
 												</li>
 												<li><a href='index.php?opc=estAuto'>Año 2023</a>
 													<ul class='children'>
-													<li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2023</a></li>
-													<li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2023</a></li>
-													<li><a target'_blank' href='../sisapone/archivos/Mar2023.xlsx'>Mar. 2023</a></li>
+													<li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2022</a></li>
+													<li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2022</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -762,11 +757,11 @@ class menu{
 					   </ul>
 				</div> <!-- Menu Brand Manager --> ";
 				
-		 } // fin menu brand manager
+		 	} // fin menu brand manager
 		 
-		 else if($_SESSION["usuario_rol"] == 5) //Menu para Inventario
-		  { 
-		 	echo "	
+		 	else if($_SESSION["usuario_rol"] == 5) //Menu para Inventario
+		  	{ 
+		 		echo "	
 				<div class='menu-secondary-wrap'>
 						<ul class='menus menu-secondary'>
 							
@@ -900,8 +895,8 @@ class menu{
 							 
 						 </ul>
 					</div> <!-- fin menu -->";
-		 } // fin menu Inventario else
-		 else if($_SESSION["usuario_rol"] == 6) // Menu para Bodega
+			} // fin menu Inventario else
+			else if($_SESSION["usuario_rol"] == 6) // Menu para Bodega
    		    { 
 		 	echo "	
 				<div class='menu-secondary-wrap'>
@@ -932,6 +927,8 @@ class menu{
 										<li><a href='index.php?opc=kardex'>Kardex</a></li>
 								 </ul>
 							</li>
+
+							<li><a href='index.php?opc=ingresoMerc'>Ingreso Mercadería</a></li>
 							
 
 					</div> <!-- fin menu -->";
@@ -1207,9 +1204,8 @@ class menu{
 												</li>
 												<li><a href='index.php?opc=estAuto'>Año 2023</a>
 													<ul class='children'>
-													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2023</a></li>
-													 <li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2023</a></li>
-													 <li><a target'_blank' href='../sisapone/archivos/Mar2023.xlsx'>Mar. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2023.xlsx'>Ene. 2022</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2023.xlsx'>Feb. 2022</a></li>
 													</ul>
 												</li>
 										    </ul>

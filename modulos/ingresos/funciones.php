@@ -2,16 +2,16 @@
     session_start();
     require_once("../../clases/conexionocdb.php");
 
-    //ini_set('max_execution_time', 600); //300 seconds = 5 minutes    
-    
+    //Recibe indicación.   
     $controlador = $_POST['controlador'];
     
     if($controlador == "buscar"){
-
+        //Busca si existe el zeta en la tabla de ingreso_mercadería.
+        //De no existir extrae los datos desde las bases de datos de SAP para ingresarlos en 
         $codzetap = $_POST['data'][0]['zet'];
         $anop = $_POST['data'][1]['ano'];
 
-        //echo "Buscando ingresos de Zeta al registro. \n";
+        //Buscando ingresos de Zeta al registro.
         $sql = "SELECT TOP 1 (numZeta) as conteo FROM [RP_VICENCIO].[dbo].[Ingreso_Mercaderia] 
         WHERE numZeta = '101-".$anop."-".$codzetap."';";
         
@@ -19,13 +19,12 @@
         
         $resultado = odbc_fetch_row($rs);
         $largo = $resultado.count();
-
+        //Si existe envía ok, de lo contrario extrae los datos desde BD SAP.
         if($largo >= 1){ 
             echo "ok";
 
         }else if($largo == 0){
-            //echo "No hay registros. \n";
-            
+            //Trae registros desde Bases de datos SAP.
             $sql2= "SELECT t1.U_Lote AS Item, 
                             t1.U_ItemCode AS Codigo, 
                             t3.ItemName AS Descripcion,
@@ -43,13 +42,12 @@
             $cadena = "";
             
             $largo2 = odbc_num_rows($rs2);
-
+            //Verificar si trae resultados.
             if($largo2 == 0){ 
                 echo "error2";
                 exit;
             }else if($largo2 >= 1){
-                //echo "Obteniendo datos del Zeta. \n";
-                
+                //Generando String de datos para el SQL.
                 while($resultado2 = odbc_fetch_array($rs2)){
                     //Quitando comillas simples a las descripciones.
                     $descripcion = str_replace("'","_",$resultado2["Descripcion"]);
@@ -69,7 +67,7 @@
                 
                 $cadena = trim($cadena, ',');
 
-                //echo "Traspasando datos en tabla Ingreso_Mercaderia. \n";
+                //Traspasando datos a la tabla ingreso_mercaderia";
 
                 $sql3 = "INSERT INTO RP_VICENCIO.dbo.Ingreso_Mercaderia
                         (numZeta
@@ -111,7 +109,7 @@
         }
 
     }else if($controlador == "cargar"){
-
+        //Consulta los datos para cargar la tabla.
         $codzetap = $_POST['data'][0]['zet'];
         $anop = $_POST['data'][1]['ano'];
         
@@ -147,7 +145,7 @@
             $i = 0;
 
             while($resultado4 = odbc_fetch_array($rs4)){
-
+                //Limpia la descripción de cualquier carácter inválido para la base de datos.
                 $cadena = preg_replace("/[^a-zA-Z0-9:_+ ,.ñÑ]/", "/", $resultado4["dsc"]);            
                 
                 $data[] = array(
@@ -173,7 +171,7 @@
             echo json_encode($data); 
         }
     }else if($controlador == "actualizarConteo"){
-
+        //Actualiza solo los contadores del ítem.
         $cantCajas = $_POST['data'][0]['dcajas'];
         $uniPorCaja = $_POST['data'][1]['duxcaja'];
         $uniSueltas = $_POST['data'][2]['dusueltas'];
@@ -210,7 +208,7 @@
         }
 
     }else if($controlador == "actualizarUbicacion"){
-
+        //Actualiza la ubicación del ítem.
         $ubicacion = $_POST['data'][0]['ubicacion'];
         $item = $_POST['data'][1]['idproducto'];
 
@@ -229,7 +227,7 @@
         }
 
     }elseif($controlador == 'limpiar'){
-
+        //Elimina los regitros ingresados de un ítem.
         $item = $_POST['item'];
         $sql7 = "UPDATE [RP_VICENCIO].[dbo].[Ingreso_Mercaderia] SET
             [cantCajas] = 0
@@ -243,6 +241,7 @@
             ,codigoFisico = ''
             ,numLoteProd = ''
             ,ubicacion = ''
+            ,revision = ''
         where idIngresoMercaderia = ".$item.";";
         $rs7 = odbc_exec( $conn, $sql7 );
         

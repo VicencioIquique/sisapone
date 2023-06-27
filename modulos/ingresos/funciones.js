@@ -1,16 +1,22 @@
 window.datosGlobal = [];
 window.buscador = "";
+window.nombreTabla;
+
 function buscarZeta(){
     $("#formZeta").on('submit', function(e){
 
         data = [];
-        
+        //Recupera el año y numero del zeta
         var zeta = $('#zeta1').val();
         var anio = $('#anio').val();
 
+        nombreExport(anio,zeta)
+        
         data.push({zet: zeta});
         data.push({ano: anio});
 
+        $("#loader").show();
+        //Envía los datos a través de un array
         $.ajax({
             type: "POST",
             url: "modulos/ingresos/funciones.php",
@@ -18,8 +24,9 @@ function buscarZeta(){
             success: function(e) {
                 console.log(e);
                 res = e.toString();
+                //Si encuentra el Zeta solicita cargar los datos de la tabla ingreso_mercaderia
                 if(res === 'ok'){
-                    $("#loader").show();
+                    
                     $.ajax({
                         type: "POST",
                         url: "modulos/ingresos/funciones.php",
@@ -34,52 +41,34 @@ function buscarZeta(){
                                     'error'
                                 )
                             }else{
+                                //Muestra modal
                                 $("#divBuscador").show();
                                 console.log(datos);
+                                //Carga los datos en una variable global para usarla en otras funciones.
                                 window.datosGlobal = datos;
-                                $('#tabla').empty();
-                                
-                                html = `                          
-                                <div id="usual1"> 
-                                    <div id="tab1">
-                                        <table  id="ssptable2" class="lista" style="table-layout: auto;width: 100%; margin-top: 0px;">
-                                            <thead style="letter-spacing: 1px;">
-                                                    <tr>
-                                                        <th style="vertical-align: middle; text-align: center; width: 3%;">N°</th>        
-                                                        <th style="vertical-align: middle; text-align: center; width: 10%;">Código Zeta</th>
-                                                        <th style="vertical-align: middle; text-align: center; width: 5%;">Código Físico</th>
-                                                        <th style="vertical-align: middle; text-align: center; width: 30%;">Descripcion</th>
-                                                        <th class="rotar" style="vertical-align: middle;  width: 4%;"> Unidades Facturadas</th>
-                                                        <th class="rotar" style="vertical-align: middle; height: 80px; width: 4%;">Cajas</th>
-                                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Unidades Por Caja</th>
-                                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Unidades Sueltas</th>
-                                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Total</th>
-                                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Faltantes</th>
-                                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Sobrantes</th>
-                                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Mal Estado</th>
-                                                        <th class="rotar"style="vertical-align: middle; text-align: center; width: 5%">Lote</th>
-                                                        <th class="rotar"style="vertical-align: middle; text-align: center; width: 8%">Ubicación</th>
-                                                        <th style="vertical-align: middle; text-align: center; width: 7%">Operaciones</th>
-                                                    </tr>
-                                            </thead>
-                                            <tbody>`;
-
+                                //Limpiar tabla
+                                $("#ssptable2 tr").find("td").each(function() {
+                                    $(this).remove();
+                                });
+                                html = "";
+                                //Cargar datos en tabla.
                                 for (let i = 0; i < datos.length; i++) {
                                     
                                     html += `
                                         <tr>
                                             <td>`+datos[i].item+`</td>
-                                            <td>`+datos[i].codZ+`</td>`;
+                                            <td class="tableexport-string">`+datos[i].codZ+`</td>`;
 
                                     if(datos[i].codF == ""){
-                                        html += `<td></td>`;
+                                        html += `<td style="display: none;"></td><td></td>`;
                                     }else if(datos[i].codZ == datos[i].codF) {
-                                        html += `<td style="text-align: center;"><i class="fa-solid fa-check"></i></td>`;
+                                        html += `<td style="display: none;">`+datos[i].codF+`</td>
+                                                <td style="text-align: center;"><i class="fa-solid fa-check"></i></td>`;
                                     }else if(datos[i].codZ != datos[i].codF){
-                                        html += `<td style="text-align: center;"><i class="fa-solid fa-not-equal"></i></td>`;
+                                        html += `<td style="display: none;">`+datos[i].codF+`</td>
+                                                <td style="text-align: center;"><i class="fa-solid fa-not-equal"></i></td>`;
                                     }
-                                            
-                                            
+                                    
                                     html += `<td>`+datos[i].desc+`</td>
                                             <td>`+datos[i].uniF+`</td>
                                             <td>`+datos[i].caja+`</td>
@@ -97,11 +86,12 @@ function buscarZeta(){
                                                 </button>
                                             </td>
                                         </tr>`;
+                                    
                                 }
-
-                                html += `</tbody></table></div></div>`;   
-                                $('#tabla').append(html);
+                                $("#ssptable2 tr:last").after(html);
+                                //Ocultar el loading.
                                 $("#loader").hide();
+
                             }
                         }
                     });
@@ -134,9 +124,7 @@ function buscarZeta(){
                         'No se encuentra registro de Zeta.',
                         'error'
                     )
-                }
-                
-                        
+                }       
             }
         });
         return false;
@@ -144,13 +132,14 @@ function buscarZeta(){
 }
 
 function buscarCodigo(){
-   
+    //Buscar código ingresado
     $("#buscarCodigo").on('submit', function(e){
         e.preventDefault();
         var codigo = $('#codigo').val();
         datosArray = window.datosGlobal;
         codigoFound = "no";
         $("#loader").show();
+        //Busca el código en los datos traídos anteriormente al cargar la tabla.
         for (let x = 0; x < datosArray.length; x++) {
             codArray = datosArray[x].codZ;
             
@@ -158,12 +147,14 @@ function buscarCodigo(){
                 $("#loader").hide();
                 codigoFound = "si";
                 window.buscador = "codigo";
+                //Inicia la función agregar con la posición del array;
                 agregar(x);
                 break;
             }
         }
 
         if (codigoFound == "no") {
+            $("#loader").hide();
             Swal.fire(
                 'Error',
                 'No se encuentra el Código en este Zeta.',
@@ -174,6 +165,7 @@ function buscarCodigo(){
 }
 
 function buscarReferencia(){
+    //Permite buscar un producto por el número de referencia.
     $("#buscarReferencia").on('submit', function(e){
         e.preventDefault();
         var codigo = $('#codigoRef').val();
@@ -182,7 +174,7 @@ function buscarReferencia(){
         $("#loader").show();
         for (let x = 0; x < datosArray.length; x++) {
             codReferencia = datosArray[x].refe;
-            
+            //Busca el codigo de referencia en el array de datos obtenido previamente.
             if(codigo == codReferencia) {
                 $("#loader").hide();
                 var modal2 = document.getElementById("myModal2"); 
@@ -206,10 +198,11 @@ function buscarReferencia(){
 }
 
 function agregar(x){
-    
+    //Abre el modal para editar datos del ingreso de mercadería.
     var datosArray2 = window.datosGlobal;
     var modal = document.getElementById("myModal");
     modal.style.display = "block";
+    //Limpiar los campos donde se ingresa información.
     $('#codigoM').empty();
     $('#textoM').empty();
     $('#uFacturadas').empty();
@@ -220,11 +213,11 @@ function agregar(x){
     $('#codigoF').val("");
     $('.datosConteo').val("");
  
-    //Datos Zeta
+    //Cargar datos del Zeta
     $('#codigoM').append(datosArray2[x].codZ);
     $('#textoM').append(datosArray2[x].desc);
     $('#referencia').val(datosArray2[x].refe);
-    
+    //Si existe código físico lo trae y deshabilita el campo, sino queda el campo abierto para ingresarlo.
     if (window.buscador == "codigo") {
         if (datosArray2[x].codF == "") {
             $('#codigoF').val(datosArray2[x].codZ);
@@ -238,6 +231,7 @@ function agregar(x){
         }
     }
 
+    //Si no existe numero de referencia deja el campo abierto, sino lo carga desde base de datos.
     if (window.buscador == "referencia") {
         if (datosArray2[x].codF == "") {
             $('#textCodigoF').append("Ingrese nuevo código aquí.");
@@ -258,7 +252,7 @@ function agregar(x){
         }
     }
 
-    //Conteo
+    //Extraer sumatorias de conteos anteriores.
     var canCaja = parseInt(datosArray2[x].caja);
     var unixcaja = parseInt(datosArray2[x].ucaj);
     var unisueltas = parseInt(datosArray2[x].suel);
@@ -271,7 +265,7 @@ function agregar(x){
     $('#uxcajas').val(0);
     $('#usueltas').val(0);
     $('#totalConteo').val(0);
-
+    //Mostrar datos en el modal en la sección de Conteo.
     $('#numItem').val(datosArray2[x].item);
     $('#accajas').val(canCaja);
     $('#auxcajas').val(unixcaja);
@@ -280,14 +274,14 @@ function agregar(x){
     $('#uFacturadas').val(totalF);
 
     
-
+    //Mostrar ubicación física del ítem en bodega.
     if (ubicacion == "") {
         $('#ubiactual').val("Ninguna");
     }else{
         $('#ubiactual').val(ubicacion);
     }
 
-    //Revision 
+    //Mostrar datos en el modal en la sección de Revision.
     faltantes = parseInt(datosArray2[x].falt);
     sobrantes = parseInt(datosArray2[x].sobr);
     malestado = parseInt(datosArray2[x].mala);
@@ -297,11 +291,11 @@ function agregar(x){
     $('#usobrantes').val(0);
     $('#malestado').val(0);
 
+    //Cargar datos en modal.
     $('#numLote').val(lote);
     $('#aufaltantes').val(faltantes);
     $('#ausobrantes').val(sobrantes);
     $('#amalestado').val(malestado);
-    
     $('#idProducto').val(datosArray2[x].id);
     $('#codigoP').val(datosArray2[x].codZ);
     window.buscador = "";
@@ -309,7 +303,7 @@ function agregar(x){
 }
 
 function actualizarConteo(){
-
+    //Actualiza los datos del formulario.
     var codFisico = $('#codigoF').val();
     if(codFisico == ""){
         Swal.fire(
@@ -318,20 +312,20 @@ function actualizarConteo(){
             'error'
         )
     }else{  
-
+        //Trae los datos del modal para sumarlos con los datos anteriores.
         var numItem = parseInt($('#numItem').val());
-        var dcajas = Number(parseInt($('#ccajas').val()) + parseInt(window.datosGlobal[numItem].caja));
+        var dcajas = Number(parseInt($('#ccajas').val()) + parseInt(window.datosGlobal[numItem-1].caja));
 
         if (parseInt($('#uxcajas').val()) == 0) {
-            var duxcaja = parseInt(window.datosGlobal[numItem].ucaj);
+            var duxcaja = parseInt(window.datosGlobal[numItem-1].ucaj);
         }else{
             var duxcaja = Number(parseInt($('#uxcajas').val()));
         }
         
-        var dusueltas = Number(parseInt($('#usueltas').val()) + parseInt(window.datosGlobal[numItem].suel));
-        var dufaltantes = Number(parseInt($('#ufaltantes').val()) + parseInt(window.datosGlobal[numItem].falt));
-        var dsobrantes = Number(parseInt($('#usobrantes').val()) + parseInt(window.datosGlobal[numItem].sobr));
-        var dmalas = Number(parseInt($('#malestado').val()) + parseInt(window.datosGlobal[numItem].mala));
+        var dusueltas = Number(parseInt($('#usueltas').val()) + parseInt(window.datosGlobal[numItem-1].suel));
+        var dufaltantes = Number(parseInt($('#ufaltantes').val()) + parseInt(window.datosGlobal[numItem-1].falt));
+        var dsobrantes = Number(parseInt($('#usobrantes').val()) + parseInt(window.datosGlobal[numItem-1].sobr));
+        var dmalas = Number(parseInt($('#malestado').val()) + parseInt(window.datosGlobal[numItem-1].mala));
         var idproducto = parseInt($('#idProducto').val());
 
        var codigoP = parseInt(codFisico);
@@ -357,7 +351,7 @@ function actualizarConteo(){
         data.push({totalConteo: totalConteo});
         
         console.log(data);
-
+        //Enviar los datos a actualizar a la base de datos.
         $.ajax({
             type: "POST",
             url: "modulos/ingresos/funciones.php",
@@ -384,7 +378,7 @@ function actualizarConteo(){
 }
 
 function actualizarUbi(){
-
+    //Funcion para actualizar la ubicación de un ítem.
     var galUbi = $('#galUbi option:selected').val();
     var numUbi = $('#numUbi option:selected').val();
     var colUbi = $('#colUbi option:selected').val();
@@ -421,7 +415,9 @@ function actualizarUbi(){
     });
 }
 
+
 function limpiar(){
+    //Elimina todos los registros de un ítem.
     var idproducto = parseInt($('#idProducto').val());
     $.ajax({
         type: "POST",
@@ -444,6 +440,7 @@ function limpiar(){
 }
 
 function calculoConteo(){
+    //Detecta si ingresan datos en algún campo de conteo para llamar a la función calculo()
     const varcajas = document.getElementById('ccajas');
     const varunixcaja = document.getElementById('uxcajas');
     const varsueltas = document.getElementById('usueltas');
@@ -466,6 +463,7 @@ function calculoConteo(){
 }
 
 function calculo(){
+    //Realiza el cálculo del total en tiempo real. 
     var ccajas = parseInt($('#ccajas').val());
     var ucaja = parseInt($('#uxcajas').val());
     var usuel = parseInt($('#usueltas').val());
@@ -476,6 +474,7 @@ function calculo(){
 }
 
 function recargarTabla(){
+    //Realiza la función de solo recargar de datos actualizados la tabla.
     $("#loader").show();
     data = [];
         
@@ -502,33 +501,11 @@ function recargarTabla(){
                 console.log(datos);
                 console.log("recargando");
                 window.datosGlobal = datos;
-                $('#tabla').empty();
-                
-                html = `                          
-                <div id="usual1"> 
-                    <div id="tab1">
-                        <table  id="ssptable2" class="lista" style="table-layout: auto;width: 100%; margin-top: 0px;">
-                            <thead style="letter-spacing: 1px;">
-                                    <tr>
-                                        <th style="vertical-align: middle; text-align: center; width: 3%;">N°</th>        
-                                        <th style="vertical-align: middle; text-align: center; width: 10%;">Código Zeta</th>
-                                        <th style="vertical-align: middle; text-align: center; width: 5%;">Código Físico</th>
-                                        <th style="vertical-align: middle; text-align: center; width: 30%;">Descripcion</th>
-                                        <th class="rotar" style="vertical-align: middle;  width: 4%;"> Unidades Facturadas</th>
-                                        <th class="rotar" style="vertical-align: middle; height: 80px; width: 4%;">Cajas</th>
-                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Unidades Por Caja</th>
-                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Unidades Sueltas</th>
-                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Total</th>
-                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Faltantes</th>
-                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Sobrantes</th>
-                                        <th class="rotar" style="vertical-align: middle; width: 4%;">Mal Estado</th>
-                                        <th class="rotar"style="vertical-align: middle; text-align: center; width: 5%">Lote</th>
-                                        <th class="rotar"style="vertical-align: middle; text-align: center; width: 8%">Ubicación</th>
-                                        <th style="vertical-align: middle; text-align: center; width: 7%">Operaciones</th>
-                                    </tr>
-                            </thead>
-                            <tbody>`;
-
+                //$('#ssptable2 tr').remove();
+                $("#ssptable2 tr").find("td").each(function() {
+                    $(this).remove();
+                });
+                html = "";
                 for (let i = 0; i < datos.length; i++) {
                     
                     html += `
@@ -537,14 +514,15 @@ function recargarTabla(){
                             <td>`+datos[i].codZ+`</td>`;
 
                     if(datos[i].codF == ""){
-                        html += `<td></td>`;
+                        html += `<td style="display: none;"></td><td></td>`;
                     }else if(datos[i].codZ == datos[i].codF) {
-                        html += `<td style="text-align: center;"><i class="fa-solid fa-check"></i></td>`;
+                        html += `<td style="display: none;">`+datos[i].codF+`</td>
+                                <td style="text-align: center;"><i class="fa-solid fa-check"></i></td>`;
                     }else if(datos[i].codZ != datos[i].codF){
-                        html += `<td style="text-align: center;"><i class="fa-solid fa-not-equal"></i></td>`;
+                        html += `<td style="display: none;">`+datos[i].codF+`</td>
+                                <td style="text-align: center;"><i class="fa-solid fa-not-equal"></i></td>`;
                     }
-                            
-                            
+                    
                     html += `<td>`+datos[i].desc+`</td>
                             <td>`+datos[i].uniF+`</td>
                             <td>`+datos[i].caja+`</td>
@@ -562,11 +540,12 @@ function recargarTabla(){
                                 </button>
                             </td>
                         </tr>`;
+                    
                 }
-
-                html += `</tbody></table></div></div>`;   
-                $('#tabla').append(html);
+                $("#ssptable2 tr:last").after(html);
+                
                 $("#loader").hide();
+                
             }
         }
     });
@@ -575,14 +554,9 @@ function recargarTabla(){
 }
 
 function modal(){
+    //Abre y configura el modal para mejor visualización.
     var modal = document.getElementById("myModal");   
     var span = document.getElementsByClassName("close")[0];
-
-    //Botón para abrir modal
-    // var btn = document.getElementById("myBtn");
-    // btn.onclick = function() {
-    //     modal.style.display = "block";
-    // }
 
     //Cerrar modal
     span.onclick = function() {
@@ -642,9 +616,21 @@ function modal(){
     });
 }
 
+function nombreExport(a,b){
+    //Da formato a las fechas.
+    var d = new Date(); var month = d.getMonth()+1; var day = d.getDate();
+    var fecha = (day<10 ? '0' : '') + day + '.' + (month<10 ? '0' : '') + month + '.' + d.getFullYear();
+
+    window.nombreTabla = "RepoIngreso Z"+a+"-"+b+" "+fecha;
+
+}
+
 $(document).ready(function(){
+    //Esconde las secciones
     $("#divBuscador").hide();
     $("#loader").hide();
+
+    //Carga las funciones
     buscarZeta();
     buscarCodigo();
     buscarReferencia();
@@ -654,15 +640,34 @@ $(document).ready(function(){
     $('#zeta1').focus();
 
     $( document ).tooltip();
-    $("#btnExport").click(function(){
-        console.log("exportando");
-        $("#ssptable2").btechco_excelexport({
-            containerid: "ssptable2",
-            datatype: $datatype.Table,
-            worksheetName: "Mi Hoja de Cálculo"
+
+    if(tipoUsuario == 1){
+        
+        //Muestra el botón limpiar
+        $("#divLimpiar").show();
+        $("#divUbicacion").hide();
+        //$("#divUbicacion").show();
+    }else{
+        $("#divLimpiar").hide();
+        $("#divUbicacion").hide();
+    }
+    //Botón para exportar excel.
+    $("#descargarExcel").click(function(){
+        $('#ssptable2').tableExport({
+            type: 'excel',
+            ignoreColumn: [3,15],
+            bootstrap: true,
+            fileName: window.nombreTabla,
+            mso: {
+                fileFormat: 'xlsx',
+                xlsx: {
+                    formatId: {         
+                        numbers: 1
+                    }
+                }
+            }
         });
     });
-    
 
 });
 

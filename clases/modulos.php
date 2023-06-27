@@ -306,6 +306,9 @@ require_once("clases/registroLogs.php");
 							case 'ingresoMerc':
 								include("modulos/ingresos/ingresoMerc.php");
 								break;
+							case 'reporteIngreso':
+								include("modulos/reportes/reporteMain.php");
+								break;
 							   /**********FIN DEM********/
 							default:
 								  include("modulos/cmando/cmandoBoletas.php");
@@ -1079,11 +1082,14 @@ require_once("clases/registroLogs.php");
 							 case 'kardex':
 								 include("modulos/vendedor/kardex.php");
 							   break;
-							 
+							case 'ingresoMerc':
+								include("modulos/ingresos/ingresoMerc.php");
+								break;
 							 
 							default:
 								  include("modulos/cmando/cmandoBoletas.php");
 							   break;
+							   
 						 }
 		  } // fin opciones de Bodega
 		   else if($_SESSION["usuario_rol"] == 9) // Opciones para el  area de finanzas

@@ -1,5 +1,16 @@
+<?php
+    session_start();
+    $revision = $_SESSION["usuario_user"];
+    //print_r($_SESSION);
+    echo '<script> var tipoUsuario = '.$_SESSION[usuario_rol].'; </script>';
+?>
+
 <script type="text/javascript" src="js/jquery.base64.js"></script>
-<script type="text/javascript" src="js/jquery.btechco.excelexport.js"></script>
+<script type="text/javascript" src="js/tabla/xlsx.core.min.js"></script>
+<script type="text/javascript" src="js/tabla/FileSaver.js"></script>
+
+<script type="text/javascript" src="js/tabla/tableExport.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript" src="modulos/ingresos/funciones.js"></script>
@@ -7,6 +18,7 @@
 <link rel="stylesheet" href="css/fa6.3.0/css/all.css"></link>
 <link rel="stylesheet" href="css/bootstrap.css"></link>
 <style type="text/css">
+
 
     .rotar {
         writing-mode: vertical-lr;
@@ -75,6 +87,9 @@
         text-align: center;
     }
 
+    #ssptable2 tr:nth-child(2n) {
+        background: transparent;
+    }
 
 </style>
 
@@ -84,11 +99,11 @@
             <div class="row">
                 <div class="col-3 row">
                     <div class="col-8"><div style="text-align: center;"> Año (2 dígitos) </div></div>
-                    <div class="col-4"><input name="anio" type="text" id="anio" class="required" style="width: 100%;" /></div>
+                    <div class="col-4"><input name="anio" type="tel" id="anio" class="required" style="width: 100%;" value=""/></div>
                 </div>
                 <div class="col-5 row">
                     <div class="col-4"><div style="text-align: center;">Zeta</div></div>
-                    <div class="col-8"><input name="zeta1" type="text" class="required" id="zeta1" style="width: 100%;" /></div>
+                    <div class="col-8"><input name="zeta1" type="tel" class="required" id="zeta1" style="width: 100%;" value="" /></div>
                 </div>
                 <div class="col-4">
                 <div style="text-align: center; padding: 10px;">
@@ -101,7 +116,7 @@
 <div id="divBuscador" class="row" style="padding: 5px 10px 5px 10px;">
     <hr>
     <div class="col-2">
-        <button id="btnExport" class="btn btn-success btn-block">Exportar Excel</button>
+        <button id="descargarExcel" class="btn btn-success btn-block">Exportar Excel</button>
     </div>
     
     <div class="col-8">
@@ -123,7 +138,30 @@
 </div>
 
 <div id="tabla" style="padding: 0px 5px 0px 5px;">
-    
+    <table  id="ssptable2" class="lista table" style="table-layout: auto;width: 100%; margin-top: 0px;">
+        <thead>
+            <tr>
+                <th style="vertical-align: middle; text-align: center; width: 3%;">N°</th>        
+                <th style="vertical-align: middle; text-align: center; width: 10%;">Código Zeta</th>
+                <th style="display: none;">Código Físico</th>
+                <th style="vertical-align: middle; text-align: center; width: 5%;">Código Físico</th>
+                <th style="vertical-align: middle; text-align: center; width: 30%;">Descripcion</th>
+                <th class="rotar" style="vertical-align: middle;  width: 4%;"> Unidades Facturadas</th>
+                <th class="rotar" style="vertical-align: middle; height: 80px; width: 4%;">Cajas</th>
+                <th class="rotar" style="vertical-align: middle; width: 4%;">Unidades Por Caja</th>
+                <th class="rotar" style="vertical-align: middle; width: 4%;">Unidades Sueltas</th>
+                <th class="rotar" style="vertical-align: middle; width: 4%;">Total</th>
+                <th class="rotar" style="vertical-align: middle; width: 4%;">Faltantes</th>
+                <th class="rotar" style="vertical-align: middle; width: 4%;">Sobrantes</th>
+                <th class="rotar" style="vertical-align: middle; width: 4%;">Mal Estado</th>
+                <th class="rotar"style="vertical-align: middle; text-align: center; width: 5%">Lote</th>
+                <th class="rotar"style="vertical-align: middle; text-align: center; width: 8%">Ubicación</th>
+                <th style="vertical-align: middle; text-align: center; width: 7%">Operaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>
 
 <!-- <button id="myBtn">Open Modal</button> -->
@@ -220,7 +258,7 @@
                     <div class="col-4"><input type="number" class="datosConteo" id="uFacturadas" disabled></div>
                 </div>
             </div>
-            <div class="col-lg-6 col-xs-12 p-2">
+            <div class="col-md-6 col-xs-12 p-2">
                 <div class="row p-1">
                     <div class="col-4"><h5><b>Revisión</b></h5></div>
                     <div class="col-4"></div>
@@ -246,7 +284,8 @@
                     <div class="col-8">Numero Lote</div>
                     <div class="col-4"><input type="text" id="numLote" style="width: 100%; text-align: right;"></div>
                 </div>
-                <div class="row p-1">
+
+                <div class="row p-1" id="divLimpiar">
                     <div class="col-8">Limpiar</div>
                     <div class="col-4"><button id="btnLimpiar" type="button" class="btn btn-info btn-block">
                             <text style="color: white;">Limpiar datos</text>
@@ -263,7 +302,7 @@
             </div>
         </div> 
         <hr>
-        <div class="col-12">
+        <div class="col-12" id="divUbicacion" type="hidden">
             <div class="row">
                 <div class="col-12 row">
                     <div class="col-lg-3 col-xs-12 p-1 row"  style="border-right-color: rgba(33, 37, 41, 0.5); border-right-style: solid; border-right-width: 1px;">
@@ -329,7 +368,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-xs-12 p-1">
-                        <div class="col-12" align="right"><button id="btnUpdate" type="button" class="btn btn-success btn-block"><text style="color: white;">Actualizar ubicación</text></button></div>
+                        <div class="col-12" align="center"><button id="btnUpdate" type="button" class="btn btn-success btn-block"><text style="color: white;">Actualizar ubicación</text></button></div>
                     </div>
                 </div>
             </div>
