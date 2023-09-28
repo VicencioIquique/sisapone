@@ -245,7 +245,7 @@ SELECT [Empresa]
    ORDER BY DocDate ASC
   ";
 
-    echo $sql2;	
+    //echo $sql2;	
 	$rs2 = odbc_exec( $conn, $sql2 );
 	
 	if ( !$rs2 )
