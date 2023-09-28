@@ -21,7 +21,7 @@ if(!$finicio)
 if($_SESSION["usuario_modulo"] !=-1)
 {
 	$modulo = $_SESSION["usuario_modulo"];
-	if($modulo == 0)
+	if($modulo == 8)
 		$modulo='ZFI.2077';
 	if($modulo == 1)
 		$modulo='ZFI.1010';
@@ -245,7 +245,7 @@ SELECT [Empresa]
    ORDER BY DocDate ASC
   ";
 
-    //echo $sql2;	
+    echo $sql2;	
 	$rs2 = odbc_exec( $conn, $sql2 );
 	
 	if ( !$rs2 )
