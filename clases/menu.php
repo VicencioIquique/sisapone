@@ -311,6 +311,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2023.xlsx'>Jul. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2023.xlsx'>Ago. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2023.xlsx'>Sep. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2023.xlsx'>Oct. 2023</a></li>
 													</ul>
 												</li>
 										    
@@ -701,6 +702,7 @@ class menu{
 													<li><a target'_blank' href='../sisapone/archivos/Jul2023.xlsx'>Jul. 2023</a></li>
 													<li><a target'_blank' href='../sisapone/archivos/Ago2023.xlsx'>Ago. 2023</a></li>
 													<li><a target'_blank' href='../sisapone/archivos/Sep2023.xlsx'>Sep. 2023</a></li>
+													<li><a target'_blank' href='../sisapone/archivos/Oct2023.xlsx'>Oct. 2023</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1227,6 +1229,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2023.xlsx'>Jul. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2023.xlsx'>Ago. 2023</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2023.xlsx'>Sep. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2023.xlsx'>Oct. 2023</a></li>
 													</ul>
 												</li>
 										    </ul>
