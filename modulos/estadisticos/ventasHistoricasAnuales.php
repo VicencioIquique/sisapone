@@ -256,6 +256,7 @@ WHERE
 	AND Periodo BETWEEN '2015-01' AND '2030-12'
 GROUP BY Periodo
 ORDER BY Periodo ASC;";
+echo $sql;
 ?>
 <script language="javascript">
 $(document).ready(function() {
@@ -401,7 +402,7 @@ if($consultar){ ?>
 
 
 <div id="dv">
-<table id="ssptable2" class="lista" style="display: none;" >
+<table id="ssptable2" class="lista" style="" >
 	<thead>
     	<tr>
         	<th colspan="2" width="85"></th>
