@@ -13,14 +13,10 @@ class menu{
 							
 							<li><a href='index.php'>Inicio</a>
 							  <ul class='children'>
-							  <li><a href='index.php'>Inicio</a>
-							  <ul class='children'>
-							 	<li><a href='index.php?opc=traspasoMercaderia'>Traspaso Mercaderia</a></li>
-								<li><a target='_blank' href='../sisap/docs/manual%20Sistema%20de%20PEdidos'  >Manual Pedidos</a></li>
-								<li><a target='_blank' href='../sisap/docs/Manual%20Requerimientos'  >Manual Requerimientos</a></li>
-								<li><a href='index.php?opc=logout'>Salir del Sistema</a></li>
-							  </ul>
-							</li>	
+							  <li><a href='index.php?opc=traspasoMercaderia'>Traspaso Mercaderia</a></li>
+							  <li><a target='_blank' href='../sisap/docs/manual%20Sistema%20de%20PEdidos'  >Manual Pedidos</a></li>
+							  <li><a target='_blank' href='../sisap/docs/Manual%20Requerimientos'  >Manual Requerimientos</a></li>
+							  <li><a href='index.php?opc=logout'>Salir del Sistema</a></li>
 							  <li><a href='index.php?opc=cmando'>Cuadro de Mando</a></li>
 							  <li><a href='index.php?opc=cmandoBoletas'>Cuadro de Mando Centralización de Boletas</a></li>
 							  <li><a href='index.php?opc=cmandoCompras'>Cuadro de Mando Compras</a></li>
