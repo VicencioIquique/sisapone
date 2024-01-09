@@ -45,4 +45,4 @@
             </table>
         </div>
 </div>	
-<script type="text/javascript" src="modulos/traspasoMercaderia/js/traspaso.js"></script>
+<!-- <script type="text/javascript" src="/js/traspaso.js"></script> -->

@@ -16,6 +16,9 @@ require_once("clases/registroLogs.php");
 							case 'login':
 								 include("modulos/sesion/index.php");
 							   break;
+							case 'traspasoMercaderia':
+								include("modulos/traspasoMercaderia/traspaso.php");
+							break;
 							case 'valida':
 								 include("modulos/sesion/doLogin.php");
 							   break;
