@@ -141,7 +141,7 @@ if($consultar)
       			,SUM(TotalCLP) [Total]
   			FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
 			WHERE 1=1
-			  AND Year = '2023'
+			  AND Year = '2024'
 			  AND CONVERT(date,[DocDate]) = '".$finicio."'
 			GROUP BY WhsCode) T2 ON T1.Local = T2.WhsCode
 		";
