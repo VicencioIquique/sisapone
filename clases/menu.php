@@ -319,7 +319,8 @@ class menu{
 												</li>
 												<li><a href='index.php?opc=estAuto'>Año 2024</a>
 													<ul class='children'>
-													 <li><a target'_blank' href='../sisapone/archivos/Ene2024.xlsx'>Ene. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2024.xlsx'>Ene. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2024.xlsx'>Feb. 2024</a></li>
 													</ul>
 												</li>
 										    
@@ -718,7 +719,8 @@ class menu{
 												</li>
 												<li><a href='index.php?opc=estAuto'>Año 2024</a>
 													<ul class='children'>
-													 <li><a target'_blank' href='../sisapone/archivos/Ene2024.xlsx'>Ene. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2024.xlsx'>Ene. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2024.xlsx'>Feb. 2024</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1252,7 +1254,8 @@ class menu{
 												</li>
 												<li><a href='index.php?opc=estAuto'>Año 2024</a>
 													<ul class='children'>
-													 <li><a target'_blank' href='../sisapone/archivos/Ene2024.xlsx'>Ene. 2023</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ene2024.xlsx'>Ene. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2024.xlsx'>Feb. 2024</a></li>
 													</ul>
 												</li>
 										    </ul>
