@@ -666,5 +666,23 @@ include("conexionocdb.php");
 		
 }
 
+function precioOferta($codigo) {
+	include("conexionocdb.php");
+	$sql10 = "
+		SELECT [upc]
+			,[descuento]
+			,[cantidad]
+		FROM [RP_VICENCIO].[dbo].[RP_Descuento_Navidad2]
+		WHERE upc = '".$codigo."'
+	";
+	$rs10 = odbc_exec( $conn, $sql10 );
+	if (!$rs10){
+		exit("Error en la consulta SQL");
+	}
+	$result = odbc_fetch_array($rs10);
+	$precioOferta = $result['descuento'];
+	return $precioOferta;
+}
+
 
 ?>
