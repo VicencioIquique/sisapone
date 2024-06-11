@@ -14,6 +14,7 @@ class menu{
 							<li><a href='index.php'>Inicio</a>
 							  <ul class='children'>
 							  <li><a href='index.php?opc=traspasoMercaderia'>Traspaso Mercaderia</a></li>
+							  <li><a href='index.php?opc=nroAtencion'>Actualizar Nro. Atencion SVE</a></li>
 							  <li><a href='index.php?opc=cmando'>Cuadro de Mando</a></li>
 							  <li><a href='index.php?opc=cmandoBoletas'>Cuadro de Mando Centralización de Boletas</a></li>
 							  <li><a href='index.php?opc=cmandoCompras'>Cuadro de Mando Compras</a></li>
