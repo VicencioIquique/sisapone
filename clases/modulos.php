@@ -75,9 +75,16 @@ require_once("clases/registroLogs.php");
 							case 'reporteCaja':
 								 include("modulos/caja/reporteCaja.php");
 							   break;
+
+							case 'paso2brand':
+								include("modulos/solicitudes/sol_p2brand.php");
+								break;
 							case 'usuarios':
 								 include("modulos/usuarios/index.php");
 							   break;
+							case 'nuevaSolicitudbrand':
+								include("modulos/solicitudes/indexbrand.php");
+							  break;  
 							case 'nuevaSolicitud':
 								 include("modulos/solicitudes/index.php");
 							   break;

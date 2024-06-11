@@ -154,7 +154,7 @@ if (isset($_GET['criterio'])){
 						{
 
 							  while($resultado =  odbc_fetch_array($rs)){ 
-							  //echo $resultado["estado"];
+							  echo $resultado["estado"];
 							  //<td style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisar_solicitud" style="color:#fff;" id="'.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></td>
 							  if($resultado["estado"]==1)
 							  {

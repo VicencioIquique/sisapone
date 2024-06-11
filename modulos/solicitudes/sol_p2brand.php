@@ -150,7 +150,7 @@ WHERE     (dbo.sisap_solicitudes.solicitud_id = ".$idsol.")
             	   
 				
                 <?php 
-				//echo $recepcion_id." ".$_SESSION["usuario_id"];
+				echo $recepcion_id." ".$_SESSION["usuario_id"];
 				if($estado ==1)
 				{
 					
