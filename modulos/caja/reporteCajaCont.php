@@ -274,7 +274,7 @@ $(document).ready(function() {
 					}else if(modulo == '005'){
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
-						$("#caja").append('<option value="1">3</option>');
+						$("#caja").append('<option value="3">3</option>');
 						$("#caja").append('<option value="2">2</option>');
 					}else if(modulo == '006'){
 						$("#caja").empty();
