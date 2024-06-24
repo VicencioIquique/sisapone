@@ -1,18 +1,19 @@
 <?php
 require_once("../../../clases/conexionocdb.php");
 
-$sql = "SELECT ALU,convert(int,PRICE01) precio,isnull(descuento,'NO')descuento,DESC2 FROM [RP_VICENCIO].[dbo].[RP_Articulos] art
-LEFT JOIN [RP_VICENCIO].[dbo].[RP_Descuento_Navidad2] nav ON art.ALU =nav.upc
-where alu ='".$_POST['codigo']."'";
+// Asegúrate de que la conexión está correctamente establecida
+// $conn = odbc_connect("DSN_NAME", "USER", "PASSWORD");
+// if (!$conn) {
+//     exit("Error en la conexión a la base de datos");
+// }
 
 // Escapa el valor de $_POST['codigo'] para evitar inyecciones SQL
-//$codigo = odbc_escape_string($_POST['codigo']);
+// $codigo = addslashes($_POST['codigo']);
 
-$sql = "SELECT ALU, convert(int, PRICE01) precio, ISNULL(descuento, 'NO') descuento, DESC2 
+$sql = "SELECT ALU, PRICE01 AS precio, ISNULL(descuento, 'NO') AS descuento, DESC2 
         FROM [RP_VICENCIO].[dbo].[RP_Articulos] art
         LEFT JOIN [RP_VICENCIO].[dbo].[RP_Descuento_Navidad2] nav ON art.ALU = nav.upc
         WHERE alu = '$codigo'";
-//echo $sql;
 
 $rsSql = odbc_exec($conn, $sql);
 if (!$rsSql) {
@@ -20,8 +21,14 @@ if (!$rsSql) {
 }
 
 $resultado = odbc_fetch_array($rsSql);
+
+// Depurar los resultados
+echo "<pre>";
+print_r($resultado); // Aquí corriges el uso de print_r
+echo "</pre>";
+
 $objeto = new stdClass();
-$objeto->precio = utf8_encode($resultado['precio']);
+$objeto->precio = $resultado['precio'];
 $objeto->descripcion = utf8_encode($resultado['DESC2']);
 $objeto->oferta = utf8_encode($resultado['descuento']);
 
