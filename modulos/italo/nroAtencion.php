@@ -74,10 +74,10 @@ if (isset($_POST['search'])) {
             </label>
             <label for="NumAte">
                 Numero Atencion
-                <input name="NumAte" id="NumAte" type="text" value="<?php echo $numAteValue; ?>" <?php echo empty($numAteValue) ? 'readonly' : ''; ?> />
+                <input name="NumAte" id="NumAte" type="text" value="<?php echo $numAteValue; ?>"  />
             </label>
             <input class="submit" type="submit" value="Buscar" id="search" name="search" />
-            <input class="submit" type="submit" value="Actualizar" id="update" name="update" <?php echo empty($numAteValue) ? 'disabled' : ''; ?> />
+            <input class="submit" type="submit" value="Actualizar" id="update" name="update"  />
         </fieldset>
     </fieldset>
 </form>
