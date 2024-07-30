@@ -8,9 +8,9 @@ require_once("../../../clases/conexionocdb.php");
 // }
 
 // Escapa el valor de $_POST['codigo'] para evitar inyecciones SQL
-// $codigo = addslashes($_POST['codigo']);
+$codigo = addslashes($_POST['codigo']);
 
-$sql = "SELECT ALU, PRICE01 AS precio, ISNULL(descuento, 'NO') AS descuento, DESC2 
+$sql = "SELECT art.ALU, art.PRICE01 AS precio, ISNULL(nav.descuento, 'NO') AS descuento, art.DESC2 
         FROM [RP_VICENCIO].[dbo].[RP_Articulos] art
         LEFT JOIN [RP_VICENCIO].[dbo].[RP_Descuento_Navidad2] nav ON art.ALU = nav.upc
         WHERE alu = '$codigo'";
@@ -35,4 +35,3 @@ $objeto->oferta = utf8_encode($resultado['descuento']);
 echo json_encode($objeto);
 
 odbc_close($conn);
-?>
