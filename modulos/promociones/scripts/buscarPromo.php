@@ -23,9 +23,9 @@ if (!$rsSql) {
 $resultado = odbc_fetch_array($rsSql);
 
 // Depurar los resultados
-echo "<pre>";
-print_r($resultado); // Aquí corriges el uso de print_r
-echo "</pre>";
+// echo "<pre>";
+// print_r($resultado); // Aquí corriges el uso de print_r
+// echo "</pre>";
 
 $objeto = new stdClass();
 $objeto->precio = $resultado['precio'];
