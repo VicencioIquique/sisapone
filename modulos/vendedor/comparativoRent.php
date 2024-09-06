@@ -409,39 +409,41 @@ SELECT
 	
 
 		
-echo $sql2;
+echo $sql;
+
+
                         $rs = odbc_exec( $conn, $sql );
 							if ( !$rs)
 							{
-							    exit( "Error en la consulta SQL" );
+							    exit( "Error en la consulta SQL 1" );
 							}
 					      $rs2 = odbc_exec( $conn, $sql2 );
 							if ( !$rs2)
 							{
-							   exit( "Error en la consulta SQL" );
+							   exit( "Error en la consulta SQL 2" );
 							}
 				/* MODULPS 6115 6130 */
                 $rs3 = odbc_exec( $conn, $sql3 );
 							if ( !$rs3)
 							{
-							    exit( "Error en la consulta SQL" );
+							    exit( "Error en la consulta SQL 3" );
 							}
 					      $rs4 = odbc_exec( $conn, $sql4);
 							if ( !$rs4)
 							{
-							   exit( "Error en la consulta SQL" );
+							   exit( "Error en la consulta SQ 4L" );
 							}				
 				
 				/* MODULPS AEROPUERTO */
                 $rs5 = odbc_exec( $conn, $sql5 );
 							if ( !$rs5)
 							{
-							    exit( "Error en la consulta SQL" );
+							    exit( "Error en la consulta SQL 5" );
 							}
 			 $rs6= odbc_exec( $conn, $sql6);
 							if ( !$rs6)
 							{
-							   exit( "Error en la consulta SQL" );
+							   exit( "Error en la consulta SQL 6" );
 							}				
 										
 							

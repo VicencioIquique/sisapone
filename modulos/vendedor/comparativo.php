@@ -495,7 +495,7 @@ SELECT
 	
 
 		
-//echo $sql2;
+echo $sql0;
                         $rs0 = odbc_exec( $conn, $sql0 );
 							if ( !$rs0)
 							{

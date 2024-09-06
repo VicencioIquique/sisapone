@@ -327,6 +327,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/May2024.xlsx'>May. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jun2024.xlsx'>Jun. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2024.xlsx'>Jul. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ago2024.xlsx'>Ago. 2024</a></li>
 													</ul>
 												</li>
 										    
@@ -732,6 +733,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/May2024.xlsx'>May. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jun2024.xlsx'>Jun. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2024.xlsx'>Jul. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ago2024.xlsx'>Ago. 2024</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1272,6 +1274,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/May2024.xlsx'>May. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jun2024.xlsx'>Jun. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2024.xlsx'>Jul. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ago2024.xlsx'>Ago. 2024</a></li>
 													</ul>
 												</li>
 										    </ul>
