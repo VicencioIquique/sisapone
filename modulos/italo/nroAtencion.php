@@ -1,5 +1,5 @@
 <?php
-require_once("clases/conexionocdb.php");
+require_once("clases/conexionodbc-2.php");
 ini_set('max_execution_time', 600); // 300 seconds = 5 minutes
 
 $statusValue = '';
