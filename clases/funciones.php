@@ -595,7 +595,7 @@ include("conexionocdb.php");
    WHERE ItemCode = '".$codigo."' ";
 
 						$cantidad1=$cantidad2=$cantidad3=$cantidad4=$cantidad5=$cantidad6=$cantidad7=$cantidad8=$cantidad9=0;
-							//echo $sql9;	
+							echo $sql9;	
 							$rs9 = odbc_exec( $conn, $sql9 );
 							if ( !$rs9 )
 							{
