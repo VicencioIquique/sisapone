@@ -78,7 +78,8 @@ else
             </form>
 			  <?php
 				 
-					$sql= "SELECT     dbo.RP_Articulos.ALU, dbo.RP_Articulos.PRICE01, dbo.oITM_From_SBO.ItemName AS DESC1
+					//$sql= "SELECT     dbo.RP_Articulos.ALU, dbo.RP_Articulos.PRICE01, dbo.oITM_From_SBO.ItemName AS DESC1
+					$sql= "SELECT     dbo.RP_Articulos.ALU, dbo.RP_Articulos.PRICE01, dbo.RP_Articulos.DESC1
 FROM         dbo.RP_Articulos LEFT OUTER JOIN
                       dbo.oITM_From_SBO ON dbo.RP_Articulos.ALU = dbo.oITM_From_SBO.ItemCode COLLATE SQL_Latin1_General_CP1_CI_AS
 WHERE     (dbo.RP_Articulos.ALU ='".$codbarra."') ";
@@ -87,7 +88,7 @@ WHERE     (dbo.RP_Articulos.ALU ='".$codbarra."') ";
 					 $stock = explode("-",getBodegaStock($codbarra));
 							//echo $sql;	
 							$rs = odbc_exec( $conn, $sql );
-							echo $rs;
+							//echo $rs;
 							if ( !$rs )
 							{
 							exit( "Error en la consulta SQL1" );
