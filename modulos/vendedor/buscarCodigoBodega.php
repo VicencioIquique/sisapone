@@ -1,5 +1,6 @@
 <?php 
 
+// require_once("clases/conexionodbc-2.php");
 require_once("clases/conexionocdb.php");
 ini_set('max_execution_time', 600); //300 seconds = 5 minutes
 $vendedor = $_GET['id'];
@@ -86,9 +87,10 @@ WHERE     (dbo.RP_Articulos.ALU ='".$codbarra."') ";
 					 $stock = explode("-",getBodegaStock($codbarra));
 							//echo $sql;	
 							$rs = odbc_exec( $conn, $sql );
+							echo $rs;
 							if ( !$rs )
 							{
-							exit( "Error en la consulta SQL" );
+							exit( "Error en la consulta SQL1" );
 							}
 
 							  while($resultado = odbc_fetch_array($rs)){ 

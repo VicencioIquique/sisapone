@@ -466,7 +466,7 @@ function getBodegaStock($codigo)
 {
 
 
-	include("conexionocdb.php");
+	include("conexionodbc-2.php");
 	
 
   $sql9="SELECT  [ItemCode]
