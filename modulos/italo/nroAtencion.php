@@ -18,7 +18,7 @@ if (isset($_POST['search'])) {
                 FROM [SBO_Imp_Eximben_SAC].[dbo].[@OSVE]
                 WHERE [DocNum] = '" . $NumDoc . "'";
 
-        $rsNumAte = odbc_exec($conn, $sql);
+        $rsNumAte = odbc_exec($conn2, $sql);
         $resultado = odbc_fetch_array($rsNumAte);
 
         if ($resultado) {
@@ -40,7 +40,7 @@ if (isset($_POST['search'])) {
                       SET [U_NUMATE] = '" . $NumAte . "'
                       WHERE [DocNum] = '" . $NumDoc . "'";
 
-        odbc_exec($conn, $updateSql);
+        odbc_exec($conn2, $updateSql);
         
         $message = "Número de atención actualizado correctamente.";
     }

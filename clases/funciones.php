@@ -479,7 +479,7 @@ function getBodegaStock($codigo)
 
 							$cantidad1=$cantidad2=$cantidad6=$cantidad17=$cantidad17=$cantidad8=$cantidad9=0;
 							//echo $sql9;	
-							$rs9 = odbc_exec( $conn, $sql9 );
+							$rs9 = odbc_exec( $conn2, $sql9 );
 							if ( !$rs9 )
 							{
 								exit( "Error en la consulta SQL" );

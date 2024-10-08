@@ -1,16 +1,13 @@
 <?php
-// Se define la cadena de conexión
 $dsn = "VICENCIOSAP"; 
-//$dsn2 = "dsnrhlocal";
-//debe ser de sistema no de usuario
+
 $usuario = "sa";
 $clave="V1c3nc10.!";
 
-//realizamos la conexion mediante odbc
-$conn=odbc_connect($dsn, $usuario, $clave);
-if (!$conn)
+$conn2=odbc_connect($dsn, $usuario, $clave);
+if (!$conn2)
 {
-	exit( "Error al establecer la conexion: ".$conn);
+	exit( "Error al establecer la conexion2: ".$conn2);
 }
 
 
