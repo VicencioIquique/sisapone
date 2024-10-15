@@ -1,5 +1,6 @@
 <?php 
-require_once("clases/conexionocdb.php");
+// require_once("clases/conexionocdb.php");
+require_once("clases/conexionodbc-2.php");
 require_once("clases/funciones.php");
 
 ini_set('max_execution_time', 300); //300 seconds = 5 minutes
@@ -25,7 +26,7 @@ if(!$finicio)
       ,[U_Marca]
   FROM [RP_VICENCIO].[dbo].[View_OMAR] ORDER BY U_Marca ASC
 ";
-							$rs3 = odbc_exec( $conn, $sql2 );
+							$rs3 = odbc_exec( $conn2, $sql2 );
 							if ( !$rs3 )
 							{
 							exit( "Error en la consulta SQL" );
@@ -278,7 +279,7 @@ if ($modulo)
 						if ($modulo)
 						{	
 							//echo $sql;	
-							$rs = odbc_exec( $conn, $sql );
+							$rs = odbc_exec( $conn2, $sql );
 							if ( !$rs )
 							{
 							exit( "Error en la consulta SQL" );
@@ -336,4 +337,4 @@ if ($modulo)
             
 
 
-<?php odbc_close( $conn );?>
+<?php odbc_close( $conn2 );?>
