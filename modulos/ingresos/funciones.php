@@ -30,12 +30,14 @@
                             t3.ItemName AS Descripcion,
                             t3.U_ZF_MODELO AS Referencia,
                             FLOOR(t1.U_Quantity) AS Cantidad
-            FROM [SBO_Imp_Eximben_SAC].[dbo].[@SVE3] AS t1
-            RIGHT JOIN [SBO_Imp_Eximben_SAC].[dbo].[@OSVE] AS t2 ON t1.DocEntry = t2.DocEntry
-            INNER JOIN [SBO_Imp_Eximben_SAC].[dbo].[OITM] AS t3 ON t3.ItemCode = t1.U_ItemCode
+            FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[@SVE3] AS t1
+            RIGHT JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[@OSVE] AS t2 ON t1.DocEntry = t2.DocEntry
+            INNER JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[OITM] AS t3 ON t3.ItemCode = t1.U_ItemCode
             WHERE t2.U_NUMVIS = '".$codzetap."'
             AND YEAR(t2.CreateDate) = '20".$anop."'
             ORDER BY VisOrder;";
+            
+            // echo $sql2;
             
             $rs2 = odbc_exec( $conn, $sql2 );
 
