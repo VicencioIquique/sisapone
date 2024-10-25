@@ -293,7 +293,7 @@ FROM         dbo.RP_ReceiptsDet_SAP INNER JOIN
                       dbo.RP_ReceiptsCab_SAP ON dbo.RP_ReceiptsDet_SAP.ID = dbo.RP_ReceiptsCab_SAP.ID INNER JOIN
                       dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode COLLATE SQL_Latin1_General_CP1_CI_AS = dbo.RP_ReceiptsDet_SAP.Sku LEFT OUTER JOIN
                       dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
-					  LEFT JOIN SBO_Imp_Eximben_SAC.dbo.VIC_VW_ItemsVenta OI ON dbo.RP_ReceiptsDet_SAP.Sku COLLATE SQL_Latin1_General_CP1_CI_AS  = OI.ItemCode
+					  LEFT JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_ItemsVenta] OI ON dbo.RP_ReceiptsDet_SAP.Sku COLLATE SQL_Latin1_General_CP1_CI_AS  = OI.ItemCode
 					  
 WHERE       (dbo.RP_ReceiptsCab_SAP.FechaDocto >= '".$finicio2." 00:00:00.000') AND (dbo.RP_ReceiptsCab_SAP.FechaDocto <= '".$ffin2." 23:59:59.000') AND (dbo.RP_ReceiptsDet_SAP.Vendedor <> 'Admin')  ".$Wmodulo." ".$Wvendedor." ".$Wmarca." ".$WtipoProducto." ".$Wcodbarra." ORDER BY dbo.RP_ReceiptsCab_SAP.FechaDocto" ;
 							
