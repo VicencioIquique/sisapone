@@ -7,7 +7,7 @@ $sql="SELECT  [Bodega]
       ,[RecNum]
       ,[Alu]
       ,CONVERT(INT,[Cantidad]) as cant
-  FROM [RP_VICENCIO].[dbo].[VerStockTiendas]
+  FROM [SAPSQL.DHN.CL].[RP_VICENCIO].[dbo].[VerStockTiendas]
   
   WHERE [Alu] LIKE '".$idarticulo."' AND [Bodega] = 2";
 

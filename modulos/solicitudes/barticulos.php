@@ -9,10 +9,10 @@ if (isset($_GET['term']))
 	
 	$sql="SELECT [ItemCode]
       ,[ItemName]
-  FROM [RP_VICENCIO].[dbo].[oITM_From_SBO]
+  FROM [SAPSQL.DHN.CL].[RP_VICENCIO].[dbo].[oITM_From_SBO]
   WHERE [ItemCode] LIKE '%'+'".$_REQUEST['term']."'+'%' OR [ItemName] LIKE '%'+'".$_REQUEST['term']."'+'%' ";//'%'+'".$_GET['term']."'+'%'
    
-   //echo $sql;
+   echo $sql;
 
 
 $stmt = odbc_exec( $conn, $sql );

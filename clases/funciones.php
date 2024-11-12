@@ -259,10 +259,10 @@ function getStockBodegaRef ($cod)
 	include("conexionocdb.php");
 	
 $sql="SELECT sum(CONVERT(INT,[Quantity])) AS cant
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON]
+  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON]
   WHERE ItemCode = '".$cod."' ";
 		
-							//echo $sql7;	
+							echo $sql7;	
 							$rs7 = odbc_exec( $conn, $sql );
 							if ( !$rs7 )
 							{
