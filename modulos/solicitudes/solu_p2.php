@@ -232,8 +232,8 @@ WHERE     (dbo.View_OMAR.Name = '".$bmarca."')  AND (dbo.oITM_From_SBO.ItmsGrpCo
   ".$Wcosto."
 ORDER BY dbo.oITM_From_SBO.ItemName";
 
-				//echo $sql;
-					
+				// echo $sql;
+					// 
 
 							//echo $sql;	
 							$rs = odbc_exec( $conn, $sql );
