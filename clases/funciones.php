@@ -262,7 +262,7 @@ $sql="SELECT sum(CONVERT(INT,[Quantity])) AS cant
   FROM [SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia2_ON]
   WHERE ItemCode = '".$cod."' ";
 		
-							// echo $sql7;	
+							echo $sql;	
 							$rs7 = odbc_exec( $conn, $sql );
 							if ( !$rs7 )
 							{
