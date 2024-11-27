@@ -1,6 +1,6 @@
 <?php 
 require_once("clases/conexionocdb.php");
-ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+ini_set('max_execution_time', 600); //300 seconds = 5 minutes
 
  $idsol = $_GET['idsol'];
  $bmarca = $_GET['marca'];
@@ -104,7 +104,7 @@ if($estado != 0)
 	  
 	 
 	  
-	 <?php // cargar emergente si se ha elegido una marca
+	<?php // cargar emergente si se ha elegido una marca
 	 if($bmarca)
      echo' 
 	 
@@ -120,7 +120,7 @@ if($estado != 0)
 	 
 	 ';
       
-      ?>
+  ?>
 	 
   }); // fin script para popup
  
