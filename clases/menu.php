@@ -330,6 +330,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2024.xlsx'>Ago. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2024.xlsx'>Sep. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2024.xlsx'>Oct. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2024.xlsx'>Oct. 2024</a></li>
 													</ul>
 												</li>
 										    
@@ -738,6 +739,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2024.xlsx'>Ago. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2024.xlsx'>Sep. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2024.xlsx'>Oct. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2024.xlsx'>Oct. 2024</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1281,6 +1283,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2024.xlsx'>Ago. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2024.xlsx'>Sep. 2024</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2024.xlsx'>Oct. 2024</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2024.xlsx'>Oct. 2024</a></li>
 													</ul>
 												</li>
 										    </ul>
