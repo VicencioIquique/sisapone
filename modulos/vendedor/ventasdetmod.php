@@ -174,7 +174,7 @@ SELECT
   ,SUM([TotalCIF]) [TotalCIF]
       ,SUM([TotalUSD]) [TotalUSD]
       ,SUM(RetencionDL)[RetencionDL]
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
+  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
   WHERE (DocDate >= '".$finicio2." 00:00:00.000') AND (DocDate <= '".$ffin2." 23:59:59.000')
        AND Empresa NOT LIKE 'EXB_AEROP'
 	   AND WhsCode NOT IN ('ZFI.6115','ZFI.6130')
@@ -202,7 +202,7 @@ SELECT
       ,SUM([TotalCIF]) [TotalCIF]
       ,SUM([TotalUSD]) [TotalUSD]
       ,SUM(RetencionDL) [RetencionDL]
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
+  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
   WHERE (DocDate >= '".$finicio2." 00:00:00.000') AND (DocDate <= '".$ffin2." 23:59:59.000')
        AND Empresa NOT LIKE 'EXB_AEROP'
 	   AND WhsCode  IN ('ZFI.6115','ZFI.6130')
@@ -230,7 +230,7 @@ SELECT
       ,SUM([TotalCIF]) [TotalCIF]
       ,SUM([TotalUSD]) [TotalUSD]
       
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
+  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
   WHERE (DocDate >= '".$finicio2." 00:00:00.000') AND (DocDate <= '".$ffin2." 23:59:59.000')
        AND Empresa  LIKE 'EXB_AEROP'
 	   --AND WhsCode  IN ('ZFI.6115','ZFI.6130')
