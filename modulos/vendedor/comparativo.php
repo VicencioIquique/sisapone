@@ -270,7 +270,7 @@ SELECT
       ,SUM([TotalCIF]) [TotalCIF] ,SUM([TotalUSD]) [TotalUSD] 
 	  ,(((SUM([TotalUSD]) - SUM([TotalCIF]))*100) /SUM([TotalUSD])) [Rentabilidad]
 	  ,(SUM([TotalCLP]) /SUM([TotalUSD])) [TC]
- FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] 
+ FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim] 
 WHERE (DocDate >= '".$finicio2." 00:00:00.000') 
   AND (DocDate <= '".$ffin2." 23:59:59.000') 
   AND Empresa NOT LIKE 'EXB_AEROP' 
@@ -290,7 +290,7 @@ GROUP BY /*[Empresa] ,*/[WhsCode]
       ,SUM([TotalCIF]) [TotalCIF] ,SUM([TotalUSD]) [TotalUSD] 
 	  ,(((SUM([TotalUSD]) - SUM([TotalCIF]))*100) /SUM([TotalUSD])) [Rentabilidad]
 	  ,(SUM([TotalCLP]) /SUM([TotalUSD])) [TC]
- FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] 
+ FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim] 
   WHERE (DocDate >= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $finicio2 ) ))." 00:00:00.000') AND (DocDate <= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $ffin2 ) ))." 23:59:59.000')
   AND Empresa NOT LIKE 'EXB_AEROP' 
   AND WhsCode NOT IN ('ZFI.6115','ZFI.6130')
@@ -342,7 +342,7 @@ SELECT
       ,SUM([TotalCIF]) [TotalCIF] ,SUM([TotalUSD]) [TotalUSD] 
 	  ,(((SUM([TotalUSD]) - SUM([TotalCIF]))*100) /SUM([TotalUSD])) [Rentabilidad]
 	  ,(SUM([TotalCLP]) /SUM([TotalUSD])) [TC]
- FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] 
+ FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim] 
 WHERE (DocDate >= '".$finicio2." 00:00:00.000') 
   AND (DocDate <= '".$ffin2." 23:59:59.000') 
   AND Empresa NOT LIKE 'EXB_AEROP'
@@ -362,7 +362,7 @@ GROUP BY [Empresa] ,[WhsCode]
       ,SUM([TotalCIF]) [TotalCIF] ,SUM([TotalUSD]) [TotalUSD] 
 	  ,(((SUM([TotalUSD]) - SUM([TotalCIF]))*100) /SUM([TotalUSD])) [Rentabilidad]
 	  ,(SUM([TotalCLP]) /SUM([TotalUSD])) [TC]
- FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] 
+ FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim] 
   WHERE (DocDate >= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $finicio2 ) ))." 00:00:00.000') AND (DocDate <= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $ffin2 ) ))." 23:59:59.000')
     AND Empresa NOT LIKE 'EXB_AEROP'
 	AND WhsCode  IN ('ZFI.6115','ZFI.6130')
@@ -406,7 +406,7 @@ SELECT
       ,SUM([TotalCIF]) [TotalCIF] ,SUM([TotalUSD]) [TotalUSD] 
 	  ,(((SUM([TotalUSD]) - SUM([TotalCIF]))*100) /SUM([TotalUSD])) [Rentabilidad]
 	  ,(SUM([TotalCLP]) /SUM([TotalUSD])) [TC]
- FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] 
+ FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim] 
 WHERE (DocDate >= '".$finicio2." 00:00:00.000') 
   AND (DocDate <= '".$ffin2." 23:59:59.000') 
    AND Empresa  LIKE 'EXB_AEROP'
@@ -425,7 +425,7 @@ GROUP BY [Empresa] ,[WhsCode]
       ,SUM([TotalCIF]) [TotalCIF] ,SUM([TotalUSD]) [TotalUSD] 
 	  ,(((SUM([TotalUSD]) - SUM([TotalCIF]))*100) /SUM([TotalUSD])) [Rentabilidad]
 	  ,(SUM([TotalCLP]) /SUM([TotalUSD])) [TC]
- FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] 
+ FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim] 
   WHERE (DocDate >= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $finicio2 ) ))." 00:00:00.000') AND (DocDate <= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $ffin2 ) ))." 23:59:59.000')
      AND Empresa  LIKE 'EXB_AEROP'
     ".$WtipoProducto."
@@ -451,7 +451,7 @@ SELECT
       ,SUM([TotalCIF]) [TotalCIF]
       ,SUM([TotalUSD]) [TotalUSD]
       
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
+  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim]
   WHERE (DocDate >= '".$finicio2." 00:00:00.000') AND (DocDate <= '".$ffin2." 23:59:59.000')
        AND Empresa  LIKE 'EXB_AEROP'
 	   --AND WhsCode  IN ('ZFI.6115','ZFI.6130')
@@ -479,7 +479,7 @@ SELECT
       ,SUM([TotalCIF]) [TotalCIF]
       ,SUM([TotalUSD]) [TotalUSD]
       
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO]
+  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim]
   WHERE (DocDate >= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $finicio2 ) ))." 00:00:00.000') AND (DocDate <= '".date ( 'Y-m-j' ,strtotime ( '-1 year' , strtotime ( $ffin2 ) ))." 23:59:59.000')
     AND Empresa  LIKE 'EXB_AEROP'
 	--AND WhsCode  IN ('ZFI.6115','ZFI.6130')
