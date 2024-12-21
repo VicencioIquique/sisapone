@@ -262,6 +262,7 @@ $(document).ready(function() {
 						$("#caja").append('<option value="4">4</option>');
 						$("#caja").append('<option value="5">5</option>');
 						$("#caja").append('<option value="6">6</option>');
+						$("#caja").append('<option value="9">9</option>');
 					}else if(modulo == '003'){
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
@@ -532,13 +533,17 @@ $(document).ready(function() {
 				(SELECT TOP 1 NumeroDocto FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP WHERE TipoDocto = '2' AND FechaDocto > DATEADD(day,-1,'".$fecha." 00:00:00') AND FechaDocto < DATEADD(day,-1,'".$fecha." 23:59:59') AND Bodega = '".$bodega."' AND Workstation = '".$workstation."' ORDER BY NumeroDocto DESC) as Tipo2,
 				(SELECT TOP 1 NumeroDocto FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP WHERE TipoDocto = '3' AND FechaDocto > DATEADD(day,-1,'".$fecha." 00:00:00') AND FechaDocto < DATEADD(day,-1,'".$fecha." 23:59:59') AND Bodega = '".$bodega."' AND Workstation = '".$workstation."' ORDER BY NumeroDocto DESC) as Tipo3,
 				(SELECT TOP 1 NumeroDocto FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP WHERE TipoDocto = '4' AND FechaDocto > DATEADD(day,-1,'".$fecha." 00:00:00') AND FechaDocto < DATEADD(day,-1,'".$fecha." 23:59:59') AND Bodega = '".$bodega."' AND Workstation = '".$workstation."' ORDER BY NumeroDocto DESC) as Tipo4,
+				(SELECT TOP 1 NumeroDocto FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP WHERE TipoDocto = '5' AND FechaDocto > DATEADD(day,-1,'".$fecha." 00:00:00') AND FechaDocto < DATEADD(day,-1,'".$fecha." 23:59:59') AND Bodega = '".$bodega."' AND Workstation = '".$workstation."' ORDER BY NumeroDocto DESC) as Tipo5,
 				(SELECT TOP 1 NumeroDocto FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP WHERE TipoDocto = '99' AND FechaDocto > DATEADD(day,-1,'".$fecha." 00:00:00') AND FechaDocto < DATEADD(day,-1,'".$fecha." 23:59:59') AND Bodega = '".$bodega."' AND Workstation = '".$workstation."' ORDER BY NumeroDocto DESC) as Tipo99
 			FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP
 			WHERE FechaDocto > DATEADD(day,-1,'".$fecha." 00:00:00') AND
 					FechaDocto < DATEADD(day,-1,'".$fecha." 23:59:59')
 		) as Tabla
-		GROUP BY Tabla.Tipo1, Tabla.Tipo2, Tabla.Tipo3, Tabla.Tipo4, Tabla.Tipo99
+		GROUP BY Tabla.Tipo1, Tabla.Tipo2, Tabla.Tipo3, Tabla.Tipo4, Tabla.Tipo5, Tabla.Tipo99
 	";
+
+	//echo $sql2;
+
 	$rs2 = odbc_exec( $conn, $sql2 );
 	if(!$rs2){
 		exit( "Error en la consulta SQL" );
@@ -652,6 +657,21 @@ if($consultar!= ""){
 								echo'<td style="text-align:center;">-</td>';
 							echo '</tr>';
 						}
+					}else if($resultado['TipoDocto'] == '4'){
+						if((($resultado['NumeroDocto']-1)!=$resultado2['Tipo5'])&&($resultado2['Tipo5']!=NULL)){
+							echo '<tr>';
+								echo'<td style="color:#ff0000; text-align:right;">SALTO DE FOLIO</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+								echo'<td style="text-align:center;">-</td>';
+							echo '</tr>';
+						}
 					}else if($resultado['TipoDocto'] == '99'){
 						if((($resultado['NumeroDocto']-1)!=$resultado2['Tipo99'])&&($resultado2['Tipo99']!=NULL)){
 							echo '<tr>';
@@ -682,6 +702,9 @@ if($consultar!= ""){
 								echo '<td>Nota de crédito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
+							}
+							else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
@@ -720,6 +743,9 @@ if($consultar!= ""){
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
 							}
+							else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta</td>';
+							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
 								echo '<td>SIN PAGO</td>';
@@ -744,6 +770,9 @@ if($consultar!= ""){
 								echo '<td>Nota de crédito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
+							}
+							else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
@@ -886,6 +915,9 @@ if($consultar!= ""){
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
 							}
+							else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta</td>';
+							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							echo '<td>'.$resultado['DocNum'].'</td>';
 							echo '<td>'.number_format($resultado['Total'],'0',',','.').'</td>';
@@ -919,6 +951,9 @@ if($consultar!= ""){
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
 							}
+							else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta</td>';
+							}
 							echo '<td>'.$resultado['DocNum'].'</td>';
 							echo '<td>'.number_format($resultado['Total'],'0',',','.').'</td>';
 							echo '<td>'.number_format($resultado['Monto_Cash'],'0',',','.').'</td>';
@@ -938,6 +973,9 @@ if($consultar!= ""){
 								echo '<td>Nota de credito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
+							}
+							else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							echo '<td>'.$resultado['DocNum'].'</td>';

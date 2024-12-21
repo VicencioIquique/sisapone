@@ -259,6 +259,7 @@ $(document).ready(function() {
 						$("#caja").append('<option value="4">4</option>');
 						$("#caja").append('<option value="5">5</option>');
 						$("#caja").append('<option value="6">6</option>');
+						$("#caja").append('<option value="9">9</option>');
 					}else if(modulo == '003'){
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
@@ -570,7 +571,7 @@ if($consultar!= ""){
 				}
 				//COMPROBAR SI HAY SALTO DE FOLIO CON EL ULTIMO DOCUMENTO DEL DÍA ANTERIOR//
 				if($contFolioAnterior == 0){
-					if($resultado['TipoDocto'] == '1'){
+					if($resultado['TipoDocto'] == '1' || $resultado['TipoDocto'] == '5' ){
 						if((($resultado['NumeroDocto']-1)!=$resultado2['Tipo1'])&&($resultado2['Tipo1']!=NULL)){
 							echo '<tr>';
 								echo'<td style="color:#ff0000; text-align:right;">SALTO DE FOLIO</td>';
@@ -662,6 +663,8 @@ if($consultar!= ""){
 								echo '<td>Nota de crédito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
+							}else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
@@ -699,6 +702,8 @@ if($consultar!= ""){
 								echo '<td>Nota de crédito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
+							}else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta manual</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
@@ -723,6 +728,8 @@ if($consultar!= ""){
 							}else if($resultado['TipoDocto'] == '3'){
 								echo '<td>Nota de crédito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
+								echo '<td>Boleta manual</td>';
+							}else if($resultado['TipoDocto'] == '5'){
 								echo '<td>Boleta manual</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
@@ -868,6 +875,8 @@ if($consultar!= ""){
 								echo '<td>Nota de credito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
+							}else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta manual</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
@@ -905,6 +914,8 @@ if($consultar!= ""){
 								echo '<td>Nota de credito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
+							}else if($resultado['TipoDocto'] == '5'){
+								echo '<td>Boleta manual</td>';
 							}
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
 								echo '<td>SIN PAGO</td>';
@@ -928,6 +939,8 @@ if($consultar!= ""){
 							}else if($resultado['TipoDocto'] == '3'){
 								echo '<td>Nota de credito</td>';
 							}else if($resultado['TipoDocto'] == '4'){
+								echo '<td>Boleta manual</td>';
+							}else if($resultado['TipoDocto'] == '5'){
 								echo '<td>Boleta manual</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
