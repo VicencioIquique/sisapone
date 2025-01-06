@@ -508,7 +508,7 @@ $(document).ready(function() {
 							
 						FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP as T1
 						LEFT JOIN RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T2 ON T1.ID = T2.ID
-						LEFT JOIN SBO_Imp_Eximben_SAC.dbo.OINV T3 ON T1.BaseEntry = T3.DocEntry
+						LEFT JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].OINV T3 ON T1.BaseEntry = T3.DocEntry
 						WHERE 
 							T1.FechaDocto > '".$fecha." 00:00:00' AND 
 							T1.FechaDocto < '".$fecha." 23:59:59' AND 

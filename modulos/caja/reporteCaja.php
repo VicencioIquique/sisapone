@@ -488,7 +488,7 @@ $(document).ready(function() {
 							
 						FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP as T1
 						LEFT JOIN RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T2 ON T1.ID = T2.ID
-						LEFT JOIN SBO_Imp_Eximben_SAC.dbo.OINV T3 ON T1.BaseEntry = T3.DocEntry
+						LEFT JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].OINV.dbo.OINV T3 ON T1.BaseEntry = T3.DocEntry
 						WHERE 
 							T1.FechaDocto > '".$fecha." 00:00:00' AND 
 							T1.FechaDocto < '".$fecha." 23:59:59' AND 
@@ -941,7 +941,7 @@ if($consultar!= ""){
 							}else if($resultado['TipoDocto'] == '4'){
 								echo '<td>Boleta manual</td>';
 							}else if($resultado['TipoDocto'] == '5'){
-								echo '<td>Boleta manual</td>';
+								echo '<td>Boleta</td>';
 							}
 							echo '<td>'.$resultado['NumeroDocto'].'</td>';
 							if(number_format($resultado['Monto_Cash'],'0',',','.')==0 && number_format($resultado['Monto_DebitCard'],'0',',','.') ==0 && number_format($resultado['Monto_CreditCard'],'0',',','.') == 0 && number_format($resultado['Monto_Check'],'0',',','.') == 0 && number_format($resultado['Monto_Payments'],'0',',','.') == 0 && number_format($resultado['Monto_StoreCredit'],'0',',','.') == 0){
