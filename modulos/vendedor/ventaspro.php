@@ -55,7 +55,7 @@ $sql2= "SELECT   [Code]
 /************************************************************ PARA LOS VENDEDORES **************************************/
 
 $sql3= "SELECT     SlpCode, SlpName
-		FROM       SBO_Imp_Eximben_SAC.dbo.OSLP WHERE SlpCode > 0";
+		FROM       [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].OSLP WHERE SlpCode > 0";
 							$rs3 = odbc_exec( $conn, $sql3 );
 							if ( !$rs3 )
 							{
