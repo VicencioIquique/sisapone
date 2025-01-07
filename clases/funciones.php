@@ -124,7 +124,7 @@ function getusuarioRP ($b)
 	
 
 		 	$sql7="	SELECT     SlpCode, SlpName
-FROM         SBO_Imp_Eximben_SAC.dbo.OSLP WHERE SlpCode = ".$b." ";
+FROM         [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].OSLP WHERE SlpCode = ".$b." ";
 
 		
 							//echo $sql7;	

@@ -297,7 +297,7 @@ FROM         dbo.RP_ReceiptsDet_SAP INNER JOIN
 					  
 WHERE       (dbo.RP_ReceiptsCab_SAP.FechaDocto >= '".$finicio2." 00:00:00.000') AND (dbo.RP_ReceiptsCab_SAP.FechaDocto <= '".$ffin2." 23:59:59.000') AND (dbo.RP_ReceiptsDet_SAP.Vendedor <> 'Admin')  ".$Wmodulo." ".$Wvendedor." ".$Wmarca." ".$WtipoProducto." ".$Wcodbarra." ORDER BY dbo.RP_ReceiptsCab_SAP.FechaDocto" ;
 							
-							echo $sql;	
+							// echo $sql;	
 							$rs = odbc_exec( $conn, $sql );
 							if ( !$rs )
 							{
