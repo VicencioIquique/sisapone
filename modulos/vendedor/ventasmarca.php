@@ -71,7 +71,7 @@ SELECT
       ,SUM([TotalCIF]) [CIF]
       ,SUM([TotalUSD]) [USD]
   
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim]
+  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO_Slim_2]
   WHERE  Periodo >= '".$finicio."' AND  Periodo <= '".$ffin."'
 	".$conGrupo."
 	".$conModulo."
