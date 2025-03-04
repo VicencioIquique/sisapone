@@ -337,6 +337,7 @@ class menu{
 												<li><a href='index.php?opc=estAuto'>Año 2025</a>
 													<ul class='children'>
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2025.xlsx'>Ene. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2025.xlsx'>Feb. 2025</a></li>
 													</ul>
 												</li>
 										    
@@ -752,6 +753,7 @@ class menu{
 												<li><a href='index.php?opc=estAuto'>Año 2025</a>
 													<ul class='children'>
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2025.xlsx'>Ene. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2025.xlsx'>Feb. 2025</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1302,6 +1304,7 @@ class menu{
 												<li><a href='index.php?opc=estAuto'>Año 2025</a>
 													<ul class='children'>
 													 <li><a target'_blank' href='../sisapone/archivos/Ene2025.xlsx'>Ene. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Feb2025.xlsx'>Feb. 2025</a></li>
 													</ul>
 												</li>
 										    </ul>
