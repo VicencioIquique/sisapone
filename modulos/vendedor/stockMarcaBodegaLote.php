@@ -278,11 +278,12 @@ if ($modulo)
 							
 						if ($modulo)
 						{	
-							//echo $sql;	
+							echo $sql;	
 							$rs = odbc_exec( $conn2, $sql );
+							echo $rs;
 							if ( !$rs )
 							{
-							exit( "Error en la consulta SQL" );
+							exit( "Error en la consulta SQL Franco" );
 							}
 							
 							$i=1;
