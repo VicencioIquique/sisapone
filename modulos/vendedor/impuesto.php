@@ -44,8 +44,8 @@ $sql="SELECT
 				  ,SUM([TotalCIF]) [TotalCIF]
 				  ,AVG([TipoCambio]) [TipoCambio]
 				  ,(SUM([TotalCIF])*AVG([TipoCambio])) [CIF_CLP]
-				  ,((SUM([TotalCIF])*0.005)*AVG([TipoCambio])) [RetencionDL]
-			  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] AS Z
+				  ,((SUM([TotalCIF])*0.0034)*AVG([TipoCambio])) [RetencionDL]
+			  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_VtasD_RPRO] AS Z
 			  WHERE Z.Periodo = '".$periodo."'
 			        AND A.Periodo = Z.Periodo AND Z.WhsCode = A.WhsCode
 			  GROUP BY WhsCode
@@ -54,15 +54,15 @@ $sql="SELECT
 			) AS TABLA
                           ) AS RetencionDLCLP
       ,(SELECT SUM(Z.RetencionDL)
-          FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_CR_VTAS_IMP_DL] AS Z
+          FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_CR_VTAS_IMP_DL] AS Z
          WHERE Z.Periodo = '".$periodo."' AND A.Periodo = Z.Periodo AND Z.WhsCode = A.WhsCode) AS RetencionDL
       ,(SELECT SUM(Z.CantBoletas)
-          FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_CR_VTAS_IMP_DL] AS Z
+          FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_CR_VTAS_IMP_DL] AS Z
          WHERE Z.Periodo = '".$periodo."'  AND A.Periodo = Z.Periodo AND Z.WhsCode = A.WhsCode) AS BoletasCant
       ,((SUM([CtoVtaCIF])*661.49)*0.52)/100  [CIFxUSD]
       --,[Emp_Relacionada]
 
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_Ventas_Todas] AS A
+  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[VIC_VW_Ventas_Todas] AS A
  WHERE Periodo = '".$periodo."'
        ".$wEmpresa."
  GROUP BY 
@@ -76,7 +76,7 @@ $sql="SELECT
        ,Emp_Relacionada
   ";
 
-  //echo $sql;
+  echo $sql;
 
 		
 ?>
