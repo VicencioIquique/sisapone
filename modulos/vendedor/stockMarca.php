@@ -75,6 +75,7 @@ $sql="SELECT
 	  ,[Cif]
 	  ,[CifTotal]
 	  ,[Cantidad]
+	  ,[TipoProducto]
   FROM [RP_VICENCIO].[dbo].[SI_LotesDisponibles]
  WHERE  (Bodega LIKE '".$modulo."')  ".$conMarca."
 
@@ -231,6 +232,7 @@ if ($modulo)
                         <th>Marca</th>
                         <th>Código</th>
 						<th>Descripción</th>
+						<th>Tipo Producto</th>
                         <th>Cif Promedio</th>
                         <th>Cif Total</th>
                         <th>Cantidad</th>
@@ -261,6 +263,7 @@ if ($modulo)
 									<td ><strong>'.$resultado["Name"].'</strong></td>
 									<td  ><strong >'.(string)$resultado["ItemCode"].'</strong></td>
 									<td ><strong>'.$resultado["ItemName"].'</strong></td>
+									<td ><strong>'.$resultado["TipoProducto"].'</strong></td>
 									<td ><strong>'.number_format($resultado["Cif"], 4, ',', '.').'</strong></td>
 									<td ><strong>'.number_format($resultado["CifTotal"], 4, ',', '.').'</strong></td>
 									<td ><strong>'.number_format($resultado["Cantidad"], 0, ',', '.').'</strong></td>									
