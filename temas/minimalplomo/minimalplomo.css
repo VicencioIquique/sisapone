@@ -303,7 +303,7 @@ body{
 	margin-bottom:15px;
 	font-size:20px;
 	color:#a0a0a0;
-	//border: 1px solid #339999;
+	/* border: 1px solid #339999; */
 
 }
 
@@ -337,6 +337,12 @@ body{
 
 
 #horizontalFormB #articulo ,#horizontalForm #articulo
+{
+	width: 650px;
+	font-size:16px;
+}
+
+#horizontalFormB #marca ,#horizontalForm #marca
 {
 	width: 650px;
 	font-size:16px;

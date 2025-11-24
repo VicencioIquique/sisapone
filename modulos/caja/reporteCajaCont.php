@@ -262,6 +262,7 @@ $(document).ready(function() {
 						$("#caja").append('<option value="4">4</option>');
 						$("#caja").append('<option value="5">5</option>');
 						$("#caja").append('<option value="6">6</option>');
+						$("#caja").append('<option value="8">8</option>');
 						$("#caja").append('<option value="9">9</option>');
 					}else if(modulo == '003'){
 						$("#caja").empty();
