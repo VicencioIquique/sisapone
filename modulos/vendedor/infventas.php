@@ -154,7 +154,7 @@ ORDER BY NRODOCTO";
 									$numerodocto =  intval($resultado["NRODOCTO"]);
 									$nombredia = utf8_encode($resultado["DIA"]);
 									
-									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4)
+									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5)
 									{
 										$acumreten1 = $acumreten1 + $resultado["RETEN"];
 									}
@@ -171,7 +171,7 @@ ORDER BY NRODOCTO";
 								if($nombredia == 'Monday')
 								{
 										
-										if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4) // para encontrar el mayor y menor numero de documento
+										if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5) // para encontrar el mayor y menor numero de documento
 										{
 											$acumlun = $acumlun + $resultado["Sumaventa"];
 											$retmon = $retmon + $resultado["RETEN"];
@@ -185,7 +185,7 @@ ORDER BY NRODOCTO";
 													
 												}
 										
-									    }//fin if docto 1 -4
+									    }//fin if docto 1 -4 -5
 									
 										 if($resultado["TipoDocto"] == 2) // para encontrar el mayor y menor numero de documento
 										{
@@ -214,7 +214,7 @@ ORDER BY NRODOCTO";
 								if($nombredia == 'Tuesday')
 								{
 										
-									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4) // para encontrar el mayor y menor numero de documento
+									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5) // para encontrar el mayor y menor numero de documento
 									{
 										$acummart = $acummart + $resultado["Sumaventa"];
 										$rettus = $rettus + $resultado["RETEN"];
@@ -254,7 +254,7 @@ ORDER BY NRODOCTO";
 								} //fin martes
 								if($nombredia == 'Wednesday')
 								{
-									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4) // para encontrar el mayor y menor numero de documento
+									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5) // para encontrar el mayor y menor numero de documento
 									{
 										$acummier = $acummier + $resultado["Sumaventa"];
 										$retwed = $retwed + $resultado["RETEN"];
@@ -295,7 +295,7 @@ ORDER BY NRODOCTO";
 								if($nombredia == 'Thursday')
 								{
 										
-									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4) // para encontrar el mayor y menor numero de documento
+									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5) // para encontrar el mayor y menor numero de documento
 									{
 										$acumjuev = $acumjuev + $resultado["Sumaventa"];
 										$rettur = $rettur + $resultado["RETEN"];
@@ -336,7 +336,7 @@ ORDER BY NRODOCTO";
 								if($nombredia == 'Friday')
 								{
 										
-									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4) // para encontrar el mayor y menor numero de documento
+									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5) // para encontrar el mayor y menor numero de documento
 									{
 										$acumvier = $acumvier + $resultado["Sumaventa"];
 										$retfri = $retfri + $resultado["RETEN"];
@@ -377,7 +377,7 @@ ORDER BY NRODOCTO";
 								if($nombredia == 'Saturday')
 								{
 										
-									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4) // para encontrar el mayor y menor numero de documento
+									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5) // para encontrar el mayor y menor numero de documento
 									{
 										$acumsab = $acumsab + $resultado["Sumaventa"];
 										$retsat = $retsat + $resultado["RETEN"];
@@ -418,7 +418,7 @@ ORDER BY NRODOCTO";
 								if($nombredia == 'Sunday')
 								{
 										
-									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4) // para encontrar el mayor y menor numero de documento
+									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5) // para encontrar el mayor y menor numero de documento
 									{
 										$acumdom = $acumdom + $resultado["Sumaventa"];
 										$retsun = $retsun + $resultado["RETEN"];

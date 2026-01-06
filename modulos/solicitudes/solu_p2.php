@@ -54,15 +54,8 @@ try {
     // --- 3. OBTENER PRODUCTOS POR MARCA (SI APLICA) ---
     // Esto es para el diálogo modal
     if ($bmarca) {
-        // Construcción de consulta dinámica de forma SEGURA
-        // $Wcosto = "";
-        // if ($costo == 0) {
-        //     $Wcosto = " AND (dbo.oITM_From_SBO.QryGroup1 = 'Y')";
-        // }
         
         $conAcce = "";
-
-        // --- ¡NUEVO! --- Lógica de filtro SQL ---
         $filtro_sql = ""; // Esta variable reemplaza a $Wcosto
 
         switch ($filtro_tipo) {
@@ -79,30 +72,44 @@ try {
                 $filtro_sql = "";
                 break;
         }
-        // --- Fin de Lógica de filtro SQL ---
-        
+
         if ($_SESSION["usuario_modulo"] != 7) {
             $conAcce = " AND (dbo.oITM_From_SBO.ItmsGrpCod <> 104)";
         }
 
         // Usamos la misma lógica de filtros, pero solo para CONTAR
-        $sql_total = "SELECT COUNT(dbo.oITM_From_SBO.ItemCode)
-        FROM (
-        SELECT Alu, Cantidad
-        FROM dbo.VerStockTiendas
-        WHERE (Bodega = ?) 
-        ) AS TABLA 
-        FULL OUTER JOIN dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS 
-        LEFT OUTER JOIN dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
-        WHERE (dbo.View_OMAR.Name = ?) 
-        AND (dbo.oITM_From_SBO.ItmsGrpCod <> 103) 
-        AND (dbo.oITM_From_SBO.ItmsGrpCod <> 100) 
-        AND (dbo.oITM_From_SBO.ItmsGrpCod <> 106) 
-        AND (dbo.oITM_From_SBO.ItmsGrpCod <> 107) 
-        AND dbo.oITM_From_SBO.frozenFor <> 'Y' 
-        AND QryGroup3 <> 'Y'
-        " . $conAcce . "
-        " .$filtro_sql;
+        $sql_total = "SELECT COUNT(TotalFiltrado.ItemCode) 
+            FROM (
+                SELECT 
+                    dbo.oITM_From_SBO.ItemCode
+                FROM (
+                    SELECT Alu, Cantidad
+                    FROM dbo.VerStockTiendas
+                    WHERE (Bodega = ?) 
+                ) AS TABLA 
+                FULL OUTER JOIN dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS 
+                LEFT OUTER JOIN dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
+                
+                -- ⭐ AÑADIR JOIN a la tabla/vista de Stock de Referencia
+                LEFT OUTER JOIN 
+                    [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON] StockRef 
+                    ON StockRef.ItemCode = dbo.oITM_From_SBO.ItemCode
+                
+                WHERE 
+                    (dbo.View_OMAR.Name = ?) 
+                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 103) 
+                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 100) 
+                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 106) 
+                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 107) 
+                    AND dbo.oITM_From_SBO.frozenFor <> 'Y' 
+                    AND QryGroup3 <> 'Y'
+                    " . $conAcce . "
+                    " .$filtro_sql . "
+                GROUP BY 
+                    dbo.oITM_From_SBO.ItemCode
+            HAVING 
+                    SUM(ISNULL(StockRef.Quantity, 0)) > 0
+        ) AS TotalFiltrado";
 
         // Formateamos la bodega (como hicimos antes)
         $bodega_formateada = str_pad($_SESSION["usuario_modulo"], 3, "0", STR_PAD_LEFT);
@@ -150,6 +157,41 @@ try {
         
         // Fíjate cómo usamos '?' para los parámetros
         // --- ¡CAMBIO! --- Esta es la nueva consulta principal para SQL Server 2008 ---
+        // $sql_marca = "
+        // WITH ProductosPaginados AS (
+        //     SELECT 
+        //         dbo.oITM_From_SBO.ItemCode, 
+        //         dbo.oITM_From_SBO.ItemName, 
+        //         dbo.View_OMAR.Name, 
+        //         TABLA.Cantidad, 
+        //         QryGroup1, 
+        //         QryGroup2,
+        //         -- Aquí numeramos todas las filas que coinciden
+        //         ROW_NUMBER() OVER (ORDER BY dbo.oITM_From_SBO.ItemName) AS rn 
+        //     FROM (
+        //         SELECT Alu, Cantidad
+        //         FROM dbo.VerStockTiendas
+        //         WHERE (Bodega = ?) -- Param 1
+        //     ) AS TABLA 
+        //     FULL OUTER JOIN dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS 
+        //     LEFT OUTER JOIN dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
+        //     WHERE 
+        //         (dbo.View_OMAR.Name = ?) -- Param 2
+        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 103) 
+        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 100) 
+        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 106) 
+        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 107) 
+        //         AND dbo.oITM_From_SBO.frozenFor <> 'Y' 
+        //         AND QryGroup3 <> 'Y'
+        //         " . $conAcce . "
+        //         " .$filtro_sql. "
+        // )
+        // -- Ahora seleccionamos solo el rango que queremos de las filas numeradas
+        // SELECT ItemCode, ItemName, Name, Cantidad, QryGroup1, QryGroup2
+        // FROM ProductosPaginados
+        // WHERE rn BETWEEN ? AND ? -- Param 3 y 4
+        // ORDER BY ItemName";
+
         $sql_marca = "
         WITH ProductosPaginados AS (
             SELECT 
@@ -157,9 +199,12 @@ try {
                 dbo.oITM_From_SBO.ItemName, 
                 dbo.View_OMAR.Name, 
                 TABLA.Cantidad, 
-                QryGroup1, 
-                QryGroup2,
-                -- Aquí numeramos todas las filas que coinciden
+                oITM_From_SBO.QryGroup1, 
+                oITM_From_SBO.QryGroup2,
+                -- Agregamos la suma del stock para poder filtrar con HAVING
+                SUM(ISNULL(StockRef.Quantity, 0)) AS StockRefTotal, 
+                
+                -- Aquí numeramos solo las filas que cumplen los criterios (incluyendo el stock)
                 ROW_NUMBER() OVER (ORDER BY dbo.oITM_From_SBO.ItemName) AS rn 
             FROM (
                 SELECT Alu, Cantidad
@@ -168,6 +213,12 @@ try {
             ) AS TABLA 
             FULL OUTER JOIN dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS 
             LEFT OUTER JOIN dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
+            
+            -- ⭐ AÑADIR JOIN a la tabla/vista de Stock de Referencia
+            LEFT OUTER JOIN 
+                [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON] StockRef 
+                ON StockRef.ItemCode = dbo.oITM_From_SBO.ItemCode
+            
             WHERE 
                 (dbo.View_OMAR.Name = ?) -- Param 2
                 AND (dbo.oITM_From_SBO.ItmsGrpCod <> 103) 
@@ -175,9 +226,22 @@ try {
                 AND (dbo.oITM_From_SBO.ItmsGrpCod <> 106) 
                 AND (dbo.oITM_From_SBO.ItmsGrpCod <> 107) 
                 AND dbo.oITM_From_SBO.frozenFor <> 'Y' 
-                AND QryGroup3 <> 'Y'
+                AND oITM_From_SBO.QryGroup3 <> 'Y'
                 " . $conAcce . "
                 " .$filtro_sql. "
+            
+            -- ⭐ DEBEMOS AGRUPAR ANTES DE FILTRAR POR LA SUMA
+            GROUP BY 
+                dbo.oITM_From_SBO.ItemCode, 
+                dbo.oITM_From_SBO.ItemName, 
+                dbo.View_OMAR.Name, 
+                TABLA.Cantidad, 
+                oITM_From_SBO.QryGroup1, 
+                oITM_From_SBO.QryGroup2
+            
+            -- ⭐ FILTRO FINAL: Solo incluimos los que tengan StockTotal > 0
+            HAVING 
+                SUM(ISNULL(StockRef.Quantity, 0)) > 0
         )
         -- Ahora seleccionamos solo el rango que queremos de las filas numeradas
         SELECT ItemCode, ItemName, Name, Cantidad, QryGroup1, QryGroup2
@@ -333,29 +397,29 @@ $config_js = [
                             <tbody id="tablebody">
                                 <?php foreach ($productos_marca as $producto): ?>
                                     <?php 
-                                        // Limpiamos los datos antes de mostrarlos
+                                        // 1. Limpieza y Preparación de Datos
                                         $itemCode = htmlspecialchars($producto["ItemCode"], ENT_QUOTES, 'UTF-8');
                                         $itemName = htmlspecialchars(utf8_encode($producto["ItemName"]), ENT_QUOTES, 'UTF-8');
                                         $cantidad = (int)$producto["Cantidad"];
                                         $style = ($producto["QryGroup2"] == 'Y') ? 'style="color:#D55C00;"' : '';
                                         
-                                        // Asumimos que getStockBodegaRef es una función PHP que tienes definida
-                                        // Si no, deberías cargarla o incluirla al inicio.
-                                        $stockBodega = getStockBodegaRef($itemCode); 
-                                        //$stockBodega = 1; // Placeholder si la función no está
+
                                     ?>
+                                    
                                     <tr <?php echo $style; ?>>
                                         <td><strong><?php echo $itemCode; ?></strong></td>
+                                        
                                         <td><?php echo $itemName; ?></td>
+                                        
                                         <td><?php echo $cantidad; ?></td>
                                         
-                                        <?php if ($stockBodega == 0): ?>
-                                            <td>Sin Stock</td>
-                                            <td><center><img src="images/alert2.png" width="23px" height="23px" /></center></td>
-                                        <?php else: ?>
-                                            <td><input type="text" name="name" id="cantsol" class="text ui-widget-content ui-corner-all" maxlength="3" value="0" /></td>
-                                            <td><a class="anade_lista" id="<?php echo $itemCode; ?>"><img src="images/agg.png" /></a></td>
-                                        <?php endif; ?>
+                                        <td>
+                                            <input type="text" name="name" id="cantsol" class="text ui-widget-content ui-corner-all" maxlength="3" value="0" />
+                                        </td>
+                                        
+                                        <td>
+                                            <a class="anade_lista" id="<?php echo $itemCode; ?>"><img src="images/agg.png" /></a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

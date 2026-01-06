@@ -346,6 +346,8 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2025.xlsx'>Ago. 2025</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2025.xlsx'>Sep. 2025</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2025.xlsx'>Oct. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2025.xlsx'>Nov. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Dic2025.xlsx'>Dic. 2025</a></li>
 													</ul>
 												</li>
 										    
@@ -770,6 +772,8 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2025.xlsx'>Ago. 2025</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2025.xlsx'>Sep. 2025</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2025.xlsx'>Oct. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2025.xlsx'>Nov. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Dic2025.xlsx'>Dic. 2025</a></li>
 													 </ul>
 												</li>
 										    </ul>
@@ -1329,6 +1333,8 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Ago2025.xlsx'>Ago. 2025</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Sep2025.xlsx'>Sep. 2025</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Oct2025.xlsx'>Oct. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Nov2025.xlsx'>Nov. 2025</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Dic2025.xlsx'>Dic. 2025</a></li>
 													</ul>
 												</li>
 										    </ul>
