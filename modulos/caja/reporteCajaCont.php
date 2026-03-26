@@ -253,6 +253,7 @@ $(document).ready(function() {
 						$("#caja").append('<option value=""> </option>');
 						$("#caja").append('<option value="1">1</option>');
 						$("#caja").append('<option value="2">2</option>');
+						$("#caja").append('<option value="3">3</option>');
 					}else if(modulo == '002'){
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
@@ -290,6 +291,7 @@ $(document).ready(function() {
 						$("#caja").append('<option value=""> </option>');
 						$("#caja").append('<option value="1">1</option>');
 						$("#caja").append('<option value="2">2</option>');
+						$("#caja").append('<option value="3">3</option>');
 					}else if(modulo == '008'){
 						$("#caja").empty();
 						$("#caja").append('<option value=""> </option>');
