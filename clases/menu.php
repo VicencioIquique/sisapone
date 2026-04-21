@@ -5,7 +5,7 @@ class menu{
 		function mostrar()
 		{	
 		
-			if($_SESSION["usuario_rol"] == 1) // Menu para ROOT
+			if(($_SESSION["usuario_rol"] ?? 0) == 1) // Menu para ROOT
    		    { 
 		 	echo "	
 				<div class='menu-secondary-wrap'>
@@ -390,7 +390,7 @@ class menu{
 			} 
 			// fin menu para ROOT
 			
-			else if($_SESSION["usuario_rol"] == 2) //Menu para Vendedores
+			else if(($_SESSION["usuario_rol"] ?? 0) == 2) //Menu para Vendedores
 		  	{ 
 		 
 			  	echo "	
@@ -450,7 +450,7 @@ class menu{
 		 	} // fin menu para vendedores
 			
 			
-			else if($_SESSION["usuario_rol"] == 3) //Menu para Visador
+			else if(($_SESSION["usuario_rol"] ?? 0) == 3) //Menu para Visador
 		 	{ 
 				echo "	
 				<div class='menu-secondary-wrap'>
@@ -556,7 +556,7 @@ class menu{
 				
 			} // fin menu para Visador
 		
-		 	else if($_SESSION["usuario_rol"] == 4) //Menu para Brand Manager
+		 	else if(($_SESSION["usuario_rol"] ?? 0) == 4) //Menu para Brand Manager
 			{ 
 		   		echo "	
 				<div class='menu-secondary-wrap'>
@@ -860,7 +860,7 @@ class menu{
 				
 		 	} // fin menu brand manager
 		 
-		 	else if($_SESSION["usuario_rol"] == 5) //Menu para Inventario
+		 	else if(($_SESSION["usuario_rol"] ?? 0) == 5) //Menu para Inventario
 		  	{ 
 		 		echo "	
 				<div class='menu-secondary-wrap'>
@@ -997,7 +997,7 @@ class menu{
 						 </ul>
 					</div> <!-- fin menu -->";
 			} // fin menu Inventario else
-			else if($_SESSION["usuario_rol"] == 6) // Menu para Bodega
+			else if(($_SESSION["usuario_rol"] ?? 0) == 6) // Menu para Bodega
    		    { 
 		 	echo "	
 				<div class='menu-secondary-wrap'>
@@ -1035,7 +1035,7 @@ class menu{
 					</div> <!-- fin menu -->";
 			} 
 			// fin menu para Bodega
-		  if($_SESSION["usuario_rol"] == 9) // Menu para Finanzas
+		  if(($_SESSION["usuario_rol"] ?? 0) == 9) // Menu para Finanzas
    		    { 
 		 	echo "	
 				<div class='menu-secondary-wrap'>
@@ -1131,7 +1131,7 @@ class menu{
 						 </ul>
 					</div> <!-- fin menu -->";
 			} // fin menu Contabilidad y finanzas
-			else if($_SESSION["usuario_rol"] == 10) //Ejecutivo menu
+			else if(($_SESSION["usuario_rol"] ?? 0) == 10) //Ejecutivo menu
    		    { 
 		 	 echo "	
 				<div class='menu-secondary-wrap'>
@@ -1424,7 +1424,7 @@ class menu{
 			
 		 
 		 
-		 else if($_SESSION["usuario_rol"] == 11) //Menu para Vendedores de AEROPUERTO
+		 else if(($_SESSION["usuario_rol"] ?? 0) == 11) //Menu para Vendedores de AEROPUERTO
 		  	{ 
 		 
 			  echo "	
@@ -1477,7 +1477,7 @@ class menu{
 				   </div> <!-- Menu Vendedores --> ";
 		 } // fin menu para vendedores
 		 
-			if($_SESSION["usuario_rol"] == 15) // Menu para Finanzas
+			if(($_SESSION["usuario_rol"] ?? 0) == 15) // Menu para Finanzas
    		    { 
 		 	echo "	
 				<div class='menu-secondary-wrap'>

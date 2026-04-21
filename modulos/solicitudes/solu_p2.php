@@ -77,120 +77,6 @@ try {
             $conAcce = " AND (dbo.oITM_From_SBO.ItmsGrpCod <> 104)";
         }
 
-        // Usamos la misma lógica de filtros, pero solo para CONTAR
-        $sql_total = "SELECT COUNT(TotalFiltrado.ItemCode) 
-            FROM (
-                SELECT 
-                    dbo.oITM_From_SBO.ItemCode
-                FROM (
-                    SELECT Alu, Cantidad
-                    FROM dbo.VerStockTiendas
-                    WHERE (Bodega = ?) 
-                ) AS TABLA 
-                FULL OUTER JOIN dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS 
-                LEFT OUTER JOIN dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
-                
-                -- ⭐ AÑADIR JOIN a la tabla/vista de Stock de Referencia
-                LEFT OUTER JOIN 
-                    [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON] StockRef 
-                    ON StockRef.ItemCode = dbo.oITM_From_SBO.ItemCode
-                
-                WHERE 
-                    (dbo.View_OMAR.Name = ?) 
-                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 103) 
-                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 100) 
-                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 106) 
-                    AND (dbo.oITM_From_SBO.ItmsGrpCod <> 107) 
-                    AND dbo.oITM_From_SBO.frozenFor <> 'Y' 
-                    AND QryGroup3 <> 'Y'
-                    " . $conAcce . "
-                    " .$filtro_sql . "
-                GROUP BY 
-                    dbo.oITM_From_SBO.ItemCode
-            HAVING 
-                    SUM(ISNULL(StockRef.Quantity, 0)) > 0
-        ) AS TotalFiltrado";
-
-        // Formateamos la bodega (como hicimos antes)
-        $bodega_formateada = str_pad($_SESSION["usuario_modulo"], 3, "0", STR_PAD_LEFT);
-        
-        $stmt_total = $conn->prepare($sql_total);
-        $stmt_total->execute([$bodega_formateada, $bmarca]);
-        $total_productos = (int)$stmt_total->fetchColumn(); // Obtenemos el número total (ej. 1500)
-        $total_paginas = ceil($total_productos / $por_pagina); // Calculamos el total de páginas (ej. 1500 / 50 = 30)
-
-        // --- Fin de Conteo Total ---
-
-        // {
-        //     // --- INICIO DE BLOQUE DE DEPURACIÓN ---
-        //     echo "--- Iniciando Depuración de Stock ---<br>";
-            
-        //     // 1. Preparamos la subconsulta que nos interesa
-        //     $debug_sql = "SELECT Alu, Cantidad, Bodega 
-        //             FROM dbo.VerStockTiendas 
-        //             WHERE Bodega = ?";
-                    
-        //             $debug_stmt = $conn->prepare($debug_sql);
-
-        //     // 2. Probamos con el valor STRING original
-        //     $bodega_str = (string)$_SESSION["usuario_modulo"]; // "2"
-        //     $debug_stmt->execute([$bodega_str]);
-        //     $resultados_str = $debug_stmt->fetchAll(PDO::FETCH_ASSOC);
-        //     echo "Resultados buscando Bodega como STRING ('$bodega_str'):<br>";
-        //     echo "<pre>";
-        //     print_r($resultados_str);
-        //     echo "</pre>";
-            
-        //     // 3. Probamos con el valor INT
-        //     $bodega_int = (int)$_SESSION["usuario_modulo"]; // 2
-        //     $debug_stmt->execute([$bodega_int]);
-        //     $resultados_int = $debug_stmt->fetchAll(PDO::FETCH_ASSOC);
-        //     echo "Resultados buscando Bodega como INTEGER ($bodega_int):<br>";
-        //     echo "<pre>";
-        //     print_r($resultados_int);
-        //     echo "</pre>";
-            
-        //     echo "--- Fin de Depuración ---";
-        //     exit; // Detenemos el script para ver solo estos resultados
-        //     // --- FIN DE BLOQUE DE DEPURACIÓN ---
-        // }
-        
-        // Fíjate cómo usamos '?' para los parámetros
-        // --- ¡CAMBIO! --- Esta es la nueva consulta principal para SQL Server 2008 ---
-        // $sql_marca = "
-        // WITH ProductosPaginados AS (
-        //     SELECT 
-        //         dbo.oITM_From_SBO.ItemCode, 
-        //         dbo.oITM_From_SBO.ItemName, 
-        //         dbo.View_OMAR.Name, 
-        //         TABLA.Cantidad, 
-        //         QryGroup1, 
-        //         QryGroup2,
-        //         -- Aquí numeramos todas las filas que coinciden
-        //         ROW_NUMBER() OVER (ORDER BY dbo.oITM_From_SBO.ItemName) AS rn 
-        //     FROM (
-        //         SELECT Alu, Cantidad
-        //         FROM dbo.VerStockTiendas
-        //         WHERE (Bodega = ?) -- Param 1
-        //     ) AS TABLA 
-        //     FULL OUTER JOIN dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS 
-        //     LEFT OUTER JOIN dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
-        //     WHERE 
-        //         (dbo.View_OMAR.Name = ?) -- Param 2
-        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 103) 
-        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 100) 
-        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 106) 
-        //         AND (dbo.oITM_From_SBO.ItmsGrpCod <> 107) 
-        //         AND dbo.oITM_From_SBO.frozenFor <> 'Y' 
-        //         AND QryGroup3 <> 'Y'
-        //         " . $conAcce . "
-        //         " .$filtro_sql. "
-        // )
-        // -- Ahora seleccionamos solo el rango que queremos de las filas numeradas
-        // SELECT ItemCode, ItemName, Name, Cantidad, QryGroup1, QryGroup2
-        // FROM ProductosPaginados
-        // WHERE rn BETWEEN ? AND ? -- Param 3 y 4
-        // ORDER BY ItemName";
 
         $sql_marca = "
         WITH ProductosPaginados AS (
@@ -201,53 +87,34 @@ try {
                 TABLA.Cantidad, 
                 oITM_From_SBO.QryGroup1, 
                 oITM_From_SBO.QryGroup2,
-                -- Agregamos la suma del stock para poder filtrar con HAVING
-                SUM(ISNULL(StockRef.Quantity, 0)) AS StockRefTotal, 
-                
-                -- Aquí numeramos solo las filas que cumplen los criterios (incluyendo el stock)
-                ROW_NUMBER() OVER (ORDER BY dbo.oITM_From_SBO.ItemName) AS rn 
-            FROM (
+                ROW_NUMBER() OVER (ORDER BY dbo.oITM_From_SBO.ItemName) AS rn,
+                COUNT(*) OVER () AS TotalRows
+            FROM dbo.oITM_From_SBO WITH (NOLOCK)
+            LEFT JOIN (
                 SELECT Alu, Cantidad
-                FROM dbo.VerStockTiendas
-                WHERE (Bodega = ?) -- Param 1
-            ) AS TABLA 
-            FULL OUTER JOIN dbo.oITM_From_SBO ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS 
-            LEFT OUTER JOIN dbo.View_OMAR ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
-            
-            -- ⭐ AÑADIR JOIN a la tabla/vista de Stock de Referencia
-            LEFT OUTER JOIN 
-                [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON] StockRef 
-                ON StockRef.ItemCode = dbo.oITM_From_SBO.ItemCode
-            
+                FROM dbo.VerStockTiendas WITH (NOLOCK)
+                WHERE Bodega = ?
+            ) AS TABLA ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS
+            LEFT JOIN dbo.View_OMAR WITH (NOLOCK) ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
             WHERE 
-                (dbo.View_OMAR.Name = ?) -- Param 2
-                AND (dbo.oITM_From_SBO.ItmsGrpCod <> 103) 
-                AND (dbo.oITM_From_SBO.ItmsGrpCod <> 100) 
-                AND (dbo.oITM_From_SBO.ItmsGrpCod <> 106) 
-                AND (dbo.oITM_From_SBO.ItmsGrpCod <> 107) 
-                AND dbo.oITM_From_SBO.frozenFor <> 'Y' 
+                dbo.View_OMAR.Name = ?
+                AND dbo.oITM_From_SBO.ItmsGrpCod NOT IN (103, 100, 106, 107)
+                AND dbo.oITM_From_SBO.frozenFor <> 'Y'
                 AND oITM_From_SBO.QryGroup3 <> 'Y'
                 " . $conAcce . "
-                " .$filtro_sql. "
-            
-            -- ⭐ DEBEMOS AGRUPAR ANTES DE FILTRAR POR LA SUMA
-            GROUP BY 
-                dbo.oITM_From_SBO.ItemCode, 
-                dbo.oITM_From_SBO.ItemName, 
-                dbo.View_OMAR.Name, 
-                TABLA.Cantidad, 
-                oITM_From_SBO.QryGroup1, 
-                oITM_From_SBO.QryGroup2
-            
-            -- ⭐ FILTRO FINAL: Solo incluimos los que tengan StockTotal > 0
-            HAVING 
-                SUM(ISNULL(StockRef.Quantity, 0)) > 0
+                " . $filtro_sql . "
+                AND EXISTS (
+                    SELECT 1
+                    FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON]
+                    WHERE ItemCode = dbo.oITM_From_SBO.ItemCode
+                    HAVING SUM(ISNULL(Quantity, 0)) > 0
+                )
         )
-        -- Ahora seleccionamos solo el rango que queremos de las filas numeradas
-        SELECT ItemCode, ItemName, Name, Cantidad, QryGroup1, QryGroup2
+        SELECT ItemCode, ItemName, Name, Cantidad, QryGroup1, QryGroup2, TotalRows
         FROM ProductosPaginados
-        WHERE rn BETWEEN ? AND ? -- Param 3 y 4
+        WHERE rn BETWEEN ? AND ?
         ORDER BY ItemName";
+
                       
 
 
@@ -264,6 +131,11 @@ try {
         
         // Obtenemos TODOS los resultados en un array
         $productos_marca = $stmt_marca->fetchAll(PDO::FETCH_ASSOC);
+
+        $total_productos = !empty($productos_marca) ? (int)$productos_marca[0]['TotalRows'] : 0;
+        $total_paginas = ($total_productos > 0) ? ceil($total_productos / $por_pagina) : 0;
+
+    } else {
     }
 
     // --- 4. OBTENER DETALLES DE LA SOLICITUD ACTUAL ---

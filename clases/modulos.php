@@ -9,7 +9,7 @@ require_once("clases/registroLogs.php");
 			 $id=$_GET['opc']; //se captura la opcion elegida
 
 
-			if($_SESSION["usuario_rol"] == 1) // Opciones para el ROOT
+			if(($_SESSION["usuario_rol"] ?? 0) == 1) // Opciones para el ROOT
 		  	{
 		 		switch ($id)
 						{
@@ -31,7 +31,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -339,7 +339,7 @@ require_once("clases/registroLogs.php");
 
 		  
 
-			else if($_SESSION["usuario_rol"] == 2) //Opciones para los Vendedores
+			else if(($_SESSION["usuario_rol"] ?? 0) == 2) //Opciones para los Vendedores
 		  	{
 		 		switch ($id)
 						{
@@ -355,7 +355,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 							echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -428,7 +428,7 @@ require_once("clases/registroLogs.php");
 
 						 }
 		} // fin opciones para ejecutivo
-		else if($_SESSION["usuario_rol"] == 3) //Opciones para Visador
+		else if(($_SESSION["usuario_rol"] ?? 0) == 3) //Opciones para Visador
 		  	{
 		 		switch ($id)
 						{
@@ -444,7 +444,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -610,7 +610,7 @@ require_once("clases/registroLogs.php");
 							   break;
 						 }
 			  } // fin opciones Visador
-			  else if($_SESSION["usuario_rol"] == 4) //Opciones para Brand Manager
+			  else if(($_SESSION["usuario_rol"] ?? 0) == 4) //Opciones para Brand Manager
 		  {
 		 		switch ($id)
 			   {
@@ -629,7 +629,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -833,7 +833,7 @@ require_once("clases/registroLogs.php");
 						 }
 			 } // fin opciones para Brand Manager
 
-			else if($_SESSION["usuario_rol"] == 5) //Opciones para personal de Inventario
+			else if(($_SESSION["usuario_rol"] ?? 0) == 5) //Opciones para personal de Inventario
 		  	{
 		 		switch ($id)
 						{
@@ -849,7 +849,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -1010,7 +1010,7 @@ require_once("clases/registroLogs.php");
 							   break;
 						 }
 			 } // fin opciones para inventario
-			 else if($_SESSION["usuario_rol"] == 6) // Opciones para Bodega
+			 else if(($_SESSION["usuario_rol"] ?? 0) == 6) // Opciones para Bodega
 		  	{
 		 		switch ($id)
 						{
@@ -1026,7 +1026,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -1105,7 +1105,7 @@ require_once("clases/registroLogs.php");
 							   
 						 }
 		  } // fin opciones de Bodega
-		   else if($_SESSION["usuario_rol"] == 9) // Opciones para el  area de finanzas
+		   else if(($_SESSION["usuario_rol"] ?? 0) == 9) // Opciones para el  area de finanzas
 		  	{
 		 		switch ($id)
 						{
@@ -1121,7 +1121,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -1264,7 +1264,7 @@ require_once("clases/registroLogs.php");
 						 }
 		  } // fin opciones de finanzas y contabilidad
 		  
-		  else if($_SESSION["usuario_rol"] == 10) //Opciones para ejecutivo
+		  else if(($_SESSION["usuario_rol"] ?? 0) == 10) //Opciones para ejecutivo
 		  {
 		 		switch ($id)
 			   {
@@ -1283,7 +1283,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -1444,7 +1444,7 @@ require_once("clases/registroLogs.php");
 						 }
 			 } // fin opciones para Brand ejecutivo
 
-		else if($_SESSION["usuario_rol"] == 11) //Opciones para los Vendedores aeropuerto
+		else if(($_SESSION["usuario_rol"] ?? 0) == 11) //Opciones para los Vendedores aeropuerto
 		  	{
 		 		switch ($id)
 						{
@@ -1460,7 +1460,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 							echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -1521,7 +1521,7 @@ require_once("clases/registroLogs.php");
 						 }
 		} // fin opciones para Vendedores AEROPUERTO
 
-		   else if($_SESSION["usuario_rol"] == 15) // Opciones para el  area de finanzas
+		   else if(($_SESSION["usuario_rol"] ?? 0) == 15) // Opciones para el  area de finanzas
 		  	{
 		 		switch ($id)
 						{
@@ -1537,7 +1537,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -1677,7 +1677,7 @@ require_once("clases/registroLogs.php");
 							   break;
 						 }
 		  } // fin opciones de finanzas y contabilidad
-		  else if($_SESSION["usuario_rol"] == 16) //Opciones para personal de Bodega
+		  else if(($_SESSION["usuario_rol"] ?? 0) == 16) //Opciones para personal de Bodega
 		  	{
 		 		switch ($id)
 						{
@@ -1693,7 +1693,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
@@ -1868,7 +1868,7 @@ require_once("clases/registroLogs.php");
 							case 'logout':
 								$accion="USUARIO CIERRA SESION EN EL SISTEMA";
                         		$origen=$_SERVER['REMOTE_ADDR'] .' - '.gethostbyaddr($_SERVER['REMOTE_ADDR']).' - '.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-                        		generaLogs($_SESSION["usuario_nombre"],$accion,$origen);
+                        		generaLogs(($_SESSION["usuario_nombre"] ?? ""),$accion,$origen);
 								session_unset();
 								session_destroy();
 								echo '<script languaje="javascript"> window.location="index.php"; </script>';
