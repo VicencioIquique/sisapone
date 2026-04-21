@@ -11,5 +11,6 @@ if (!$conn)
 	exit( "Error al establecer la conexion1: ".$conn);
 }
 
+odbc_exec($conn, "USE RP_VICENCIO");
 
 ?>

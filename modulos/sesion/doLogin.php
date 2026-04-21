@@ -13,8 +13,8 @@
 	}*/
 	
 	
-$login = $_REQUEST[username];
-$pass = $_REQUEST[password];
+$login = $_REQUEST['username'];
+$pass = $_REQUEST['password'];
 
 
 
@@ -32,7 +32,7 @@ else {
 require_once("clases/conexionocdb.php");
 require_once("clases/registroLogs.php");
 	$sql= "SELECT     Count(*) AS counter
-FROM         dbo.sisap_usuarios
+FROM         RP_VICENCIO.dbo.sisap_usuarios
 WHERE     (usuario_user = '".$login."') ";
 
 $rs = odbc_exec( $conn, $sql );
