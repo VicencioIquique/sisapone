@@ -26,12 +26,17 @@ if(!$finicio)
       ,[U_Marca]
   FROM [RP_VICENCIO].[dbo].[View_OMAR] ORDER BY U_Marca ASC
 ";
-							$rs3 = odbc_exec( $conn2, $sql2 );
-							if ( !$rs3 )
-							{
-							exit( "Error en la consulta SQL" );
-							}
 
+
+$rs3 = odbc_exec( $conn2, $sql2 );
+
+// if ( !$rs3 )
+// {
+// exit( "Error en la consulta SQL2" );
+// }
+if (!$rs3) {
+    exit("Error en la consulta SQL2: " . odbc_errormsg($conn2));
+}
 
 /********************** para que solo busque por modulos segun pertenesca ******************************************/
 if($_SESSION["usuario_modulo"] !=-1)
@@ -98,7 +103,7 @@ if ($uNegocio)
   FROM [SBO_Imp_Eximben_SAC].[dbo].[Stock_Bodegas_SAPJPL]
   WHERE [WhsCode] = '".$modulo."' ".$conMarca."    ".$conuNegocio." ";
 
-//echo $sql;
+echo $sql;
 							
 	echo'  <script src="graficos/amcharts/amcharts.js" type="text/javascript"></script>   ';	
 	
