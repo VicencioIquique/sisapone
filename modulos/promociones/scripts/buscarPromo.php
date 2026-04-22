@@ -29,8 +29,8 @@ $resultado = odbc_fetch_array($rsSql);
 
 $objeto = new stdClass();
 $objeto->precio = $resultado['precio'];
-$objeto->descripcion = utf8_encode($resultado['DESC2']);
-$objeto->oferta = utf8_encode($resultado['descuento']);
+$objeto->descripcion = utf8_safe($resultado['DESC2']);
+$objeto->oferta = utf8_safe($resultado['descuento']);
 
 echo json_encode($objeto);
 

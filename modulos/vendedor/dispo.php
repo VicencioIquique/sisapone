@@ -177,7 +177,7 @@ SELECT
 														  
 									
 									  echo '<tr>
-											<td  >'.utf8_encode(str_replace("ZFI.","LOCAL ",$resultado["WhsCode"])).'</td> 									
+											<td  >'.utf8_safe(str_replace("ZFI.","LOCAL ",$resultado["WhsCode"])).'</td> 									
 											<td ><strong>'.number_format($resultado["monto"], 0, '', '.').'</strong></td>
 											<td ><strong>'.number_format($resultado["monto"], 0, '', '.').'</strong></td>
 											<td ><strong>'.number_format($resultado["monto"], 0, '', '.').'</strong></td>'; 
@@ -282,7 +282,7 @@ SELECT
 														  
 									
 									  echo '<tr>
-											<td  >'.utf8_encode(str_replace("ZFI.","LOCAL ",$resultado["WhsCode"])).'</td> 									
+											<td  >'.utf8_safe(str_replace("ZFI.","LOCAL ",$resultado["WhsCode"])).'</td> 									
 											<td ><strong>'.number_format($resultado["monto"], 0, '', '.').'</strong></td>
 											<td ><strong>'.number_format($resultado["monto"], 0, '', '.').'</strong></td>
 											<td ><strong>'.number_format($resultado["monto"], 0, '', '.').'</strong></td>'; 

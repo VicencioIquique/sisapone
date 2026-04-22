@@ -228,7 +228,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs2))
 											 { 
 												
-												 echo'<option value="'.$result['Marca'].'">'.utf8_encode($result['Marca']).'</option>';
+												 echo'<option value="'.$result['Marca'].'">'.utf8_safe($result['Marca']).'</option>';
 												
 											 }
 										
@@ -249,7 +249,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs4))
 											 { 
 												
-												 echo'<option value="'.$result['Linea'].'">'.utf8_encode($result['Linea']).'</option>';
+												 echo'<option value="'.$result['Linea'].'">'.utf8_safe($result['Linea']).'</option>';
 												
 											 }
 										
@@ -270,7 +270,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs5))
 											 { 
 												
-												 echo'<option value="'.$result['SubLinea'].'">'.utf8_encode($result['SubLinea']).'</option>';
+												 echo'<option value="'.$result['SubLinea'].'">'.utf8_safe($result['SubLinea']).'</option>';
 												
 											 }
 										
@@ -291,7 +291,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs6))
 											 { 
 												
-												 echo'<option value="'.$result['Proveedor'].'">'.utf8_encode($result['Proveedor']).'</option>';
+												 echo'<option value="'.$result['Proveedor'].'">'.utf8_safe($result['Proveedor']).'</option>';
 												
 											 }
 										
@@ -312,7 +312,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs7))
 											 { 
 												
-												 echo'<option value="'.$result['BrandManager'].'">'.utf8_encode($result['BrandManager']).'</option>';
+												 echo'<option value="'.$result['BrandManager'].'">'.utf8_safe($result['BrandManager']).'</option>';
 												
 											 }
 										
@@ -515,8 +515,8 @@ overflow-y:hidden;">
 			
 						echo'
 						<tr>
-						<td >'.utf8_encode((string)$resultado["ItemCode"]).'&nbsp;</td> 
-						<td style="text-align:left;">'.utf8_encode($resultado["ItemName"]).'</td> 
+						<td >'.utf8_safe((string)$resultado["ItemCode"]).'&nbsp;</td> 
+						<td style="text-align:left;">'.utf8_safe($resultado["ItemName"]).'</td> 
 						<td ><strong>'.number_format($resultado["Enero"], 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($resultado["Febrero"], 0, '', '.').'</strong></td>
 						<td ><strong>'.number_format($resultado["Marzo"], 0, '', '.').'</strong></td>

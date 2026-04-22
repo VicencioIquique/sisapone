@@ -434,28 +434,28 @@ if($consultar!= ""){
 					echo '<td></td>';
 					echo '<td align="center"></td>';
 					echo '<td align="center"></td>';
-					echo '<td align="center">'.utf8_encode($resultado['Producto']).'</td>';
+					echo '<td align="center">'.utf8_safe($resultado['Producto']).'</td>';
 					echo '<td></td>';
-					echo '<td align="center">'.utf8_encode($resultado['Fecha'])."&nbsp;".'</td>';
+					echo '<td align="center">'.utf8_safe($resultado['Fecha'])."&nbsp;".'</td>';
 					echo '<td>'.number_format($resultado['Valor'],'2',',','.').'</td>';
 					echo '<td>'.number_format($resultado['Cantidad'],'0',',','.').'</td>';
-					echo '<td align="center">'.utf8_encode($resultado['Factura']).'</td>';
+					echo '<td align="center">'.utf8_safe($resultado['Factura']).'</td>';
 					echo '<td>'.number_format($resultado['Monto'],'2',',','.').'</td>';
-					echo '<td align="center">'.utf8_encode($resultado['FechaFactura'])."&nbsp;".'</td>';
+					echo '<td align="center">'.utf8_safe($resultado['FechaFactura'])."&nbsp;".'</td>';
 				}else{
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['DocEntry'],'0','','').'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.$resultado['Correlativo'].'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.$resultado['Zeta'].'</td>';
-					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_encode($resultado['Numero'])."&nbsp;".'</td>';
-					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_encode($resultado['Proveedor'])."&nbsp;".'</td>';
-					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_encode($resultado['Producto']).'</td>';
+					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_safe($resultado['Numero'])."&nbsp;".'</td>';
+					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_safe($resultado['Proveedor'])."&nbsp;".'</td>';
+					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_safe($resultado['Producto']).'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['Pedido'],'2',',','.').'</td>';
-					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_encode($resultado['Fecha'])."&nbsp;".'</td>';
+					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_safe($resultado['Fecha'])."&nbsp;".'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['Valor'],'2',',','.').'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['Cantidad'],'0',',','.').'</td>';
-					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_encode($resultado['Factura']).'</td>';
+					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_safe($resultado['Factura']).'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['Monto'],'2',',','.').'</td>';
-					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_encode($resultado['FechaFactura'])."&nbsp;".'</td>';
+					echo '<td style="border-top: 1px solid #689DED;" align="center">'.utf8_safe($resultado['FechaFactura'])."&nbsp;".'</td>';
 
 					$repiteLinea = $resultado['DocEntry'];
 				}

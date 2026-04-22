@@ -116,38 +116,38 @@ FROM          RP_REGGEN.dbo.sisap_solicitudes LEFT OUTER JOIN
 									  if($resultado["estado"]==3)
 								  {
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  href="modulos/impresiones/listasolicitudpdfAir.php?idsol='.$resultado["solicitud_id"].' ">'.utf8_encode($resultado["solicitud_id"]).'</a></td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  href="modulos/impresiones/listasolicitudpdfAir.php?idsol='.$resultado["solicitud_id"].' ">'.utf8_safe($resultado["solicitud_id"]).'</a></td>';
 								  }
 								else if($resultado["estado"]==1)
 								  {
 							   echo '<tr>
-									<td  style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  href="modulos/impresiones/listasolicitudpdfAir.php?idsol='.$resultado["solicitud_id"].' ">'.utf8_encode($resultado["solicitud_id"]).'</a></td>';
+									<td  style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  href="modulos/impresiones/listasolicitudpdfAir.php?idsol='.$resultado["solicitud_id"].' ">'.utf8_safe($resultado["solicitud_id"]).'</a></td>';
 								  }
 								else if($resultado["estado"]==2)
 								  {
 							   echo '<tr>
-									<td  style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  href="modulos/impresiones/listasolicitudpdfAir.php?idsol='.$resultado["solicitud_id"].' ">'.utf8_encode($resultado["solicitud_id"]).'</a></td>';
+									<td  style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  href="modulos/impresiones/listasolicitudpdfAir.php?idsol='.$resultado["solicitud_id"].' ">'.utf8_safe($resultado["solicitud_id"]).'</a></td>';
 								  }
 									echo '
-								    <td ><strong>'.utf8_encode(getusuario($resultado["vendedor_id"])).'</strong></td>
+								    <td ><strong>'.utf8_safe(getusuario($resultado["vendedor_id"])).'</strong></td>
 									<td >'.getestado($resultado["estado"]).'</td>
-									<td >'.utf8_encode($resultado["Fecha"]).'</td>
-									<td >'.utf8_encode(getmoduloAir($resultado["modulo"])).'</td>
+									<td >'.utf8_safe($resultado["Fecha"]).'</td>
+									<td >'.utf8_safe(getmoduloAir($resultado["modulo"])).'</td>
 									
-									<td >'.utf8_encode(getusuario($resultado["recepcion_id"])).'</td>
+									<td >'.utf8_safe(getusuario($resultado["recepcion_id"])).'</td>
 									<td ></td>' ;
 																
 								}
 								else if((int)$resultado["estado"]==0)
 								{
 							   echo '<tr>
-									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=pasodos&idsol='.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></td>
-									<td ><strong>'.utf8_encode(getusuario($resultado["vendedor_id"])).'</strong></td>
+									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=pasodos&idsol='.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></td>
+									<td ><strong>'.utf8_safe(getusuario($resultado["vendedor_id"])).'</strong></td>
 									<td >'.getestado($resultado["estado"]).'</td>
-									<td >'.utf8_encode($resultado["Fecha"]).'</td>
-									<td >'.utf8_encode(getmoduloAir($resultado["modulo"])).'</td>
+									<td >'.utf8_safe($resultado["Fecha"]).'</td>
+									<td >'.utf8_safe(getmoduloAir($resultado["modulo"])).'</td>
 									
-									<td >'.utf8_encode(getusuario($resultado["recepcion_id"])).'</td>
+									<td >'.utf8_safe(getusuario($resultado["recepcion_id"])).'</td>
 									<td ><a class="elimina_solicitud" id="'.$resultado["solicitud_id"].'"><img src="images/delete.png" /></a></td>' ;
 								}
 						

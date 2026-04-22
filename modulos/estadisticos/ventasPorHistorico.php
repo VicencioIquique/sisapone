@@ -178,7 +178,7 @@ $(document).ready(function() {
 								}
 								echo "<option value = ''> </option>";
 								while($resultado = odbc_fetch_array($rs)){
-									echo "<option value = ".utf8_encode($resultado['AreaNegocio'])."> ".utf8_encode($resultado['AreaNegocio'])."</option>";
+									echo "<option value = ".utf8_safe($resultado['AreaNegocio'])."> ".utf8_safe($resultado['AreaNegocio'])."</option>";
 								}
 							?>
 							</select>
@@ -195,7 +195,7 @@ $(document).ready(function() {
 								}
 								echo "<option value = ''> </option>";
 								while($resultado = odbc_fetch_array($rs)){
-									echo '<option value = '.urlencode($resultado["Name"]).'> '. utf8_encode($resultado["Name"]).'</option>';
+									echo '<option value = '.urlencode($resultado["Name"]).'> '. utf8_safe($resultado["Name"]).'</option>';
 								}
 							?>
 							</select>
@@ -789,7 +789,7 @@ HAVING TABLA.Segmento IS NOT NULL
 							echo '<td style="background-color:#DCE6F1; border-left:2px solid #689DED;"></td>';
 						}else{
 							$repiteSegmento = $resultado["Segmento"];
-							echo '<td style="background-color:#DCE6F1; border-left:2px solid #689DED;">'. utf8_encode($resultado["Segmento"]) .'</td>';
+							echo '<td style="background-color:#DCE6F1; border-left:2px solid #689DED;">'. utf8_safe($resultado["Segmento"]) .'</td>';
 						}
 						if($resultado["TotalStatus"]  == $repiteStatus){
 							echo '<td style="border-top: 1px dotted #689DED; border-bottom: 1px dotted #689DED;"></td>';
@@ -802,11 +802,11 @@ HAVING TABLA.Segmento IS NOT NULL
                             <td style="border-top: 1px dotted #689DED; border-bottom: 1px dotted #689DED;">'. $resultado["Marcas"] .'</td>';
                     if($marca != ""){
 
-                        $descripcion = str_replace("Marca:", "", utf8_encode($resultado["ItemName"]));
+                        $descripcion = str_replace("Marca:", "", utf8_safe($resultado["ItemName"]));
                         $descripcion = str_replace("Tipo:", ",", $descripcion);
                         $descripcion = str_replace($resultado["Marcas"], "", $descripcion);
                         echo
-                            '<td style="border-top: 1px dotted #689DED; border-bottom: 1px dotted #689DED;">'. utf8_encode((string)$resultado["ItemCode"]) .'*</td>
+                            '<td style="border-top: 1px dotted #689DED; border-bottom: 1px dotted #689DED;">'. utf8_safe((string)$resultado["ItemCode"]) .'*</td>
                             <td style="border-top: 1px dotted #689DED; border-bottom: 1px dotted #689DED;">'. $descripcion .'</td>';
                     }
                 } //Fin else SUB TOTAL ?>

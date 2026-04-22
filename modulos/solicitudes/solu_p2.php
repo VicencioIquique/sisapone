@@ -1,6 +1,6 @@
 <?php
 
-session_start(); 
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 require_once("clases/conexion_pdo.php"); // Usamos la nueva conexión PDO
 ini_set('max_execution_time', 600);
@@ -8,12 +8,13 @@ ini_set('max_execution_time', 600);
 
 $idsol = $_GET['idsol'] ?? null;
 $bmarca = $_GET['marca'] ?? null;
+$buscar_texto = trim($_GET['buscar_texto'] ?? '');
 
 // Leemos el filtro. Por defecto, será 'regular' (QryGroup1 = 'Y')
 $filtro_tipo = $_GET['filtro_tipo'] ?? 'regular';
 
 // --- ¡NUEVO! --- Variables de Paginación ---
-$por_pagina = 100; // ¿Cuántos productos mostrar por página?
+$por_pagina = 200; // ¿Cuántos productos mostrar por página?
 $pagina_actual = (int)($_GET['pagina'] ?? 1); // Obtiene la pág. de la URL, o 1 por defecto
 
 // -- ¡CAMBIO! -- Calculamos el rango de filas
@@ -80,12 +81,12 @@ try {
 
         $sql_marca = "
         WITH ProductosPaginados AS (
-            SELECT 
-                dbo.oITM_From_SBO.ItemCode, 
-                dbo.oITM_From_SBO.ItemName, 
-                dbo.View_OMAR.Name, 
-                TABLA.Cantidad, 
-                oITM_From_SBO.QryGroup1, 
+            SELECT
+                dbo.oITM_From_SBO.ItemCode,
+                dbo.oITM_From_SBO.ItemName,
+                OMAR.Name,
+                TABLA.Cantidad,
+                oITM_From_SBO.QryGroup1,
                 oITM_From_SBO.QryGroup2,
                 ROW_NUMBER() OVER (ORDER BY dbo.oITM_From_SBO.ItemName) AS rn,
                 COUNT(*) OVER () AS TotalRows
@@ -95,20 +96,14 @@ try {
                 FROM dbo.VerStockTiendas WITH (NOLOCK)
                 WHERE Bodega = ?
             ) AS TABLA ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS
-            LEFT JOIN dbo.View_OMAR WITH (NOLOCK) ON dbo.View_OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
-            WHERE 
-                dbo.View_OMAR.Name = ?
+            LEFT JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[@VK_OMAR] AS OMAR ON OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
+            WHERE
+                OMAR.Name = ?
                 AND dbo.oITM_From_SBO.ItmsGrpCod NOT IN (103, 100, 106, 107)
                 AND dbo.oITM_From_SBO.frozenFor <> 'Y'
                 AND oITM_From_SBO.QryGroup3 <> 'Y'
                 " . $conAcce . "
                 " . $filtro_sql . "
-                AND EXISTS (
-                    SELECT 1
-                    FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON]
-                    WHERE ItemCode = dbo.oITM_From_SBO.ItemCode
-                    HAVING SUM(ISNULL(Quantity, 0)) > 0
-                )
         )
         SELECT ItemCode, ItemName, Name, Cantidad, QryGroup1, QryGroup2, TotalRows
         FROM ProductosPaginados
@@ -135,28 +130,77 @@ try {
         $total_productos = !empty($productos_marca) ? (int)$productos_marca[0]['TotalRows'] : 0;
         $total_paginas = ($total_productos > 0) ? ceil($total_productos / $por_pagina) : 0;
 
-    } else {
+    } elseif ($buscar_texto) {
+
+        $conAcce = "";
+        $filtro_sql = "";
+        switch ($filtro_tipo) {
+            case 'regular':  $filtro_sql = " AND (dbo.oITM_From_SBO.QryGroup1 = 'Y')"; break;
+            case 'sinvalor': $filtro_sql = " AND (dbo.oITM_From_SBO.QryGroup2 = 'Y')"; break;
+        }
+        if ($_SESSION["usuario_modulo"] != 7) {
+            $conAcce = " AND (dbo.oITM_From_SBO.ItmsGrpCod <> 104)";
+        }
+
+        $bodega_formateada = str_pad($_SESSION["usuario_modulo"], 3, "0", STR_PAD_LEFT);
+        $param_texto = '%' . $buscar_texto . '%';
+
+        $sql_marca = "
+        WITH ProductosPaginados AS (
+            SELECT
+                dbo.oITM_From_SBO.ItemCode,
+                dbo.oITM_From_SBO.ItemName,
+                OMAR.Name,
+                TABLA.Cantidad,
+                oITM_From_SBO.QryGroup1,
+                oITM_From_SBO.QryGroup2,
+                ROW_NUMBER() OVER (ORDER BY dbo.oITM_From_SBO.ItemName) AS rn,
+                COUNT(*) OVER () AS TotalRows
+            FROM dbo.oITM_From_SBO WITH (NOLOCK)
+            LEFT JOIN (
+                SELECT Alu, Cantidad
+                FROM dbo.VerStockTiendas WITH (NOLOCK)
+                WHERE Bodega = ?
+            ) AS TABLA ON dbo.oITM_From_SBO.ItemCode = TABLA.Alu COLLATE SQL_Latin1_General_CP850_CI_AS
+            LEFT JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[@VK_OMAR] AS OMAR ON OMAR.Code = dbo.oITM_From_SBO.U_VK_Marca
+            WHERE
+                (dbo.oITM_From_SBO.ItemCode LIKE ? OR dbo.oITM_From_SBO.ItemName LIKE ?)
+                AND dbo.oITM_From_SBO.ItmsGrpCod NOT IN (103, 100, 106, 107)
+                AND dbo.oITM_From_SBO.frozenFor <> 'Y'
+                AND oITM_From_SBO.QryGroup3 <> 'Y'
+                " . $conAcce . "
+                " . $filtro_sql . "
+        )
+        SELECT ItemCode, ItemName, Name, Cantidad, QryGroup1, QryGroup2, TotalRows
+        FROM ProductosPaginados
+        WHERE rn BETWEEN ? AND ?
+        ORDER BY ItemName";
+
+        $stmt_marca = $conn->prepare($sql_marca);
+        $stmt_marca->execute([$bodega_formateada, $param_texto, $param_texto, $inicio_fila, $fin_fila]);
+        $productos_marca = $stmt_marca->fetchAll(PDO::FETCH_ASSOC);
+
+        $total_productos = !empty($productos_marca) ? (int)$productos_marca[0]['TotalRows'] : 0;
+        $total_paginas = ($total_productos > 0) ? ceil($total_productos / $por_pagina) : 0;
     }
 
     // --- 4. OBTENER DETALLES DE LA SOLICITUD ACTUAL ---
     // Esto es para la tabla principal
     
-    $sql_detalles = "SELECT 
+    $sql_detalles = "SELECT
                         dbo.sisap_solicitudes.solicitud_id,
                         dbo.sisap_soldetalle.solicitud_id AS detid,
-                        SBO_Imp_Eximben_SAC.dbo.VIC_VW_ItemsVenta.Marca COLLATE SQL_Latin1_General_CP850_CI_AS AS Marca,
+                        dbo.sisap_soldetalle.marca AS Marca,
                         dbo.sisap_soldetalle.codigo,
-                        dbo.sisap_soldetalle.descripcion, 
-                        dbo.sisap_soldetalle.marca, 
-                        dbo.sisap_soldetalle.stock_modulo, 
-                        dbo.sisap_soldetalle.cant_solicitada, 
-                        dbo.sisap_soldetalle.cant_aceptada, 
+                        dbo.sisap_soldetalle.descripcion,
+                        dbo.sisap_soldetalle.stock_modulo,
+                        dbo.sisap_soldetalle.cant_solicitada,
+                        dbo.sisap_soldetalle.cant_aceptada,
                         dbo.sisap_soldetalle.detalle_id
-                     FROM dbo.sisap_solicitudes 
+                     FROM dbo.sisap_solicitudes
                      LEFT OUTER JOIN dbo.sisap_soldetalle ON dbo.sisap_solicitudes.solicitud_id = dbo.sisap_soldetalle.solicitud_id
-                     LEFT JOIN SBO_Imp_Eximben_SAC.dbo.VIC_VW_ItemsVenta ON dbo.sisap_soldetalle.codigo = SBO_Imp_Eximben_SAC.dbo.VIC_VW_ItemsVenta.ItemCode COLLATE SQL_Latin1_General_CP850_CI_AS 
                      WHERE dbo.sisap_solicitudes.solicitud_id = ?
-                     ORDER BY SBO_Imp_Eximben_SAC.dbo.VIC_VW_ItemsVenta.Marca, dbo.sisap_soldetalle.detalle_id";
+                     ORDER BY dbo.sisap_soldetalle.marca, dbo.sisap_soldetalle.detalle_id";
     
     $stmt_detalles = $conn->prepare($sql_detalles);
     $stmt_detalles->execute([$idsol]);
@@ -173,7 +217,7 @@ $conn = null;
 // --- 5. PASAMOS VARIABLES A JAVASCRIPT DE FORMA SEGURA ---
 // Esto reemplaza el "echo" de PHP dentro de <script>
 $config_js = [
-    'shouldOpenDialog' => (bool)$bmarca,
+    'shouldOpenDialog' => (bool)$bmarca || (bool)$buscar_texto,
     'idsol' => $idsol
 ];
 
@@ -255,7 +299,7 @@ $config_js = [
         <form id="addproductoform">
             <fieldset>
                 <div id="contenido">
-                    <?php if ($bmarca && count($productos_marca) > 0): ?>
+                    <?php if (($bmarca || $buscar_texto) && count($productos_marca) > 0): ?>
                         <table id="table-6" class="lista">
                             <thead>
                                 <tr>
@@ -271,7 +315,7 @@ $config_js = [
                                     <?php 
                                         // 1. Limpieza y Preparación de Datos
                                         $itemCode = htmlspecialchars($producto["ItemCode"], ENT_QUOTES, 'UTF-8');
-                                        $itemName = htmlspecialchars(utf8_encode($producto["ItemName"]), ENT_QUOTES, 'UTF-8');
+                                        $itemName = htmlspecialchars(utf8_safe($producto["ItemName"]), ENT_QUOTES, 'UTF-8');
                                         $cantidad = (int)$producto["Cantidad"];
                                         $style = ($producto["QryGroup2"] == 'Y') ? 'style="color:#D55C00;"' : '';
                                         
@@ -297,7 +341,7 @@ $config_js = [
                             </tbody>
                         </table>
                         
-                    <?php elseif ($bmarca): ?>
+                    <?php elseif ($bmarca || $buscar_texto): ?>
                         <p class="validateTips">No se encontraron Registros</p>
                     <?php endif; ?>
                 </div>
@@ -347,42 +391,23 @@ $config_js = [
                 <input name="idarticulo" type="hidden" id="idarticulo" value="" />
                 <input name="unidadarticulo" type="hidden" id="unidadarticulo" value="" />
                 
-                <table id="tablaarticulo" border="0">
-                    <tbody>
-                    <tr>
-                        <td style="padding-right: 15px;">
-                            <label for="marca" style="white-space: nowrap;">Buscar Marca
-                                <input type='text' name='marca' id="marca" value='' class='auto' style="width: 250px;">
-                            </label>
-                        </td>
+                <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px;">
+                    <label style="display:flex; flex-direction:column; font-size:12px;">Buscar Marca
+                        <input type='text' name='marca' id="marca" value='<?php echo htmlspecialchars($bmarca ?? '', ENT_QUOTES, 'UTF-8'); ?>' class='auto' style="width: 180px;">
+                    </label>
 
-                        <td style="padding-right: 15px;">
-                            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 15px;">
+                    <label style="display:flex; flex-direction:column; font-size:12px;">Código / Descripción
+                        <input type='text' name='buscar_texto' id="buscar_texto" value='<?php echo htmlspecialchars($buscar_texto, ENT_QUOTES, 'UTF-8'); ?>' style="width: 180px;" placeholder="ej: 1234 o crema">
+                    </label>
 
-                                <label>
-                                    <input type="radio" name="filtro_tipo" value="regular" <?php echo ($filtro_tipo == 'regular') ? 'checked' : ''; ?>>
-                                    Productos
-                                </label>
-                                
-                                <label>
-                                    <input type="radio" name="filtro_tipo" value="sinvalor" <?php echo ($filtro_tipo == 'sinvalor') ? 'checked' : ''; ?>>
-                                    Tester/Publicidad
-                                </label>
-                                
-                                <label>
-                                    <input type="radio" name="filtro_tipo" value="todos" <?php echo ($filtro_tipo == 'todos') ? 'checked' : ''; ?>>
-                                    Todos los Artículos
-                                </label>
-                            
-                            </div>
-                        </td>
+                    <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 2px;">
+                        <label><input type="radio" name="filtro_tipo" value="regular" <?php echo ($filtro_tipo == 'regular') ? 'checked' : ''; ?>> Productos</label>
+                        <label><input type="radio" name="filtro_tipo" value="sinvalor" <?php echo ($filtro_tipo == 'sinvalor') ? 'checked' : ''; ?>> Tester/Publicidad</label>
+                        <label><input type="radio" name="filtro_tipo" value="todos" <?php echo ($filtro_tipo == 'todos') ? 'checked' : ''; ?>> Todos los Artículos</label>
+                    </div>
 
-                        <td>
-                            <input type="submit" value="Buscar" class="submit" id="enviarmarca" />
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <input type="submit" value="Buscar" class="submit" id="enviarmarca" style="margin-bottom: 2px;" />
+                </div>
             </fieldset>
         </div>
     </form>
@@ -403,12 +428,12 @@ $config_js = [
                 <?php if (count($detalles_solicitud) > 0): ?>
                     <?php foreach ($detalles_solicitud as $detalle): ?>
                         <tr>
-                            <td><strong><?php echo htmlspecialchars($detalle["Marca"], ENT_QUOTES, 'UTF-8'); ?></strong></td>
-                            <td><strong><?php echo htmlspecialchars($detalle["codigo"], ENT_QUOTES, 'UTF-8'); ?></strong></td>
-                            <td><?php echo htmlspecialchars(utf8_encode($detalle["descripcion"]), ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($detalle["stock_modulo"], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($detalle["cant_solicitada"], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($detalle["cant_aceptada"], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><strong><?php echo htmlspecialchars($detalle["Marca"] ?? '', ENT_QUOTES, 'UTF-8'); ?></strong></td>
+                            <td><strong><?php echo htmlspecialchars($detalle["codigo"] ?? '', ENT_QUOTES, 'UTF-8'); ?></strong></td>
+                            <td><?php echo htmlspecialchars(utf8_safe($detalle["descripcion"]), ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($detalle["stock_modulo"] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($detalle["cant_solicitada"] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($detalle["cant_aceptada"] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                             <td><a class="elimina_lista" id="<?php echo htmlspecialchars($detalle["codigo"], ENT_QUOTES, 'UTF-8'); ?>"><img src="images/delete.png" /></a></td>
                         </tr>
                     <?php endforeach; ?>

@@ -155,19 +155,19 @@ if (isset($_GET['criterio'])){
 
 							  while($resultado =  odbc_fetch_array($rs)){ 
 							  //echo $resultado["estado"];
-							  //<td style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisar_solicitud" style="color:#fff;" id="'.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></td>
+							  //<td style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisar_solicitud" style="color:#fff;" id="'.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></td>
 							  if($resultado["estado"]==1)
 							  {
 							   echo '<tr>
-									<td style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" href="index.php?opc=paso2brand&idsol='.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></td>
-									<td ><strong>'.utf8_encode($resultado["usuario_nombre"]).'</strong></td>
+									<td style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" href="index.php?opc=paso2brand&idsol='.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></td>
+									<td ><strong>'.utf8_safe($resultado["usuario_nombre"]).'</strong></td>
 									<td >'.getestado($resultado["estado"]).'</td>
-									<td >'.utf8_encode($resultado["Fecha"]).'</td>
-									<td >'.utf8_encode($resultado["fecha_estado"]).'</td>
+									<td >'.utf8_safe($resultado["Fecha"]).'</td>
+									<td >'.utf8_safe($resultado["fecha_estado"]).'</td>
 									
-									<td >'.utf8_encode(substr($resultado["bodega"],4,10)).'</td>
+									<td >'.utf8_safe(substr($resultado["bodega"],4,10)).'</td>
 									
-									<td >'.utf8_encode($resultado["recepcion_nombre"]).'</td>
+									<td >'.utf8_safe($resultado["recepcion_nombre"]).'</td>
 									<td ></td>
 									<td >'.$resultado["cantDoc"].'</td>
 									' ;
@@ -178,27 +178,27 @@ if (isset($_GET['criterio'])){
 								  if($resultado["estado"]==2)
 								  {
 							   echo '<tr>
-									<td style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=paso2brand&idsol='.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></td>';
+									<td style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=paso2brand&idsol='.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></td>';
 								  }
 								  if($resultado["estado"]==3)
 								  {
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" target="_blank" href="modulos/impresiones/listasolicitudpdf.php?idsol='.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" target="_blank" href="modulos/impresiones/listasolicitudpdf.php?idsol='.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></td>';
 								  }
 								 if($resultado["estado"]==4)
 								  {
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" target="_blank" href="modulos/impresiones/listasolicitudpdf.php?idsol='.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" target="_blank" href="modulos/impresiones/listasolicitudpdf.php?idsol='.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></td>';
 								  }
 								
-									echo '<td ><strong>'.utf8_encode($resultado["usuario_nombre"]).'</strong></td>
+									echo '<td ><strong>'.utf8_safe($resultado["usuario_nombre"]).'</strong></td>
 									<td >'.getestado($resultado["estado"]).'</td>
-									<td >'.utf8_encode($resultado["Fecha"]).'</td>
-									<td >'.utf8_encode($resultado["fecha_estado"]).'</td>
+									<td >'.utf8_safe($resultado["Fecha"]).'</td>
+									<td >'.utf8_safe($resultado["fecha_estado"]).'</td>
 									
-									<td >'.utf8_encode(substr($resultado["bodega"],4,10)).'</td>
+									<td >'.utf8_safe(substr($resultado["bodega"],4,10)).'</td>
 									
-									<td >'.utf8_encode($resultado["recepcion_nombre"]).'</td>';
+									<td >'.utf8_safe($resultado["recepcion_nombre"]).'</td>';
 									
 									if($resultado["estado"]==3 &&  $_SESSION["usuario_nombre"] != "Mauricio Huerta" &&  $_SESSION["usuario_nombre"] == $resultado["recepcion_nombre"])
 								    {

@@ -323,8 +323,8 @@ $(document).ready(function() {
 		  while($resultado = odbc_fetch_array($rs)){ 
 		   echo '<tr>
 				<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.$i.'</td>
-				<td >'.utf8_encode($resultado["Marca"]).'</td>
-				<td >'.utf8_encode($resultado["ItmsGrpNam"]).'</td>
+				<td >'.utf8_safe($resultado["Marca"]).'</td>
+				<td >'.utf8_safe($resultado["ItmsGrpNam"]).'</td>
 				<td ><strong>'.number_format($resultado["SumCantidad"], 0, '', '.').'</strong></td>
 				<td ><strong>'.number_format($resultado["SumaMarca"], 0, '', '.').'</strong></td> 
 				<td ><strong>'.number_format($resultado["USD"], 2, ',', '.').'</strong></td> 

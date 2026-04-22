@@ -274,7 +274,7 @@ if($cuenta>0)
 							{
 							 echo '<tr >';
 							 }		echo'<td   ><strong>'.$resultados["ItemCode"].'</strong></td>
-										<td >'.utf8_encode($resultados["ItemName"]).'</td>
+										<td >'.utf8_safe($resultados["ItemName"]).'</td>
 										<td >'.(int)$resultados["Cantidad"].'</td>';
 										if(	getStockBodegaRef($resultados["ItemCode"]) == 0)
 										{										
@@ -387,7 +387,7 @@ ORDER BY SBO_Imp_Eximben_SAC.dbo.VIC_VW_ItemsVenta.Marca, dbo.sisap_soldetalle.d
 							 echo '<tr >
 							            <td ><stron>'.$resultados["Marca"].'</strong></td>
 										<td ><stron>'.$resultados["codigo"].'</strong></td>
-										<td >'.utf8_encode($resultados["descripcion"]).'</td>
+										<td >'.utf8_safe($resultados["descripcion"]).'</td>
 										<td >'.$resultados["stock_modulo"].'</td>
 										<td >'.$resultados["cant_solicitada"].'</td>
 										<td >'.$resultados["cant_aceptada"].'</td>

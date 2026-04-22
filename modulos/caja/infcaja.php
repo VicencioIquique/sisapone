@@ -263,14 +263,14 @@ $sql5= "SELECT RPAG.TipoPago
 							  while($resultado = odbc_fetch_array($rs)){ 
 							   /*echo '<tr>
 									<td >'.$resultado["FechaDoc"].'</td>
-							         <td >'.utf8_encode($resultado["TipoDocto"]).'</td>
+							         <td >'.utf8_safe($resultado["TipoDocto"]).'</td>
 									<td >'.number_format($resultado["TOTAL"], 0, '', '.').'</td> ' ;*/
 									
 									
 									$total = $total + $resultado["Sumaventa"];
 									$cantotal = $cantotal + $resultado["Cantidad"];
 									$numerodocto =  intval($resultado["NRODOCTO"]);
-									$nombredia = utf8_encode($resultado["DIA"]);
+									$nombredia = utf8_safe($resultado["DIA"]);
 									$caja = $resultado["Workstation"];
 									
 									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4)

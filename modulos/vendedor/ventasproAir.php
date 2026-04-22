@@ -162,7 +162,7 @@ $(document).ready(function() {
 											 while($resulta = odbc_fetch_array($rs3))
 											 { 
 												
-												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_encode($resulta['SlpName']).'</option>';
+												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_safe($resulta['SlpName']).'</option>';
 												
 											 }
 										
@@ -208,13 +208,13 @@ $(document).ready(function() {
 									<select id="marca" name="marca"    class="styled" >';
 											if($marca)
 												{
-													echo'<option value="'.$marca.'" selected>'.utf8_encode($marca).'</option>';
+													echo'<option value="'.$marca.'" selected>'.utf8_safe($marca).'</option>';
 												}
 											 echo'<option value=""></option>';	
 											 while($result = odbc_fetch_array($rs2))
 											 { 
 												
-												 echo'<option value="'.$result['Code'].'">'.utf8_encode($result['Name']).'</option>';
+												 echo'<option value="'.$result['Code'].'">'.utf8_safe($result['Name']).'</option>';
 												
 											 }
 										
@@ -329,11 +329,11 @@ WHERE       (RP_REGGEN.dbo.RP_ReceiptsCab_SAP.FechaDocto >= '".$finicio2." 00:00
 
 									echo'<td >'.$resultado["Fecha"].'</td>
 									<td ><a target="_blank" href="index.php?opc=verBoletaAir&nroBoleta='.$resultado["NumeroDocto"].'&caja='.$resultado["Workstation"].'&bodega='.$resultado["Bodega"].'">'.$resultado["NumeroDocto"].'</a></td>
-									<td >'.utf8_encode(getusuarioAir((int)$resultado["Vendedor"])).'</td>
+									<td >'.utf8_safe(getusuarioAir((int)$resultado["Vendedor"])).'</td>
 									<td >'.number_format($resultado["Cantidad"], 0, '', '.').'</td> 
 									<td >'.$resultado["Sku"].'&nbsp;</td> 
-									<td >'.utf8_encode($resultado["Name"]).'</td> 
-									<td >'.utf8_encode($resultado["ItemName"]).'</td> 
+									<td >'.utf8_safe($resultado["Name"]).'</td> 
+									<td >'.utf8_safe($resultado["ItemName"]).'</td> 
 									<td ><strong>'.number_format($resultado["PrecioExtendido"], 0, '', '.').'</strong></td>
 									</tr>' ;
 									/*<td ><strong>'.$tipoDoc.$resultado["Workstation"].$resultado["Bodega"].$resultado["NumeroDocto"].'</strong></td>

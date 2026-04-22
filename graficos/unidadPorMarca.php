@@ -39,7 +39,7 @@
  		while($resultado2 = odbc_fetch_array($rs2)){ 
 							  
 									echo '{ 
-										country: "'.utf8_encode($resultado2["Name"]).'",
+										country: "'.utf8_safe($resultado2["Name"]).'",
 										visits: '.$resultado2["SumCantidad"].',
 										color: "#7eb61b"
 									},'; //fin data

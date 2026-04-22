@@ -331,35 +331,35 @@ if($consultar!= ""){
 			$repiteLinea = "";
 			while($resultado = odbc_fetch_array($rs)){
 				echo '<tr>';
-				if($repiteLinea == utf8_encode($resultado['LINEA'])){
+				if($repiteLinea == utf8_safe($resultado['LINEA'])){
 					echo '<td style="background-color:#ffff99;" ></td>';
-					echo '<td>'.utf8_encode($resultado['Referencia'])."&nbsp;".'</td>';
-					echo '<td style="width:780px;">'.utf8_encode($resultado['DESCRIPTION']).'</td>';
-					echo '<td style="text-align:center;">'.utf8_encode($resultado['SKU'])."&nbsp;".'</td>';
+					echo '<td>'.utf8_safe($resultado['Referencia'])."&nbsp;".'</td>';
+					echo '<td style="width:780px;">'.utf8_safe($resultado['DESCRIPTION']).'</td>';
+					echo '<td style="text-align:center;">'.utf8_safe($resultado['SKU'])."&nbsp;".'</td>';
 					echo '<td style="text-align:center;">'.number_format($resultado['CapVolu'],'0',',','.').'</td>';
-					echo '<td style="text-align:center;">'.utf8_encode($resultado['Segmento']).'</td>';
-					echo '<td style="text-align:center;">'.utf8_encode($resultado['Genero']).'</td>';
-					echo '<td style="text-align:center;">'.utf8_encode($resultado['Status']).'</td>';
+					echo '<td style="text-align:center;">'.utf8_safe($resultado['Segmento']).'</td>';
+					echo '<td style="text-align:center;">'.utf8_safe($resultado['Genero']).'</td>';
+					echo '<td style="text-align:center;">'.utf8_safe($resultado['Status']).'</td>';
 					echo '<td>'.number_format($resultado['PrePacks'],'0',',','.').'</td>';
 					echo '<td>'.number_format($resultado['LPC_Precio'],'2',',','.').'</td>';
 					echo '<td>'.number_format($resultado['DFS_Precio'],'2',',','.').'</td>';
 					echo '<td>'.number_format($resultado['LPV_Precio'],'0',',','.').'</td>';
 					echo '<td>'.number_format($resultado['LPV_Aero'],'0',',','.').'</td>';
 				}else{
-					echo '<td style="border-top: 1px solid #676767; text-align:center; font-weight:bold; font-size:16px; background-color:#ffff99;">'.utf8_encode($resultado['LINEA']).'</td>';
-					echo '<td style="border-top: 1px solid #676767;">'.utf8_encode($resultado['Referencia'])."&nbsp;".'</td>';
-					echo '<td style="width:780px; border-top: 1px solid #676767;">'.utf8_encode($resultado['DESCRIPTION']).'</td>';
-					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_encode($resultado['SKU'])."&nbsp;".'</td>';
+					echo '<td style="border-top: 1px solid #676767; text-align:center; font-weight:bold; font-size:16px; background-color:#ffff99;">'.utf8_safe($resultado['LINEA']).'</td>';
+					echo '<td style="border-top: 1px solid #676767;">'.utf8_safe($resultado['Referencia'])."&nbsp;".'</td>';
+					echo '<td style="width:780px; border-top: 1px solid #676767;">'.utf8_safe($resultado['DESCRIPTION']).'</td>';
+					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_safe($resultado['SKU'])."&nbsp;".'</td>';
 					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.number_format($resultado['CapVolu'],'0',',','.').'</td>';
-					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_encode($resultado['Segmento']).'</td>';
-					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_encode($resultado['Genero']).'</td>';
-					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_encode($resultado['Status']).'</td>';
+					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_safe($resultado['Segmento']).'</td>';
+					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_safe($resultado['Genero']).'</td>';
+					echo '<td style="border-top: 1px solid #676767; text-align:center;">'.utf8_safe($resultado['Status']).'</td>';
 					echo '<td style="border-top: 1px solid #676767;">'.number_format($resultado['PrePacks'],'0',',','.').'</td>';
 					echo '<td style="border-top: 1px solid #676767;">'.number_format($resultado['LPC_Precio'],'2',',','.').'</td>';
 					echo '<td style="border-top: 1px solid #676767;">'.number_format($resultado['DFS_Precio'],'2',',','.').'</td>';
 					echo '<td style="border-top: 1px solid #676767;">'.number_format($resultado['LPV_Precio'],'0',',','.').'</td>';
 					echo '<td style="border-top: 1px solid #676767;">'.number_format($resultado['LPV_Aero'],'0',',','.').'</td>';
-					$repiteLinea = utf8_encode($resultado['LINEA']);
+					$repiteLinea = utf8_safe($resultado['LINEA']);
 				}
 				echo '</tr>';
 			}

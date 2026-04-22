@@ -61,7 +61,7 @@ ORDER BY SBO_Import_Eximben_SAC.dbo.OITM.U_VK_Marca";
 		  while($resultados = odbc_fetch_array($rs)) 
 						  { 
 							$vector[] =   array ( 
-												"country" => utf8_encode($resultados['Name']),
+												"country" => utf8_safe($resultados['Name']),
 												"visits" => (int)$resultados['SumaMarca'],
 												"color" => "#0489B1"
 												

@@ -298,7 +298,7 @@ $(function(){
 							  }
 							  echo "<option value = ''> </option>";
 							  while($resultado = odbc_fetch_array($rs)){
-								echo "<option value=".$resultado['AcctCode'].">".utf8_encode($resultado['AcctName'])."</option>";
+								echo "<option value=".$resultado['AcctCode'].">".utf8_safe($resultado['AcctName'])."</option>";
 							  }
                         ?>
                         </select>
@@ -367,15 +367,15 @@ FROM [SISAP].[dbo].[SI_DetalleFondoFijo] AS A INNER JOIN [SBO_Imp_Eximben_SAC].[
 				        while($resultado = odbc_fetch_array($rs2)){
 				          ?>
                   <tr <?php echo'style="cursor: pointer; cursor: hand;" onClick="'; echo "editarRendicion(".$resultado["idDetalleFondoFijo"].",".$resultado["FK_idFondoFijo"].",'".$resultado["business"]."','".$resultado["numDoc"]."','".$resultado["title"]."','".$resultado["description"]."',".$resultado["cost"].",'".$resultado["AcctCode"]."','".$resultado["OcrCode"]."','".$resultado["baseDatos"].'\')"';  ?>>
-                    <td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; text-align:center;" ><?php echo utf8_encode($resultado["idDetalleFondoFijo"]); ?></td>
+                    <td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; text-align:center;" ><?php echo utf8_safe($resultado["idDetalleFondoFijo"]); ?></td>
 							      <td><strong><?php echo $resultado["rinDate"]; ?></strong></td>
 								    <td><strong><?php echo $resultado["numDoc"]; ?></strong></td>
 								    <td><strong><?php echo $resultado["title"]; ?></strong></td>
 								    <td><strong><?php echo $resultado["description"]; ?></strong></td>
                     <td><strong><?php echo number_format($resultado["cost"], 0, '', '.'); ?></strong></td>
                     <td><strong><?php echo $resultado["business"]; ?></strong></td>
-                    <td><strong><?php echo utf8_encode($resultado["AcctName"]); ?></strong></td>
-                    <td><strong><?php echo utf8_encode($resultado["OcrCode"]); ?></strong></td>
+                    <td><strong><?php echo utf8_safe($resultado["AcctName"]); ?></strong></td>
+                    <td><strong><?php echo utf8_safe($resultado["OcrCode"]); ?></strong></td>
                      <?php 
 		  	if($idusuario == 107){
 		  		echo '<td><strong>'. $resultado["baseDatos"] .'</strong></td>';
@@ -441,7 +441,7 @@ FROM [SISAP].[dbo].[SI_DetalleFondoFijo] AS A INNER JOIN [SBO_Imp_Eximben_SAC].[
           }
           echo "<option value = ''> </option>";
           while($resultado = odbc_fetch_array($rs)){
-            echo "<option value=".$resultado['AcctCode'].">".utf8_encode($resultado['AcctName'])."</option>";
+            echo "<option value=".$resultado['AcctCode'].">".utf8_safe($resultado['AcctName'])."</option>";
           }
       ?>
     </select>
@@ -455,7 +455,7 @@ FROM [SISAP].[dbo].[SI_DetalleFondoFijo] AS A INNER JOIN [SBO_Imp_Eximben_SAC].[
           }
           echo "<option value = ''> </option>";
           while($resultado = odbc_fetch_array($rs)){
-            echo "<option value=".$resultado['OcrCode'].">".utf8_encode($resultado['OcrCode'])." - ". utf8_encode($resultado['OcrName']) ."</option>";
+            echo "<option value=".$resultado['OcrCode'].">".utf8_safe($resultado['OcrCode'])." - ". utf8_safe($resultado['OcrName']) ."</option>";
           }
       ?>
     </select>
@@ -490,7 +490,7 @@ FROM [SISAP].[dbo].[SI_DetalleFondoFijo] AS A INNER JOIN [SBO_Imp_Eximben_SAC].[
           }
           echo "<option value = ''> </option>";
           while($resultado = odbc_fetch_array($rs)){
-            echo "<option value=".$resultado['AcctCode'].">".utf8_encode($resultado['AcctName'])."</option>";
+            echo "<option value=".$resultado['AcctCode'].">".utf8_safe($resultado['AcctName'])."</option>";
           }
       ?>
     </select>
@@ -504,7 +504,7 @@ FROM [SISAP].[dbo].[SI_DetalleFondoFijo] AS A INNER JOIN [SBO_Imp_Eximben_SAC].[
           }
           echo "<option value = ''> </option>";
           while($resultado = odbc_fetch_array($rs)){
-            echo "<option value=".$resultado['OcrCode'].">".utf8_encode($resultado['OcrCode'])." - ". utf8_encode($resultado['OcrName']) ."</option>";
+            echo "<option value=".$resultado['OcrCode'].">".utf8_safe($resultado['OcrCode'])." - ". utf8_safe($resultado['OcrName']) ."</option>";
           }
       ?>
     </select>

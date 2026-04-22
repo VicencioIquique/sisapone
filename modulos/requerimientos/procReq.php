@@ -368,26 +368,26 @@ if (isset($_GET['criterio'])){
 										  
 								  {
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 								  else if($resultado["FK_idEstado"] == 5 && $resultado["VBSolicitante"] == 1){
 									  echo '<td></td>';
 									  /*echo'<tr>
-									<td style="background-color:#41C316;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';*/
+									<td style="background-color:#41C316;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';*/
 								  }
 								  /*else if($resultado["FK_idEstado"] == 5 && $resultado["VBSolicitante"] == 0){
 									  echo'<tr>
-									<td style="background-color:#FA132E;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td style="background-color:#FA132E;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }*/
 								else if($resultado["FK_idEstado"]==2)
 								  {
 							   echo '<tr>
-									<td  style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="comenzarReq" style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td  style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="comenzarReq" style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 								else if($resultado["FK_idEstado"]==3)
 								  {
 							   echo '<tr>
-									<td  style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="terminarReq" style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td  style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="terminarReq" style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 									echo '
 									<td >'.($resultado["createDate"]).'</td>
@@ -429,7 +429,7 @@ if (isset($_GET['criterio'])){
 								else if((int)$resultado["FK_idEstado"]==1)
 								{
 							   echo '<tr>
-									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisarReq" style="color:#fff;" id="'.$resultado["idRequerimiento"].'">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>
+									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisarReq" style="color:#fff;" id="'.$resultado["idRequerimiento"].'">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>
 									<td >'.($resultado["createDate"]).'</td>';
 									if($resultado["revDate"] == ""){
 										echo '<td>En espera</td>';
@@ -558,11 +558,11 @@ if (isset($_GET['criterio'])){
 								  if($resultado["FK_idEstado"] == 5 && $resultado["VBSolicitante"] == 1){
 									 
 									  echo'<tr>
-									<td style="background-color:#41C316;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisarFinalizado" style="color:#fff;" target="_blank" id="'.$resultado["idRequerimiento"].'">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td style="background-color:#41C316;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisarFinalizado" style="color:#fff;" target="_blank" id="'.$resultado["idRequerimiento"].'">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 								  else if($resultado["FK_idEstado"] == 5 && $resultado["VBSolicitante"] == 0){
 									  echo'<tr>
-									<td style="background-color:#FA132E;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisarFinalizado" style="color:#fff;" target="_blank" id="'.$resultado["idRequerimiento"].'">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td style="background-color:#FA132E;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="revisarFinalizado" style="color:#fff;" target="_blank" id="'.$resultado["idRequerimiento"].'">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 								
 									echo '

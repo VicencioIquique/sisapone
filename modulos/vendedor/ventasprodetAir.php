@@ -136,7 +136,7 @@ $sql3= "SELECT     SlpCode, SlpName
 											 while($resulta = odbc_fetch_array($rs3))
 											 { 
 												
-												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_encode($resulta['SlpName']).'</option>';
+												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_safe($resulta['SlpName']).'</option>';
 												
 											 }
 										
@@ -168,13 +168,13 @@ $sql3= "SELECT     SlpCode, SlpName
 											 echo'<option value=""></option>';
 											if($marca)
 												{
-													echo'<option value="'.$marca.'" selected>'.utf8_encode($marca).'</option>';
+													echo'<option value="'.$marca.'" selected>'.utf8_safe($marca).'</option>';
 												}
 												
 											 while($result = odbc_fetch_array($rs2))
 											 { 
 												
-												 echo'<option value="'.$result['Code'].'">'.utf8_encode($result['Name']).'</option>';
+												 echo'<option value="'.$result['Code'].'">'.utf8_safe($result['Name']).'</option>';
 												
 											 }
 										
@@ -297,10 +297,10 @@ WHERE     (RP_REGGEN.dbo.RP_ReceiptsDet_SAP.Bodega = '".$modulo."') AND (RP_REGG
 							   
 									echo '<td >'.$resultado["Fecha"].'</td>
 									<td >'.$resultado["NumeroDocto"].'</td>
-									<td >'.utf8_encode(getusuarioAir((int)$resultado["Vendedor"])).'</td>
+									<td >'.utf8_safe(getusuarioAir((int)$resultado["Vendedor"])).'</td>
 									<td >'.$resultado["Sku"].'</td> 
-									<td >'.utf8_encode($resultado["Name"]).'</td> 
-									<td >'.utf8_encode($resultado["ItemName"]).'</td> 
+									<td >'.utf8_safe($resultado["Name"]).'</td> 
+									<td >'.utf8_safe($resultado["ItemName"]).'</td> 
 									<td >'.number_format($resultado["Cantidad"], 0, '', '.').'</td> 
 									<td ><strong>'.number_format($resultado["PrecioExtendido"], 0, '', '.').'</strong></td>
 									<td >'.number_format($resultado["USD"], 2, ',', '.').'</td> 

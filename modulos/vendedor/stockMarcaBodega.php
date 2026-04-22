@@ -150,13 +150,13 @@ $(document).ready(function() {
 									<select id="marca" name="marca"  class="styled" class="required" >';
 											if($marca)
 												{
-													echo'<option value="'.$marca.'" selected>'.utf8_encode($marca).'</option>';
+													echo'<option value="'.$marca.'" selected>'.utf8_safe($marca).'</option>';
 												}
 											 echo'<option value=""></option>';	
 											 while($result = odbc_fetch_array($rs3))
 											 { 
 												
-												 echo'<option value="'.$result['Code'].'">'.utf8_encode($result['Name']).'</option>';
+												 echo'<option value="'.$result['Code'].'">'.utf8_safe($result['Name']).'</option>';
 												
 											 }
 										
@@ -277,7 +277,7 @@ if ($marca)
 							  
 							   echo '<tr>
 							 		<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.$i.'</td>
-									<td >'.utf8_encode($resultado["Bodega"]).'</td>
+									<td >'.utf8_safe($resultado["Bodega"]).'</td>
 									<td ><strong>'.$resultado["Name"].'</strong></td>
 									<td ><strong>'.$resultado["ItemCode"].'</strong></td>
 									<td ><strong>'.$resultado["ItemName"].'</strong></td>

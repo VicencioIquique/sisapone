@@ -158,7 +158,7 @@ if($consultar)
         	while(($resultado = odbc_fetch_array($rs)) )
 				{ 
 					echo '<tr>
-							<td  >'.utf8_encode(str_replace("ZFI.","LOCAL ",$resultado["Local"])).'</td> 									
+							<td  >'.utf8_safe(str_replace("ZFI.","LOCAL ",$resultado["Local"])).'</td> 									
 							<td >'.number_format($resultado["DocMin"], 0, '', '.').'</td> 
 							<td >'.number_format($resultado["DocMax"], 0, '', '.').'</td>
 							<td ><strong>'.number_format($resultado["RetencionDL"], 0, '', '.').'</strong></td>

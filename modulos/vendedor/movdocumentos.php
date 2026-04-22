@@ -438,14 +438,14 @@ $(document).ready(function() {
 							  while($resultado = odbc_fetch_array($rs2)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado["Dia"]).'</td>';
 									if($agrupar == 'Detalle')
 									{
-									    echo '<td >'.utf8_encode($resultado["Desde"]).'</td>';
+									    echo '<td >'.utf8_safe($resultado["Desde"]).'</td>';
 									}
 									else 
 									{
-									  echo '<td >'.utf8_encode($resultado["Desde"]).' - '.$resultado["Hasta"].'</td>';
+									  echo '<td >'.utf8_safe($resultado["Desde"]).' - '.$resultado["Hasta"].'</td>';
 									}
 									echo'<td ><strong>'.number_format($resultado["Nro"], 0, '', '.').'</strong></td>
 									<td ><strong>'.number_format($resultado["Valor"], 2, ',', '.').'</strong></td>
@@ -517,14 +517,14 @@ $(document).ready(function() {
 							  while($resultado = odbc_fetch_array($rs)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado["Dia"]).'</td>';
 									if($agrupar == 'Detalle')
 									{
-									    echo '<td >'.utf8_encode($resultado["Desde"]).'</td>';
+									    echo '<td >'.utf8_safe($resultado["Desde"]).'</td>';
 									}
 									else 
 									{
-									  echo '<td >'.utf8_encode($resultado["Desde"]).' - '.$resultado["Hasta"].'</td>';
+									  echo '<td >'.utf8_safe($resultado["Desde"]).' - '.$resultado["Hasta"].'</td>';
 									}
 									
 									echo'<td ><strong>'.number_format($resultado["Nro"], 0, '', '.').'</strong></td>
@@ -596,14 +596,14 @@ $(document).ready(function() {
 							  while($resultado3 = odbc_fetch_array($rs3)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado3["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado3["Dia"]).'</td>';
 									if($agrupar == 'Detalle')
 									{
-									    echo '<td >'.utf8_encode($resultado3["Desde"]).'</td>';
+									    echo '<td >'.utf8_safe($resultado3["Desde"]).'</td>';
 									}
 									else 
 									{
-									  echo '<td >'.utf8_encode($resultado3["Desde"]).' - '.$resultado3["Hasta"].'</td>';
+									  echo '<td >'.utf8_safe($resultado3["Desde"]).' - '.$resultado3["Hasta"].'</td>';
 									}
 									
 									echo'<td ><strong>'.number_format($resultado3["Nro"], 0, '', '.').'</strong></td>
@@ -677,23 +677,23 @@ $(document).ready(function() {
 							  while($resultado = odbc_fetch_array($rs4)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado["Dia"]).'</td>';
 									if($agrupar == 'Detalle')
 									{
-									    echo '<td >'.utf8_encode($resultado["FDesde"]).'</td>';
+									    echo '<td >'.utf8_safe($resultado["FDesde"]).'</td>';
 									}
 									else 
 									{
-									  echo '<td >'.utf8_encode($resultado["FDesde"]).' - '.$resultado["FHasta"].'</td>';
+									  echo '<td >'.utf8_safe($resultado["FDesde"]).' - '.$resultado["FHasta"].'</td>';
 									}
 									
 									if($agrupar == 'Detalle')
 									{
-									    echo '<td >'.utf8_encode($resultado["Desde"]).'</td>';
+									    echo '<td >'.utf8_safe($resultado["Desde"]).'</td>';
 									}
 									else 
 									{
-									  echo '<td >'.utf8_encode($resultado["Desde"]).' - '.$resultado["Hasta"].'</td>';
+									  echo '<td >'.utf8_safe($resultado["Desde"]).' - '.$resultado["Hasta"].'</td>';
 									}
 									
 									echo'<td ><strong>'.number_format($resultado["Nro"], 0, '', '.').'</strong></td>
@@ -767,23 +767,23 @@ $(document).ready(function() {
 							  while($resultado3 = odbc_fetch_array($rs5)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado3["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado3["Dia"]).'</td>';
 									if($agrupar == 'Detalle')
 									{
-									    echo '<td >'.utf8_encode($resultado3["FDesde"]).'</td>';
+									    echo '<td >'.utf8_safe($resultado3["FDesde"]).'</td>';
 									}
 									else 
 									{
-									  echo '<td >'.utf8_encode($resultado3["FDesde"]).' - '.$resultado3["FHasta"].'</td>';
+									  echo '<td >'.utf8_safe($resultado3["FDesde"]).' - '.$resultado3["FHasta"].'</td>';
 									}
 									
 									if($agrupar == 'Detalle')
 									{
-									    echo '<td >'.utf8_encode($resultado3["Desde"]).'</td>';
+									    echo '<td >'.utf8_safe($resultado3["Desde"]).'</td>';
 									}
 									else 
 									{
-									  echo '<td >'.utf8_encode($resultado3["Desde"]).' - '.$resultado3["Hasta"].'</td>';
+									  echo '<td >'.utf8_safe($resultado3["Desde"]).' - '.$resultado3["Hasta"].'</td>';
 									}
 									
 									echo'

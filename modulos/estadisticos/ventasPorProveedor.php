@@ -192,7 +192,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs7))
 											 { 
 												
-												 echo'<option value="'.$result['BrandManager'].'">'.utf8_encode($result['BrandManager']).'</option>';
+												 echo'<option value="'.$result['BrandManager'].'">'.utf8_safe($result['BrandManager']).'</option>';
 												
 											 }
 										
@@ -221,7 +221,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs2))
 											 { 
 												
-												 echo'<option value="'.$result['Proveedor'].'">'.utf8_encode($result['Proveedor']).'</option>';
+												 echo'<option value="'.$result['Proveedor'].'">'.utf8_safe($result['Proveedor']).'</option>';
 												
 											 }
 										
@@ -503,10 +503,10 @@ overflow-y:hidden;">
 			
 						echo'
 						<tr>
-						<td >'.utf8_encode((string)$resultado["Proveedor"]).'</td>';
+						<td >'.utf8_safe((string)$resultado["Proveedor"]).'</td>';
 						
 						if($proveedor)
-						echo '<td >'.utf8_encode((string)$resultado["Marca"]).'</td>';
+						echo '<td >'.utf8_safe((string)$resultado["Marca"]).'</td>';
 						
 						echo'
 						<td ><strong>'.number_format($resultado["Enero"], $decimales, ',', '.').'</strong></td>

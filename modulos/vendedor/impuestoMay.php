@@ -259,7 +259,7 @@ $(document).ready(function() {
 							  while($resultado = odbc_fetch_array($rs2)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado["Dia"]).'</td>';
 									
 									echo'<td ><strong>'.$resultado["Empresa"].'</strong></td>
 									<td ><strong>'.$resultado["TipoProducto"].'</strong></td>
@@ -333,7 +333,7 @@ $(document).ready(function() {
 							  while($resultado2 = odbc_fetch_array($rs2)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:22px; text-align:center;" >'.utf8_encode($resultado2["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:22px; text-align:center;" >'.utf8_safe($resultado2["Dia"]).'</td>';
 									
 									echo'<td ><strong>'.$resultado2["Empresa"].'</strong></td>
 									<td ><strong>'.$resultado2["TipoProducto"].'</strong></td>
@@ -408,7 +408,7 @@ $(document).ready(function() {
 							  while($resultado3 = odbc_fetch_array($rs3)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado3["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado3["Dia"]).'</td>';
 									
 									echo'<td ><strong>'.$resultado3["Empresa"].'</strong></td>
 									<td ><strong>'.$resultado3["TipoProducto"].'</strong></td>

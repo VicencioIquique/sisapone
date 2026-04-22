@@ -56,8 +56,8 @@ ORDER BY NRODOCTO
 							  while($resultado = odbc_fetch_array($rs)){ 
 							   /*echo '<tr>
 									<td >'.$resultado["Fecha"].'</td>
-							         <td >'.utf8_encode($resultado["Bodega"]).'</td>
-								     <td >'.utf8_encode($resultado["DIA"]).'</td>
+							         <td >'.utf8_safe($resultado["Bodega"]).'</td>
+								     <td >'.utf8_safe($resultado["DIA"]).'</td>
 									<td >'.$resultado["NRODOCTO"].'</td>
 									<td >'.$resultado["TipoDocto"].'</td>
 									<td >'.$resultado["RETEN"].'</td>
@@ -65,7 +65,7 @@ ORDER BY NRODOCTO
 									$total = $total + $resultado["Sumaventa"];
 									$cantotal = $cantotal + $resultado["Cantidad"];
 									$numerodocto =  intval($resultado["NRODOCTO"]);
-									$nombredia = utf8_encode($resultado["DIA"]);
+									$nombredia = utf8_safe($resultado["DIA"]);
 									
 									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4)
 									{

@@ -181,7 +181,7 @@ echo $sql;
 				while($resultado2 = odbc_fetch_array($rs2)){ 
 							  
 									echo '{ 
-										country: "'.utf8_encode($resultado2["BManager"]).'",
+										country: "'.utf8_safe($resultado2["BManager"]).'",
 										visits: '.$resultado2["Pextendido"].'
 										
 									},'; //fin data

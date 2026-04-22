@@ -107,7 +107,7 @@ if (isset($_GET['criterio'])){
 									  if($resultado["Estado"]==1)
 									{
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;"   href="index.php?opc=validarDSMAir&nDsm='.$resultado["NroDEM"].'">'.utf8_encode($resultado["NroDEM"]).'</a></td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;"   href="index.php?opc=validarDSMAir&nDsm='.$resultado["NroDEM"].'">'.utf8_safe($resultado["NroDEM"]).'</a></td>';
 									}
 									echo '
 								    <td ><strong>'.$resultado["Fecha"].'</strong></td>
@@ -119,7 +119,7 @@ if (isset($_GET['criterio'])){
 								else if((int)$resultado["Estado"]==0)
 								{
 							   echo '<tr>
-									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=validarDSMAir&nDsm='.$resultado["NroDEM"].'">'.utf8_encode($resultado["NroDEM"]).'</a></td>
+									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=validarDSMAir&nDsm='.$resultado["NroDEM"].'">'.utf8_safe($resultado["NroDEM"]).'</a></td>
 									<td ><strong>'.$resultado["Fecha"].'</strong></td>
 									<td >'.$resultado["TOrigen"].'</td>
 									<td >'.getmoduloAir((int)$resultado["modulo"]).'</td>

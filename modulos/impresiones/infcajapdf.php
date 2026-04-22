@@ -88,7 +88,7 @@ ORDER BY TipoDocto, TipoPago";
 									$total = $total + $resultado["Sumaventa"];
 									$cantotal = $cantotal + $resultado["Cantidad"];
 									$numerodocto =  intval($resultado["NRODOCTO"]);
-									$nombredia = utf8_encode($resultado["DIA"]);
+									$nombredia = utf8_safe($resultado["DIA"]);
 									$caja = $resultado["Workstation"];
 									
 									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4)

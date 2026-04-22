@@ -88,7 +88,7 @@ if (isset($_POST['moduloid'])){
 									  if($resultado["Estado"]==1)
 									{
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;"   href="index.php?opc=validarDEM&nDEM='.$resultado["NroDSM"].'">'.utf8_encode($resultado["NroDSM"]).'</a></td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;"   href="index.php?opc=validarDEM&nDEM='.$resultado["NroDSM"].'">'.utf8_safe($resultado["NroDSM"]).'</a></td>';
 									}
 									echo '
 								    <td ><strong>'.$resultado["Fecha"].'</strong></td>
@@ -100,7 +100,7 @@ if (isset($_POST['moduloid'])){
 								else if((int)$resultado["Estado"]==0)
 								{
 							   echo '<tr>
-									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=validarDEM&nDEM='.$resultado["NroDSM"].'">'.utf8_encode($resultado["NroDSM"]).'</a></td>
+									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;" href="index.php?opc=validarDEM&nDEM='.$resultado["NroDSM"].'">'.utf8_safe($resultado["NroDSM"]).'</a></td>
 									<td ><strong>'.$resultado["Fecha"].'</strong></td>
 									<td >'.getmodulo((int)$resultado["TOrigen"]).'</td>
 									<td >'.$resultado["Bodega"].'</td>

@@ -617,7 +617,7 @@ if($consultar!= ""){
 		if($consultar){
 			$repiteLinea = "";
 			while($resultado = odbc_fetch_array($rs)){
-				if("Descontinuado" == utf8_encode($resultado['Status'])){
+				if("Descontinuado" == utf8_safe($resultado['Status'])){
 					if($contDescontinuado == 0){
 						$contDescontinuado++;
 						$descCIF = $acumCIFTotal;
@@ -672,10 +672,10 @@ if($consultar!= ""){
 					$acumSubTotalStockVigente  = $acumSubTotalStockVigente + $resultado['Stock'];
 					echo '<tr>';
 				}
-				if($repiteLinea == utf8_encode($resultado['LINEA'])){
+				if($repiteLinea == utf8_safe($resultado['LINEA'])){
 					echo '<td></td>';
-					echo '<td>'.utf8_encode($resultado['REFERENCIA'])."&nbsp;".'</td>';
-					echo '<td style="">'.utf8_encode($resultado['DESCRIPTION'])."&nbsp;".'</td>';
+					echo '<td>'.utf8_safe($resultado['REFERENCIA'])."&nbsp;".'</td>';
+					echo '<td style="">'.utf8_safe($resultado['DESCRIPTION'])."&nbsp;".'</td>';
 					echo '<td style="border-left: 1px solid #689DED;">'.number_format($resultado['Enero'],'0',',','.').'</td>';
 					echo '<td>'.number_format($resultado['Febrero'],'0',',','.').'</td>';
 					echo '<td>'.number_format($resultado['Marzo'],'0',',','.').'</td>';
@@ -724,9 +724,9 @@ if($consultar!= ""){
 					//echo '<td>--</td>';
 					echo '<td>'.number_format($resultado['RetailUSA'],'2',',','').'</td>';
 				}else{
-					echo '<td style="border-top: 1px solid #689DED; text-align:left;">'.utf8_encode($resultado['LINEA']).'</td>';
-					echo '<td style="border-top: 1px solid #689DED;">'.utf8_encode($resultado['REFERENCIA'])."&nbsp;".'</td>';
-					echo '<td style="border-top: 1px solid #689DED;">'.utf8_encode($resultado['DESCRIPTION'])."&nbsp;".'</td>';
+					echo '<td style="border-top: 1px solid #689DED; text-align:left;">'.utf8_safe($resultado['LINEA']).'</td>';
+					echo '<td style="border-top: 1px solid #689DED;">'.utf8_safe($resultado['REFERENCIA'])."&nbsp;".'</td>';
+					echo '<td style="border-top: 1px solid #689DED;">'.utf8_safe($resultado['DESCRIPTION'])."&nbsp;".'</td>';
 					echo '<td style="border-top: 1px solid #689DED; border-left: 1px solid #689DED;">'.number_format($resultado['Enero'],'0',',','.').'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['Febrero'],'0',',','.').'</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['Marzo'],'0',',','.').'</td>';
@@ -775,7 +775,7 @@ if($consultar!= ""){
 					//echo '<td style="border-top: 1px solid #689DED;">--</td>';
 					echo '<td style="border-top: 1px solid #689DED;">'.number_format($resultado['RetailUSA'],'2',',','').'</td>';
 					//echo '<td style="border-top: 1px solid #689DED;>'.number_format($resultado['LPC_Precio'],'2',',','').'</td>';
-					$repiteLinea = utf8_encode($resultado['LINEA']);
+					$repiteLinea = utf8_safe($resultado['LINEA']);
 				}
 				echo '</tr>';
 				$acumTotalUnidades = $acumTotalUnidades + $resultado['Total_UNDS'];

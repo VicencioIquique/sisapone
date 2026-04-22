@@ -169,7 +169,7 @@ function subirArchivo(){
 									//echo '<option value=''></option>';
 									
 									while($resultado = odbc_fetch_array($rs)){ 
-										echo '<option value='.utf8_encode($resultado['idArea']).'>'.utf8_encode($resultado['description']).'</option>';
+										echo '<option value='.utf8_safe($resultado['idArea']).'>'.utf8_safe($resultado['description']).'</option>';
 								}
 								?>
 							</select>
@@ -270,16 +270,16 @@ function subirArchivo(){
 									  if($resultado["FK_idEstado"] == 4 && $resultado["idSolicitante"] == $_SESSION['usuario_id'])
 								  {
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="confirmarReq" style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="confirmarReq" style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 								  else if($resultado["FK_idEstado"] == 4 && $resultado["idSolicitante"] != $_SESSION['usuario_id'])
 								  {
 									echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';  
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank"  id='.$resultado["idRequerimiento"].' ">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';  
 								  }
 								  else if($resultado["FK_idEstado"] == 5){
 									  echo'
-										<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="reqFinalizado" style="color:#fff;" target="_blank" >'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+										<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a class="reqFinalizado" style="color:#fff;" target="_blank" >'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 										echo '<script type="text/javascript">
 											$(".reqFinalizado").parents("tr").remove();
 										</script>
@@ -288,12 +288,12 @@ function subirArchivo(){
 								else if($resultado["FK_idEstado"] == 2)
 								  {
 							   echo '<tr>
-									<td  style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td  style="background-color:#146672;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 								else if($resultado["FK_idEstado"] == 3)
 								  {
 							   echo '<tr>
-									<td  style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_encode($resultado["idRequerimiento"]).'</a></td>';
+									<td  style="background-color:#705249;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a style="color:#fff;" target="_blank" >'.utf8_safe($resultado["idRequerimiento"]).'</a></td>';
 								  }
 									echo '
 									<td >'.($resultado["createDate"]).'</td>
@@ -332,7 +332,7 @@ function subirArchivo(){
 								else if($resultado["FK_idEstado"] == 1)
 								{
 							   echo '<tr>
-									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;">'.utf8_encode($resultado["idRequerimiento"]).'</a></td>
+									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" ><a  style="color:#fff;">'.utf8_safe($resultado["idRequerimiento"]).'</a></td>
 									<td >'.($resultado["createDate"]).'</td>
 									<td >'.utf8_decode($resultado["nombreSolicita"]).'</td>
 									<td >'.utf8_decode($resultado["title"]).'</td>';

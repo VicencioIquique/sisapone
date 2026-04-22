@@ -10,8 +10,8 @@ if (isset($_GET['term']))
 	$sql="SELECT [Code]
       ,[Name]
       ,[U_Marca]
-  FROM [RP_VICENCIO].[dbo].[View_OMAR]
-  WHERE [Name] LIKE '%'+'".$_REQUEST['term']."'+'%' ";//'%'+'".$_GET['term']."'+'%'
+  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[@VK_OMAR]
+  WHERE [Name] LIKE '%'+'".$_REQUEST['term']."'+'%' ORDER BY [Name]";//'%'+'".$_GET['term']."'+'%'
    
    //echo $sql;
 

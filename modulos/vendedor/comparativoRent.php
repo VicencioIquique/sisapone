@@ -455,7 +455,7 @@ echo $sql;
 								
 								  echo '<tr>
 																			
-										<td  >'.utf8_encode(str_replace("ZFI.","LOCAL ",$resultado2["WhsCode"])).'</td> 
+										<td  >'.utf8_safe(str_replace("ZFI.","LOCAL ",$resultado2["WhsCode"])).'</td> 
 										<td  style=" border-left:2px double #B5B5B5;" >'.number_format($resultado2["Cantidad"], 0, '', '.').'</td> 
 										<td ><strong>'.number_format($resultado2["TotalCLP"], 0, '', '.').'</strong></td>
 										<td ><strong>'.number_format($resultado2["Media"], 0, '', '.').'</strong></td>
@@ -599,7 +599,7 @@ echo $sql;
 								
 								  echo '<tr>
 																			
-										<td  >'.utf8_encode(str_replace("ZFI.","LOCAL ",$resultado4["WhsCode"])).'</td> 
+										<td  >'.utf8_safe(str_replace("ZFI.","LOCAL ",$resultado4["WhsCode"])).'</td> 
 										<td  style=" border-left:2px double #B5B5B5;" >'.number_format($resultado4["Cantidad"], 0, '', '.').'</td> 
 										<td ><strong>'.number_format($resultado4["TotalCLP"], 0, '', '.').'</strong></td>
 										<td ><strong>'.number_format($resultado4["Media"], 0, '', '.').'</strong></td>
@@ -745,7 +745,7 @@ echo $sql;
 								
 								  echo '<tr>
 																			
-										<td  >'.utf8_encode(str_replace("LOCAL.","LOCAL ",$resultado4["WhsCode"])).'</td> 
+										<td  >'.utf8_safe(str_replace("LOCAL.","LOCAL ",$resultado4["WhsCode"])).'</td> 
 										<td  style=" border-left:2px double #B5B5B5;" >'.number_format($resultado4["Cantidad"], 0, '', '.').'</td> 
 										<td ><strong>'.number_format($resultado4["TotalCLP"], 0, '', '.').'</strong></td>
 										<td ><strong>'.number_format($resultado4["Media"], 0, '', '.').'</strong></td>

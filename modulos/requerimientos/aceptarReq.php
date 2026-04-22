@@ -9,7 +9,7 @@ echo $sql="
 	UPDATE  SISAP.dbo.SI_Requerimiento
 	SET     FK_idEstado = 5
 			,VBSolicitante = ".$datos['VBSolicitante']."
-			,feedback = '".utf8_encode($datos['feedback'])."'
+			,feedback = '".utf8_safe($datos['feedback'])."'
 	WHERE   idRequerimiento = ".$datos['idReq'];
 	
 

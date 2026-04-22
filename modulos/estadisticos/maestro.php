@@ -199,7 +199,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs2))
 											 { 
 												
-												 echo'<option value="'.$result['Marca'].'">'.utf8_encode($result['Marca']).'</option>';
+												 echo'<option value="'.$result['Marca'].'">'.utf8_safe($result['Marca']).'</option>';
 												
 											 }
 										
@@ -221,7 +221,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs4))
 											 { 
 												
-												 echo'<option value="'.$result['Linea'].'">'.utf8_encode($result['Linea']).'</option>';
+												 echo'<option value="'.$result['Linea'].'">'.utf8_safe($result['Linea']).'</option>';
 												
 											 }
 										
@@ -242,7 +242,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs5))
 											 { 
 												
-												 echo'<option value="'.$result['SubLinea'].'">'.utf8_encode($result['SubLinea']).'</option>';
+												 echo'<option value="'.$result['SubLinea'].'">'.utf8_safe($result['SubLinea']).'</option>';
 												
 											 }
 										
@@ -263,7 +263,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs6))
 											 { 
 												
-												 echo'<option value="'.$result['Proveedor'].'">'.utf8_encode($result['Proveedor']).'</option>';
+												 echo'<option value="'.$result['Proveedor'].'">'.utf8_safe($result['Proveedor']).'</option>';
 												
 											 }
 										
@@ -284,7 +284,7 @@ $(document).ready(function() {
 											 while($result = odbc_fetch_array($rs7))
 											 { 
 												
-												 echo'<option value="'.$result['BrandManager'].'">'.utf8_encode($result['BrandManager']).'</option>';
+												 echo'<option value="'.$result['BrandManager'].'">'.utf8_safe($result['BrandManager']).'</option>';
 												
 											 }
 										
@@ -414,17 +414,17 @@ overflow-y:hidden;">
 						echo'
 						<tr>
 						<td >'.(string)$resultado["ItemCode"].'&nbsp;</td> 
-						<td >'.utf8_encode($resultado["ItemName"]).'</td> 
-						<td >'.utf8_encode($resultado["AreaNegocio"]).'</td>
-						<td >'.utf8_encode($resultado["Marca"]).'</td>
-						<td >'.utf8_encode($resultado["Linea"]).'</td>
-						<td >'.utf8_encode($resultado["SubLinea"]).'</td>
-						<td >'.utf8_encode($resultado["Proveedor"]).'</td>
-						<td >'.utf8_encode($resultado["BrandManager"]).'</td>
-						<td >'.utf8_encode($resultado["Mercancia"]).'</td>
-						<td >'.utf8_encode($resultado["Tester"]).'</td>
-						<td >'.utf8_encode($resultado["Publicidad"]).'</td>
-						<td >'.utf8_encode($resultado["TipoProducto"]).'</td>
+						<td >'.utf8_safe($resultado["ItemName"]).'</td> 
+						<td >'.utf8_safe($resultado["AreaNegocio"]).'</td>
+						<td >'.utf8_safe($resultado["Marca"]).'</td>
+						<td >'.utf8_safe($resultado["Linea"]).'</td>
+						<td >'.utf8_safe($resultado["SubLinea"]).'</td>
+						<td >'.utf8_safe($resultado["Proveedor"]).'</td>
+						<td >'.utf8_safe($resultado["BrandManager"]).'</td>
+						<td >'.utf8_safe($resultado["Mercancia"]).'</td>
+						<td >'.utf8_safe($resultado["Tester"]).'</td>
+						<td >'.utf8_safe($resultado["Publicidad"]).'</td>
+						<td >'.utf8_safe($resultado["TipoProducto"]).'</td>
 						
 						<td ><strong>'.$resultado["LPV_Mon"].'</strong></td>
 						

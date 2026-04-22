@@ -231,7 +231,7 @@ $(document).ready(function() {
 							  while($resultado = odbc_fetch_array($rs2)){ 
 							 
 							   echo '<tr>
-									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_encode($resultado["Dia"]).'</td>';
+									<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.utf8_safe($resultado["Dia"]).'</td>';
 									
 									echo'<td ><strong>'.$resultado["Periodo"].'</strong></td>
 									<td ><strong>'.$resultado["Empresa"].'</strong></td>

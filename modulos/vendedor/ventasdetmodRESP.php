@@ -252,7 +252,7 @@ GROUP BY dbo.RP_ReceiptsDet_SAP.Bodega" ;
 								  {
 							  
 								   echo '<tr>
-										<td ><a style="color:#000;font-weight:bold;" href="index.php?opc=ventasdet&modulo=00'.(int)$resultado["Bodega"].'&id=&inicio='.$finicio.'&fin='.$ffin.'">'.utf8_encode(getmodulo((int)$resultado["Bodega"])).'</a></td> 
+										<td ><a style="color:#000;font-weight:bold;" href="index.php?opc=ventasdet&modulo=00'.(int)$resultado["Bodega"].'&id=&inicio='.$finicio.'&fin='.$ffin.'">'.utf8_safe(getmodulo((int)$resultado["Bodega"])).'</a></td> 
 										<td >'.number_format($resultado["Cantidad"]-$resultado2["Cantidad"], 0, '', '.').'</td> 
 										<td ><strong>'.number_format($resultado["Pextendido"]-$resultado2["Pextendido"], 0, '', '.').'</strong></td>
 										<td >'.number_format($resultado["USD"]-$resultado2["USD"], 2, ',', '.').'</td> 
@@ -269,7 +269,7 @@ GROUP BY dbo.RP_ReceiptsDet_SAP.Bodega" ;
 								else
 								{
 									 echo '<tr>
-										<td ><a style="color:#000;font-weight:bold;" href="index.php?opc=ventasdet&modulo=00'.(int)$resultado["Bodega"].'&id=&inicio='.$finicio.'&fin='.$ffin.'">'.utf8_encode(getmodulo((int)$resultado["Bodega"])).'</a></td> 
+										<td ><a style="color:#000;font-weight:bold;" href="index.php?opc=ventasdet&modulo=00'.(int)$resultado["Bodega"].'&id=&inicio='.$finicio.'&fin='.$ffin.'">'.utf8_safe(getmodulo((int)$resultado["Bodega"])).'</a></td> 
 										<td >'.number_format($resultado["Cantidad"], 0, '', '.').'</td> 
 										<td ><strong>'.number_format($resultado["Pextendido"], 0, '', '.').'</strong></td>
 										<td >'.number_format($resultado["USD"], 2, ',', '.').'</td> 

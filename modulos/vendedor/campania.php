@@ -387,7 +387,7 @@ if($consultar)
 							    					  
 								
 								  echo '<tr>
-										<td  >'.utf8_encode(str_replace("ZFI.","LOCAL ",$resultado["WhsCode"])).'</td>
+										<td  >'.utf8_safe(str_replace("ZFI.","LOCAL ",$resultado["WhsCode"])).'</td>
 										<td >'.number_format($resultado["VTACANT"], 0, '', '.').'</td> 
 										<td ><strong>'.number_format($resultado["INCENTIVO"], 0, '', '.').'</strong></td>
 										<td ><strong>'.number_format($resultado["VTACLP"], 0, '', '.').'</strong></td>
@@ -397,7 +397,7 @@ if($consultar)
 										//<td style=" border-right:2px double #B5B5B5;" >'.number_format($resultado["RetencionDL"], 2, ',', '.').'</td> 
 										echo'</tr>' ;
 										
-										$vecC[] = '<tr><td  >- En el '.utf8_encode(str_replace("ZFI.","Local ",$resultado["WhsCode"])).', de '.number_format($resultado["VTACANT"], 0, '', '.').' unidades que significan CLP $'.number_format($resultado["VTACLP"], 0, '', '.').', se generó una comisión de $'.number_format($resultado["INCENTIVO"], 0, '', '.').' </td></tr>';
+										$vecC[] = '<tr><td  >- En el '.utf8_safe(str_replace("ZFI.","Local ",$resultado["WhsCode"])).', de '.number_format($resultado["VTACANT"], 0, '', '.').' unidades que significan CLP $'.number_format($resultado["VTACLP"], 0, '', '.').', se generó una comisión de $'.number_format($resultado["INCENTIVO"], 0, '', '.').' </td></tr>';
 										
 										$TotalUnidades = $TotalUnidades + $resultado["VTACANT"];									
 										$TotalIncent = $TotalIncent + $resultado["INCENTIVO"];
@@ -948,7 +948,7 @@ if($consultar)
 							    					  
 								
 								  echo '<tr>
-										<td  >'.utf8_encode($resultado2["DESC4"]).'</td> 									
+										<td  >'.utf8_safe($resultado2["DESC4"]).'</td> 									
 										<td >'.number_format($resultado2["VTACANT"], 0, '', '.').'</td> 
 										<td ><strong>'.number_format($resultado2["INCENTIVO"], 0, '', '.').'</strong></td>
 										<td ><strong>'.number_format($resultado2["VTACLP"], 0, '', '.').'</strong></td>

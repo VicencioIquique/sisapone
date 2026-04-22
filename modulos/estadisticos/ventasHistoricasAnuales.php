@@ -485,8 +485,8 @@ if($consultar){ ?>
 	 	?>
         <th width="85" style="border-bottom: 2px solid #689DED; border-top: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;">CIF <?php echo $anio; ?></th>
         <th width="100" style="border-bottom: 2px solid #689DED; border-top: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;">RENTABILIDAD</th>
-		<th width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode($anio-1 .'-'. $anio); ?></th>
-		<th width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("ACUM ". $anio); ?></th>
+		<th width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe($anio-1 .'-'. $anio); ?></th>
+		<th width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("ACUM ". $anio); ?></th>
 		<th width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;">40% / 12</th>
 		<th width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"></th>
 		<th width="85" style="border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;">6 AÑOS</th>

@@ -231,13 +231,13 @@ $(document).ready(function() {
 									<select id="marca" name="marca"    class="styled" >';
 											if($marca)
 												{
-													echo'<option value="'.$marca.'" selected>'.utf8_encode($marca).'</option>';
+													echo'<option value="'.$marca.'" selected>'.utf8_safe($marca).'</option>';
 												}
 											 echo'<option value=""></option>';	
 											 while($result = odbc_fetch_array($rs3))
 											 { 
 												
-												 echo'<option value="'.$result['Code'].'">'.utf8_encode($result['Name']).'</option>';
+												 echo'<option value="'.$result['Code'].'">'.utf8_safe($result['Name']).'</option>';
 												
 											 }
 										
@@ -317,7 +317,7 @@ $(document).ready(function() {
 							  while($resultado = odbc_fetch_array($rs)){ 
 							  $Pa = $pa + $Pi1[$k];
 							   echo '<tr>
-									<td >'.utf8_encode($resultado["Vendedor"]).'</td>
+									<td >'.utf8_safe($resultado["Vendedor"]).'</td>
 									<td ><strong>'.number_format($resultado["Cantidad"], 0, '', '.').'</strong></td>
 									<td ><strong>'.number_format($resultado["TotalCLP"], 0, '', '.').'</strong></td>
 									<td ><strong>'.number_format(($resultado["TotalCLP"]/$total2)*100, 2, ',', '.').'%</strong></td>

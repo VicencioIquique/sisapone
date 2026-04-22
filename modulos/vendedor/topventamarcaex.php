@@ -48,7 +48,7 @@ ORDER BY SBO_Import_Eximben_SAC.dbo.OITM.U_VK_Marca";
 
 							  while($reg = odbc_fetch_array($rs)){ 
 							  
-							  $shtml = $shtml.utf8_encode($reg["U_VK_Marca"]).";".
+							  $shtml = $shtml.utf8_safe($reg["U_VK_Marca"]).";".
 							  				   number_format($reg["SumCantidad"], 0, '', '.')."; ".
 											  number_format($reg["SumaMarca"], 0, '', '.')."\n";
 						

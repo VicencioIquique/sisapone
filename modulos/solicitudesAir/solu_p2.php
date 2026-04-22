@@ -265,7 +265,7 @@ if($cuenta>0)
 							  while($resultados = odbc_fetch_array($rs)){ 
 							 echo '<tr >
 										<td ><strong>'.$resultados["ItemCode"].'</strong></td>
-										<td >'.utf8_encode($resultados["ItemName"]).'</td>
+										<td >'.utf8_safe($resultados["ItemName"]).'</td>
 										<td >'.(int)$resultados["Cantidad"].'</td>';
 										if(	getStockBodegaRef($resultados["ItemCode"]) == 0)
 										{										
@@ -367,7 +367,7 @@ WHERE     ([RP_REGGEN].dbo.sisap_solicitudes.solicitud_id = ".$idsol.")";
 							  while($resultados = odbc_fetch_array($rs)){ 
 							 echo '<tr >
 										<td ><stron>'.$resultados["codigo"].'</strong></td>
-										<td >'.utf8_encode($resultados["descripcion"]).'</td>
+										<td >'.utf8_safe($resultados["descripcion"]).'</td>
 										<td >'.$resultados["stock_modulo"].'</td>
 										<td >'.$resultados["cant_solicitada"].'</td>
 										<td >'.$resultados["cant_aceptada"].'</td>

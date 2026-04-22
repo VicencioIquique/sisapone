@@ -1,4 +1,8 @@
 <?php
+function utf8_safe($s) {
+    return mb_convert_encoding($s ?? '', 'UTF-8', 'ISO-8859-1');
+}
+
 function formateo_rut($rut_param){
     
     //validaciones varias
@@ -86,6 +90,7 @@ function getusuario ($b)
 								exit( "Error en la consulta SQL" );
 							}
 
+							  $nombre = null;
 							  while($row = odbc_fetch_array($rs7)){ 
 							  		
 									 $nombre = $row['usuario_nombre'];

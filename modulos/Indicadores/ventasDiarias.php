@@ -115,13 +115,13 @@ ORDER BY DIA,total";
 									<select id="marca" name="marca"    class="styled" >';
 											if($marca)
 												{
-													echo'<option value="'.$marca.'" selected>'.utf8_encode($marca).'</option>';
+													echo'<option value="'.$marca.'" selected>'.utf8_safe($marca).'</option>';
 												}
 											 echo'<option value=""></option>';	
 											 while($result = odbc_fetch_array($rs2))
 											 { 
 												
-												 echo'<option value="'.$result['Code'].'">'.utf8_encode($result['Name']).'</option>';
+												 echo'<option value="'.$result['Code'].'">'.utf8_safe($result['Name']).'</option>';
 												
 											 }
 										

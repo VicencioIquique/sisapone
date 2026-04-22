@@ -28,12 +28,12 @@
 		VALUES
 		(
 		GETDATE()
-		,'".utf8_encode($datos['title'])."'
-		,'".utf8_encode($datos['description'])."'
+		,'".utf8_safe($datos['title'])."'
+		,'".utf8_safe($datos['description'])."'
 		,'".$idSolicitante."'
 		,'".$estado."'
-		,'".utf8_encode($idAreaEmision)."'
-		,'".utf8_encode($datos['areaRecibeDesc'])."'
+		,'".utf8_safe($idAreaEmision)."'
+		,'".utf8_safe($datos['areaRecibeDesc'])."'
 		)";
 		/*
 		GETDATE()

@@ -383,10 +383,10 @@ $(document).ready(function() {
 			<th width="65" style="font-size:10px; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;" valign="bottom">Galpon</th>
 			<th width="65" style="font-size:10px; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;">MENSUAL</th>
 			<th width="65" style="font-size:10px; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;">ACUMULADA</th>
-			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("6 AÑOS"); ?></th>
+			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("6 AÑOS"); ?></th>
 			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;">% PROM</th>
 			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;">% PROM</th>
-			<th width="65" style="font-size:10px; border-right: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("3 AÑOS"); ?></th>
+			<th width="65" style="font-size:10px; border-right: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("3 AÑOS"); ?></th>
 		</tr>
 	</thead>
     <thead>
@@ -399,15 +399,15 @@ $(document).ready(function() {
 	 	?>
         <th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-top: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;">CIF <?php echo $anio; ?></th>
         <th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-top: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;">UTILIDAD</th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode($anio-1 .'-'. $anio); ?></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("ACUM ". $anio); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe($anio-1 .'-'. $anio); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("ACUM ". $anio); ?></th>
 		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo "40% / 12"; ?></th>
 		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("6 AÑOS"); ?></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("6 AÑOS"); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("6 AÑOS"); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("6 AÑOS"); ?></th>
 		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo '%'; ?></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("AÑO 2014"); ?></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("AÑO "); echo $anio; ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("AÑO 2014"); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("AÑO "); echo $anio; ?></th>
 		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo "2012-2013-2014"; ?></th>
 	</tr>
     </thead>
@@ -531,16 +531,16 @@ $(document).ready(function() {
     <thead>
 		<tr>
 			<th colspan="17"></th>
-			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;" valign="bottom"><?php echo utf8_encode("CRECIMIENTO"); ?></th>
+			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;" valign="bottom"><?php echo utf8_safe("CRECIMIENTO"); ?></th>
 			<th width="65"></th>
 			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;" valign="bottom">MODULO</th>
 			<th width="65" style="font-size:10px;" valign="bottom"></th>
 			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;">MENSUAL</th>
 			<th width="65" style="font-size:10px; background-color:#DCE6F1; border-left: 2px solid #689DED; border-right: 2px solid #689DED;">ACUMULADA</th>
-			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("6 AÑOS"); ?></th>
+			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("6 AÑOS"); ?></th>
 			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;">% PROM</th>
 			<th width="65" style="font-size:10px; border-top: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;">% PROM</th>
-			<th width="65" style="font-size:10px; border-right: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("3 AÑOS"); ?></th>
+			<th width="65" style="font-size:10px; border-right: 2px solid #689DED; border-left: 2px solid #689DED; border-right: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("3 AÑOS"); ?></th>
 		</tr>
 	</thead>
     <thead>
@@ -555,11 +555,11 @@ $(document).ready(function() {
 		<th width="65" style="font-size:10px;"></th>
 		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo "40% / 12"; ?></th>
 		<th width="65" style="font-size:10px;"></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("6 AÑOS"); ?></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("6 AÑOS"); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("6 AÑOS"); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("6 AÑOS"); ?></th>
 		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo '%'; ?></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("AÑO 2014"); ?></th>
-		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_encode("AÑO "); echo $anio; ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("AÑO 2014"); ?></th>
+		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo utf8_safe("AÑO "); echo $anio; ?></th>
 		<th width="65" style="font-size:10px; border-bottom: 2px solid #689DED; border-right: 2px solid #689DED; border-left: 2px solid #689DED; background-color:#DCE6F1;"><?php echo "2012-2013-2014"; ?></th>
 	</tr>
     </thead>

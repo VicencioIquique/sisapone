@@ -186,10 +186,10 @@ if (isset($_GET['criterio'])){
 									  while($resultado = odbc_fetch_array($rs))
 									  { 
 									   echo '<tr>
-											<td ><strong>'.utf8_encode($resultado["usuario_user"]).'</strong></td>
-											<td >'.utf8_encode($resultado["usuario_nombre"]).'</td>
-											<td >'.utf8_encode($resultado["usuario_rol"]).'</td>
-											<td >'.utf8_encode(getmodulo($resultado["usuario_modulo"])).'</td>
+											<td ><strong>'.utf8_safe($resultado["usuario_user"]).'</strong></td>
+											<td >'.utf8_safe($resultado["usuario_nombre"]).'</td>
+											<td >'.utf8_safe($resultado["usuario_rol"]).'</td>
+											<td >'.utf8_safe(getmodulo($resultado["usuario_modulo"])).'</td>
 											</tr>' ;
 									  }
 								}	

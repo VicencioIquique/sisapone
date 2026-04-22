@@ -84,7 +84,7 @@ if (isset($_GET['criterio'])){
 							  while($resultado = odbc_fetch_array($rs)){ 
 							   echo '<tr>
 									<td >'.$resultado["SlpCode"].'</td> 
-									<td >'.utf8_encode($resultado["SlpName"]).'</td> 
+									<td >'.utf8_safe($resultado["SlpName"]).'</td> 
 									<td><a  href="index.php?opc=ventest&id='.$resultado["SlpCode"].'" ><img src="images/bar.png" width="16px" height="16px" /></a></td> ';
 									
 							?>

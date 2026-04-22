@@ -45,7 +45,7 @@ ORDER BY SumaTotal DESC";
 
 							  while($reg = odbc_fetch_array($rs)){ 
 							  
-							  $shtml = $shtml.utf8_encode($reg["SlpName"]).";".
+							  $shtml = $shtml.utf8_safe($reg["SlpName"]).";".
 							  				   number_format($reg["SumaTotal"], 0, '', '.')."\n";
 						
 							  }

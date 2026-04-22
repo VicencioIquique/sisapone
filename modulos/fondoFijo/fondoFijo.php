@@ -228,7 +228,7 @@ function crearNuevoFondo(){
 								           exit( "Error en la consulta SQL" );
                         }else{
 								          while($resultado = odbc_fetch_array($rs5)){
-									          echo "<option value=".$resultado['idArea']."> ".utf8_encode($resultado['description'])."</option>";
+									          echo "<option value=".$resultado['idArea']."> ".utf8_safe($resultado['description'])."</option>";
                           }
                         }
                       ?>
@@ -244,7 +244,7 @@ function crearNuevoFondo(){
 								           exit( "Error en la consulta SQL" );
                         }else{
 								          while($resultado = odbc_fetch_array($rs5)){
-									          echo "<option value=".$resultado['idEstado']."> ".utf8_encode($resultado['name'])."</option>";
+									          echo "<option value=".$resultado['idEstado']."> ".utf8_safe($resultado['name'])."</option>";
                           }
                         }
                       ?>
@@ -339,10 +339,10 @@ function crearNuevoFondo(){
                     		echo '
                             <tr>
                                 <td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center; cursor:pointer;" onclick="location.href=\'index.php?opc=detalleFondoFijo&idFondo='.$resultado["idFondoFijo"].'&estado='.$resultado["FK_idEstado"].'\'">'.$resultado["idFondoFijo"].'</td>
-								                <td onclick="location.href=\'index.php?opc=detalleFondoFijo&idFondo='.$resultado["idFondoFijo"].'&estado='.$resultado["FK_idEstado"].'\'"><strong>'.utf8_encode(getEncargado($resultado["idEncargado"],$conn)).'</strong></td>
+								                <td onclick="location.href=\'index.php?opc=detalleFondoFijo&idFondo='.$resultado["idFondoFijo"].'&estado='.$resultado["FK_idEstado"].'\'"><strong>'.utf8_safe(getEncargado($resultado["idEncargado"],$conn)).'</strong></td>
                                 <td onclick="location.href=\'index.php?opc=detalleFondoFijo&idFondo='.$resultado["idFondoFijo"].'&estado='.$resultado["FK_idEstado"].'\'"><strong>'.$resultado["createDate"].'</strong></td>
-								                <td><strong>'.utf8_encode($resultado["description"]).'</strong></td>
-                                <td onclick="location.href=\'index.php?opc=detalleFondoFijo&idFondo='.$resultado["idFondoFijo"].'&estado='.$resultado["FK_idEstado"].'\'"><strong>'.utf8_encode($resultado["name"]).'</strong></td>
+								                <td><strong>'.utf8_safe($resultado["description"]).'</strong></td>
+                                <td onclick="location.href=\'index.php?opc=detalleFondoFijo&idFondo='.$resultado["idFondoFijo"].'&estado='.$resultado["FK_idEstado"].'\'"><strong>'.utf8_safe($resultado["name"]).'</strong></td>
                             	<td width="30"><img src="images/export_excel2.png" width="30px" height="30px" onclick="impExcelGeneral('.$resultado["idFondoFijo"].')" alt="Exportar Detalle" style="cursor:pointer;"  /></td>
 								<td width="30"><img src="images/white_excel.png" width="30px" height="30px" onclick="impExcelConcepto('.$resultado["idFondoFijo"].')" alt="Exportar por Concepto" style="cursor:pointer;" /></td>
 							';

@@ -45,7 +45,8 @@
       "Bash(powershell.exe -ExecutionPolicy Bypass -Command ':*)",
       "Bash(powershell.exe -ExecutionPolicy Bypass -Command 'Set-Location '\\\\''C:\\\\laragon\\\\www\\\\sisap'\\\\''; git add app/Http/Controllers/Finanzas app/Http/Controllers/Vendedor/DsmController.php resources/js/Pages/Vendedor resources/js/Pages/Finanzas app/Services/MenuService.php routes/web.php; git commit -m '\\\\''feat: vistas Vue y controllers finanzas/vendedor:*)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(php fix_utf8.php)"
     ]
   }
 }

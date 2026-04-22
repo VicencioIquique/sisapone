@@ -130,11 +130,11 @@ if (isset($_GET['criterio'])){
 							
 							   echo '<tr>
 									<td style="background-color:#5484C7;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.$resultado["abono_id"].'</td>
-									<td ><strong>'.utf8_encode($resultado["bodega"]).'</strong></td>
+									<td ><strong>'.utf8_safe($resultado["bodega"]).'</strong></td>
 									<td >'.$resultado["tipoPago"].'</td>
-									<td >'.utf8_encode($resultado["fechaCreacion"]).'</td>
+									<td >'.utf8_safe($resultado["fechaCreacion"]).'</td>
 									<td >'.number_format($resultado["monto"], 0, '', '.').'</td>
-									<td >'.utf8_encode($resultado["usuario"]).'</td>';
+									<td >'.utf8_safe($resultado["usuario"]).'</td>';
 									if($_SESSION['usuario_id']== 101)
 									{	
 										echo'<td ><a class="elimina_abono" id="'.$resultado["abono_id"].'"><img src="images/delete.png" /></a></td>';

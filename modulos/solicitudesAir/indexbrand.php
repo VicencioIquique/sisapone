@@ -114,13 +114,13 @@ FROM         dbo.sisap_solicitudes LEFT OUTER JOIN
 							  if($resultado["estado"]==1)
 							  {
 							   echo '<tr>
-									<td ><strong><a class="revisar_solicitud" id="'.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></strong></td>
-									<td ><strong>'.utf8_encode(getusuario($resultado["vendedor_id"])).'</strong></td>
+									<td ><strong><a class="revisar_solicitud" id="'.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></strong></td>
+									<td ><strong>'.utf8_safe(getusuario($resultado["vendedor_id"])).'</strong></td>
 									<td >'.getestado($resultado["estado"]).'</td>
-									<td >'.utf8_encode($resultado["Fecha"]).'</td>
-									<td >'.utf8_encode(getmodulo($resultado["modulo"])).'</td>
+									<td >'.utf8_safe($resultado["Fecha"]).'</td>
+									<td >'.utf8_safe(getmodulo($resultado["modulo"])).'</td>
 									
-										<td >'.utf8_encode(getusuario($resultado["recepcion_id"])).'</td>
+										<td >'.utf8_safe(getusuario($resultado["recepcion_id"])).'</td>
 									<td ></td>' ;
 							  } //fin if 
 							  
@@ -129,19 +129,19 @@ FROM         dbo.sisap_solicitudes LEFT OUTER JOIN
 								  if($resultado["estado"]==2)
 								  {
 							   echo '<tr>
-									<td ><strong><a  href="index.php?opc=paso2brand&idsol='.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></strong></td>';
+									<td ><strong><a  href="index.php?opc=paso2brand&idsol='.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></strong></td>';
 								  }
 								  if($resultado["estado"]==3)
 								  {
 							   echo '<tr>
-									<td ><strong><a target="_blank" href="modulos/impresiones/listasolicitudpdf.php?idsol='.$resultado["solicitud_id"].'">'.utf8_encode($resultado["solicitud_id"]).'</a></strong></td>';
+									<td ><strong><a target="_blank" href="modulos/impresiones/listasolicitudpdf.php?idsol='.$resultado["solicitud_id"].'">'.utf8_safe($resultado["solicitud_id"]).'</a></strong></td>';
 								  }
-									echo '<td ><strong>'.utf8_encode(getusuario($resultado["vendedor_id"])).'</strong></td>
+									echo '<td ><strong>'.utf8_safe(getusuario($resultado["vendedor_id"])).'</strong></td>
 									<td >'.getestado($resultado["estado"]).'</td>
-									<td >'.utf8_encode($resultado["Fecha"]).'</td>
-									<td >'.utf8_encode(getmodulo($resultado["modulo"])).'</td>
+									<td >'.utf8_safe($resultado["Fecha"]).'</td>
+									<td >'.utf8_safe(getmodulo($resultado["modulo"])).'</td>
 									
-										<td >'.utf8_encode(getusuario($resultado["recepcion_id"])).'</td>
+										<td >'.utf8_safe(getusuario($resultado["recepcion_id"])).'</td>
 									<td ></td>' ;
 							  } //fin if 
 						

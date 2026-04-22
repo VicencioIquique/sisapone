@@ -140,7 +140,7 @@ $sql3= "SELECT     SlpCode, SlpName
 											while($resulta = odbc_fetch_array($rs3))
 											 { 
 												
-												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_encode($resulta['SlpName']).'</option>';
+												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_safe($resulta['SlpName']).'</option>';
 												
 											 }
 										
@@ -176,13 +176,13 @@ $sql3= "SELECT     SlpCode, SlpName
 									<select id="marca" name="marca"    class="styled" >';
 											if($marca)
 												{
-													echo'<option value="'.$marca.'" selected>'.utf8_encode(getMarca($marca)).'</option>';
+													echo'<option value="'.$marca.'" selected>'.utf8_safe(getMarca($marca)).'</option>';
 												}
 												
 											 while($result = odbc_fetch_array($rs2))
 											 { 
 												
-												 echo'<option value="'.$result['U_VK_Marca'].'">'.utf8_encode(getMarca($result['U_VK_Marca'])).'</option>';
+												 echo'<option value="'.$result['U_VK_Marca'].'">'.utf8_safe(getMarca($result['U_VK_Marca'])).'</option>';
 												
 											 }
 										
@@ -348,11 +348,11 @@ WHERE     (dbo.RP_ReceiptsDet_SAP.Bodega = '".$modulo."') AND (dbo.RP_ReceiptsCa
 
 									echo'<td >'.$resultado["Fecha"].'</td>
 									<td >'.$resultado["NumeroDocto"].'</td>
-									<td >'.utf8_encode((int)$resultado["Vendedor"]).'</td>
+									<td >'.utf8_safe((int)$resultado["Vendedor"]).'</td>
 									<td >'.number_format($resultado["Cantidad"], 0, '', '.').'</td> 
 									<td >'.$resultado["Sku"].'</td> 
-									<td >'.utf8_encode($resultado["Name"]).'</td> 
-									<td >'.utf8_encode($resultado["ItemName"]).'</td> 
+									<td >'.utf8_safe($resultado["Name"]).'</td> 
+									<td >'.utf8_safe($resultado["ItemName"]).'</td> 
 									<td ><strong>'.number_format($resultado["PrecioExtendido"], 0, '', '.').'</strong></td>
 									</tr>' ;
 									/*<td ><strong>'.$tipoDoc.$resultado["Workstation"].$resultado["Bodega"].$resultado["NumeroDocto"].'</strong></td>

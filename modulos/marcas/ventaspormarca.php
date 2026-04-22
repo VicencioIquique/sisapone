@@ -88,7 +88,7 @@ $sql3= "SELECT     SlpCode, SlpName
 											 while($resulta = odbc_fetch_array($rs3))
 											 { 
 												
-												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_encode($resulta['SlpName']).'</option>';
+												 echo'<option value="'.$resulta['SlpCode'].'">'.utf8_safe($resulta['SlpName']).'</option>';
 												
 											 }
 										
@@ -196,8 +196,8 @@ WHERE     (dbo.RP_ReceiptsDet_SAP.Bodega = '".$modulo."') AND (dbo.RP_ReceiptsCa
 							
 								  
 							   echo '<tr>
-							         <td >'.utf8_encode($resultado["SlpName"]).'</td>
-									<td >'.utf8_encode($resultado["U_VK_Marca"]).'</td>
+							         <td >'.utf8_safe($resultado["SlpName"]).'</td>
+									<td >'.utf8_safe($resultado["U_VK_Marca"]).'</td>
 									<td ><strong>'.number_format($resultado["SumaMarca"], 0, '', '.').'</strong></td> ' ;
 									$total = $total + $resultado["SumaMarca"];
 									//$cantotal = $cantotal + $resultado["Cantidad"];

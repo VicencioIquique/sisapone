@@ -152,7 +152,7 @@ ORDER BY NRODOCTO";
 									$total = $total + $resultado["Sumaventa"];
 									$cantotal = $cantotal + $resultado["Cantidad"];
 									$numerodocto =  intval($resultado["NRODOCTO"]);
-									$nombredia = utf8_encode($resultado["DIA"]);
+									$nombredia = utf8_safe($resultado["DIA"]);
 									
 									if($resultado["TipoDocto"] == 1 || $resultado["TipoDocto"] == 4 || $resultado["TipoDocto"] == 5)
 									{
