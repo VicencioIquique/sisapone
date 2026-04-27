@@ -1,5 +1,6 @@
 <?php
 require_once("../../../clases/conexionocdb.php");
+require_once("../../../clases/funciones.php");
 
 // Asegúrate de que la conexión está correctamente establecida
 // $conn = odbc_connect("DSN_NAME", "USER", "PASSWORD");
