@@ -82,7 +82,7 @@ SELECT
 
 ";
 
-//echo $sql;			
+//echo $sql;
 	echo'  <script src="graficos/amcharts/amcharts.js" type="text/javascript"></script> ';//incluyo la librería para generar graficos	
 	include("graficos/marcas.php");// grafico que mustra las ventas por marcas en peso 
 	include("graficos/unidadPorMarca.php");// grafico que muestra las cantidades en unidad por marca					

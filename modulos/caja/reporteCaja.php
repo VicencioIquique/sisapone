@@ -450,13 +450,13 @@ $(document).ready(function() {
 							T1.NumeroDocto, 
 							CASE WHEN T3.DocNum IS NULL THEN 'Pendiente' ELSE CONVERT(CHAR(10),T3.DocNum) END as DocNum,
 							T1.Total, 
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Cash' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Cash,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('DebitCard', 'GNDeb') AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_DebitCard,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('CreditCard', 'GNCred') AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_CreditCard,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Check' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Check,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Payments' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Payments,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'CreditStore' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_StoreCredit
-							
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Cash' AND T1.ID = T3.ID),'0') as Monto_Cash,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('DebitCard', 'GNDeb') AND T1.ID = T3.ID),'0') as Monto_DebitCard,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('CreditCard', 'GNCred') AND T1.ID = T3.ID),'0') as Monto_CreditCard,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Check' AND T1.ID = T3.ID),'0') as Monto_Check,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Payments' AND T1.ID = T3.ID),'0') as Monto_Payments,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'CreditStore' AND T1.ID = T3.ID),'0') as Monto_StoreCredit
+
 						FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP as T1
 						LEFT JOIN RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T2 ON T1.ID = T2.ID
 						LEFT JOIN SBO_Inv_Servimex.dbo.OINV T3 ON T1.BaseEntry = T3.DocEntry
@@ -480,13 +480,13 @@ $(document).ready(function() {
 							T1.NumeroDocto, 
 							CASE WHEN T3.DocNum IS NULL THEN 'Pendiente' ELSE CONVERT(CHAR(10),T3.DocNum) END as DocNum,
 							T1.Total, 
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Cash' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Cash,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('DebitCard', 'GNDeb') AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_DebitCard,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('CreditCard', 'GNCred') AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_CreditCard,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Check' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Check,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Payments' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Payments,
-							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'CreditStore' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_StoreCredit
-							
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Cash' AND T1.ID = T3.ID),'0') as Monto_Cash,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('DebitCard', 'GNDeb') AND T1.ID = T3.ID),'0') as Monto_DebitCard,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('CreditCard', 'GNCred') AND T1.ID = T3.ID),'0') as Monto_CreditCard,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Check' AND T1.ID = T3.ID),'0') as Monto_Check,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Payments' AND T1.ID = T3.ID),'0') as Monto_Payments,
+							ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'CreditStore' AND T1.ID = T3.ID),'0') as Monto_StoreCredit
+
 						FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP as T1
 						LEFT JOIN RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T2 ON T1.ID = T2.ID
 						LEFT JOIN [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].OINV T3 ON T1.BaseEntry = T3.DocEntry
@@ -521,6 +521,7 @@ $(document).ready(function() {
 		) as Tabla
 		GROUP BY Tabla.Tipo1, Tabla.Tipo2, Tabla.Tipo3, Tabla.Tipo4, Tabla.Tipo99
 	";
+	//echo $sql2;
 	$rs2 = odbc_exec( $conn, $sql2 );
 	if(!$rs2){
 		exit( "Error en la consulta SQL" );
