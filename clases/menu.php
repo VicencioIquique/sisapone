@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 		
 class menu{
 	
@@ -356,9 +356,11 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Feb2026.xlsx'>Feb. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Mar2026.xlsx'>Mar. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Abr2026.xlsx'>Abr. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
 													</ul>
 												</li>
-										    
+
 										    </ul>
 										</li>
 										<li><a href='index.php?opc=maestroArticulos'>Maestro de Articulos</a></li>
@@ -790,6 +792,8 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Feb2026.xlsx'>Feb. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Mar2026.xlsx'>Mar. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Abr2026.xlsx'>Abr. 2026</a></li>
+													  <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
+													  <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1359,9 +1363,9 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Feb2026.xlsx'>Feb. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Mar2026.xlsx'>Mar. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Abr2026.xlsx'>Abr. 2026</a></li>
-													</ul>
-												</li>
-										    </ul>
+													 <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
+														</ul>
 										</li>
 										<li><a href='../sisap/archivos/ComMarcas.xlsx'>Comparativo Marcas</a></li>
 										<li><a href='index.php?opc=ventasPorHistorico'>Informe Historico</a></li>
