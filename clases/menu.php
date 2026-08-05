@@ -358,6 +358,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Abr2026.xlsx'>Abr. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Jul2026.xlsx'>Jul. 2026</a></li>
 													</ul>
 												</li>
 
@@ -794,6 +795,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Abr2026.xlsx'>Abr. 2026</a></li>
 													  <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
 													  <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
+													  <li><a target'_blank' href='../sisapone/archivos/Jul2026.xlsx'>Jul. 2026</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1365,6 +1367,7 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/Abr2026.xlsx'>Abr. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Jul2026.xlsx'>Jul. 2026</a></li>
 														</ul>
 										</li>
 										<li><a href='../sisap/archivos/ComMarcas.xlsx'>Comparativo Marcas</a></li>
