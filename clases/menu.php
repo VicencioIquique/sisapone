@@ -96,9 +96,10 @@ class menu{
 								<li><a href='index.php?opc=reporteCajaCont'>Caja</a>
 									 <ul class='children'>
 											<li><a href='index.php?opc=reporteCajaCont'>Informe de Cajas</a></li>
+											<li><a href='modulos/caja/generarInformesCaja.php' target='_blank'>Descargar Informes de Cajas</a></li>
 									 </ul>
 							</li>
-							
+
 					     	<li><a href='#'>Brand Manager</a>
 								 <ul class='children'>
 										<li><a href='index.php?opc=ventasBM'>Ventas BM</a></li>
@@ -430,6 +431,7 @@ class menu{
 								<li><a href='index.php?opc=reporteCaja'>Caja</a>
 									 <ul class='children'>
 											<li><a href='index.php?opc=reporteCaja'>Informe de Cajas</a></li>
+											<li><a href='modulos/caja/generarInformesCaja.php' target='_blank'>Descargar Informes de Cajas</a></li>
 									 </ul>
 								</li>
 							<li><a href='#'>Stocks</a>
@@ -541,6 +543,7 @@ class menu{
 							<li><a href='index.php?opc=reporteCajaCont'>Caja</a>
 									 <ul class='children'>
 											<li><a href='index.php?opc=reporteCajaCont'>Informe de Cajas</a></li>
+											<li><a href='modulos/caja/generarInformesCaja.php' target='_blank'>Descargar Informes de Cajas</a></li>
 									 </ul>
 							</li>
 							<li><a href='#'>Requerimientos</a>
@@ -1115,9 +1118,10 @@ class menu{
 							<li><a href='index.php?opc=reporteCajaCont'>Caja</a>
 									 <ul class='children'>
 											<li><a href='index.php?opc=reporteCajaCont'>Informe de Cajas</a></li>
+											<li><a href='modulos/caja/generarInformesCaja.php' target='_blank'>Descargar Informes de Cajas</a></li>
 									 </ul>
 							</li>
-							
+
 							<li><a href='index.php?opc=impuesto'>Impuestos</a>
 									 <ul class='children'>
 											<li><a href='index.php?opc=impuestoMay'>Impuesto Mayorista</a></li>

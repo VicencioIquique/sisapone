@@ -3,48 +3,166 @@
  * Genera masivamente los informes de caja (mismo formato que reporteCajaCont.php)
  * para todas las combinaciones módulo/caja que tengan documentos en una fecha.
  *
- * Uso por consola:   php modulos/caja/generarInformesCaja.php 2026-09-15
- *                    -> deja los PDF en /informes_caja/<fecha>/ y un .zip en /informes_caja/
- * Uso por navegador: /sisapone/modulos/caja/generarInformesCaja.php?fecha=2026-09-15
- *                    -> descarga un .zip con los PDF
+ * Uso por consola:   php modulos/caja/generarInformesCaja.php 2026-09-15 [bodega]
+ *                    -> sin bodega genera todos los módulos
+ * Uso por navegador: menú Caja > Descargar Informes de Cajas (requiere sesión)
+ *                    -> rol 1 (ROOT) puede elegir un módulo o todos
+ *                    -> el resto de los roles solo su módulo ($_SESSION["bodega"])
+ *
+ * Los PDF quedan en /informes_caja/<fecha>/, el ZIP en /informes_caja/ y un log en /informes_caja/<fecha>/log.txt
  */
-ini_set('max_execution_time', 0);
+set_time_limit(0);
 ini_set('memory_limit', '512M');
+ignore_user_abort(true); // si el navegador o un proxy corta la conexión, el script sigue generando
 
 $esCli = (php_sapi_name() == 'cli');
-if (!$esCli && session_status() == PHP_SESSION_NONE) {
-	session_start();
-}
-
 $raiz = realpath(__DIR__ . '/../..');
-require_once($raiz . '/clases/fpdf/fpdf.php');
-
-$fecha = $esCli ? (isset($argv[1]) ? $argv[1] : '') : (isset($_GET['fecha']) ? $_GET['fecha'] : '');
-
-if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
-	if ($esCli) {
-		exit("Uso: php generarInformesCaja.php AAAA-MM-DD\n");
-	}
-	echo '<form method="GET">
-			Fecha cierre de caja: <input type="date" name="fecha" required>
-			<input type="submit" value="Generar ZIP">
-		  </form>';
-	exit;
-}
-
-require_once($raiz . '/clases/conexionocdb.php');
-
-$usuario = isset($_SESSION['usuario_nombre']) ? $_SESSION['usuario_nombre'] : '';
+$dirBase = $raiz . '/informes_caja';
 
 $modulos = array(
 	'000' => '2077', '001' => '1010', '002' => '1132', '003' => '181', '004' => '184',
 	'005' => '2002', '006' => '6115', '007' => '6130', '008' => '2077'
 );
+// Mismo orden y opciones que el formulario de reporteCajaCont.php
+$modulosSelect = array('003' => '181', '004' => '184', '001' => '1010', '002' => '1132', '005' => '2002', '008' => '2077', '006' => '6115', '007' => '6130');
 
 $tiposDocto = array(
 	'1' => 'Boleta Fiscal', '2' => 'Factura', '3' => 'Nota de crédito',
 	'4' => 'Boleta manual', '5' => 'Boleta'
 );
+
+// ---------------------------------------------------------------------------
+// Parámetros y permisos
+// ---------------------------------------------------------------------------
+if ($esCli) {
+	$fecha = isset($argv[1]) ? $argv[1] : '';
+	$filtroBodega = isset($argv[2]) ? $argv[2] : '';
+	$usuarioSesion = '';
+	$esAdmin = true;
+} else {
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
+	header('Content-Type: text/html; charset=utf-8');
+
+	if (empty($_SESSION['usuario_rol'])) {
+		exit('Sesión expirada. <a href="../../index.php">Ingresar al sistema</a>');
+	}
+	$esAdmin = ($_SESSION['usuario_rol'] == 1);
+	$bodegaUsuario = isset($_SESSION['bodega']) ? trim($_SESSION['bodega']) : '';
+	$usuarioSesion = isset($_SESSION['usuario_nombre']) ? $_SESSION['usuario_nombre'] : '';
+	// Liberar la sesión para no bloquear otras pestañas del sistema mientras genera
+	session_write_close();
+
+	if (!$esAdmin && $bodegaUsuario === '') {
+		exit('Tu usuario no tiene un módulo asignado.');
+	}
+
+	$fecha = isset($_GET['fecha']) ? $_GET['fecha'] : '';
+	// Solo ROOT elige módulo ('' = todos); el resto queda fijo en su bodega
+	$filtroBodega = $esAdmin ? (isset($_GET['modulo']) ? $_GET['modulo'] : '') : $bodegaUsuario;
+}
+
+if ($filtroBodega !== '' && !preg_match('/^\d{3}$/', $filtroBodega)) {
+	exit("Módulo inválido\n");
+}
+
+// ---------------------------------------------------------------------------
+// Descarga de un ZIP ya generado (validando que corresponda al módulo del usuario)
+// ---------------------------------------------------------------------------
+if (!$esCli && isset($_GET['descargar'])) {
+	$archivo = $_GET['descargar'];
+	if (!preg_match('/^informes_caja_\d{4}-\d{2}-\d{2}_(todos|\d{3})\.zip$/', $archivo, $m)) {
+		exit('Archivo inválido');
+	}
+	if (!$esAdmin && $m[1] !== $bodegaUsuario) {
+		exit('No tienes permiso para descargar este archivo');
+	}
+	$rutaDescarga = $dirBase . '/' . $archivo;
+	if (!is_file($rutaDescarga)) {
+		exit('El archivo no existe');
+	}
+	header('Content-Type: application/zip');
+	header('Content-Disposition: attachment; filename="'.$archivo.'"');
+	header('Content-Length: ' . filesize($rutaDescarga));
+	readfile($rutaDescarga);
+	exit;
+}
+
+if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
+	if ($esCli) {
+		exit("Uso: php generarInformesCaja.php AAAA-MM-DD [bodega]\n");
+	}
+	echo '<title>Descargar Informes de Cajas</title>
+		<div style="font-family:Arial,sans-serif; max-width:420px; margin:40px auto;">
+		<h3>Descargar Informes de Cajas</h3>
+		<form method="GET">
+			<p>Fecha cierre de caja<br><input type="date" name="fecha" required></p>
+			<p>Módulo<br>';
+	if ($esAdmin) {
+		echo '<select name="modulo"><option value="">Todos los módulos</option>';
+		foreach ($modulosSelect as $codigo => $nombre) {
+			echo '<option value="'.$codigo.'">'.$nombre.'</option>';
+		}
+		echo '</select>';
+	} else {
+		$nombreModulo = isset($modulos[$bodegaUsuario]) ? $modulos[$bodegaUsuario] : $bodegaUsuario;
+		echo '<b>'.htmlspecialchars($nombreModulo).'</b> (todas las cajas)';
+	}
+	echo '	</p>
+			<input type="submit" value="Generar informes">
+		</form>
+		<p style="color:#666; font-size:12px;">La generación puede tardar varios minutos. No cierres la ventana.</p>
+		</div>';
+	exit;
+}
+
+if (!$esCli) {
+	// Enviar el avance al navegador a medida que se genera
+	@ini_set('zlib.output_compression', '0');
+	@ini_set('implicit_flush', '1');
+	while (ob_get_level() > 0) {
+		ob_end_flush();
+	}
+}
+
+$logArchivo = null;
+function mensaje($txt) {
+	global $esCli, $logArchivo;
+	if ($logArchivo) {
+		file_put_contents($logArchivo, date('Y-m-d H:i:s').'  '.$txt."\n", FILE_APPEND);
+	}
+	if ($esCli) {
+		echo $txt."\n";
+	} else {
+		echo htmlspecialchars($txt, ENT_QUOTES, 'UTF-8')."<br>\n";
+		flush();
+	}
+}
+
+require_once($raiz . '/clases/fpdf/fpdf.php');
+
+$sufijo = ($filtroBodega === '') ? 'todos' : $filtroBodega;
+
+// ---------------------------------------------------------------------------
+// Carpeta de salida y log
+// ---------------------------------------------------------------------------
+$dirFecha = $dirBase . '/' . $fecha;
+if (!is_dir($dirFecha) && !@mkdir($dirFecha, 0777, true)) {
+	exit("No se pudo crear la carpeta ".$dirFecha." (revisar permisos)\n");
+}
+$logArchivo = $dirFecha . '/log.txt';
+
+if (!$esCli) {
+	echo str_repeat(' ', 1024); // algunos navegadores no muestran nada hasta recibir 1KB
+}
+mensaje('Inicio generación informes de caja '.$fecha.' - módulo: '.($filtroBodega === '' ? 'todos' : (isset($modulos[$filtroBodega]) ? $modulos[$filtroBodega] : '?').' ('.$filtroBodega.')').($usuarioSesion ? ' - usuario: '.$usuarioSesion : ''));
+mensaje('Carpeta de salida: '.$dirFecha);
+
+require_once($raiz . '/clases/conexionocdb.php');
+mensaje('Conectado a la base de datos');
+
+$usuario = $usuarioSesion;
 
 // ---------------------------------------------------------------------------
 // Módulos y cajas con documentos en la fecha
@@ -55,11 +173,13 @@ $sqlCajas = "
 	WHERE FechaDocto > '".$fecha." 00:00:00' AND
 		  FechaDocto < '".$fecha." 23:59:59' AND
 		  TipoDocto <> '99'
+		  ".($filtroBodega !== '' ? "AND Bodega = '".$filtroBodega."'" : "")."
 	ORDER BY Bodega, Workstation
 ";
 $rsCajas = odbc_exec($conn, $sqlCajas);
 if (!$rsCajas) {
-	exit("Error en la consulta SQL de cajas\n");
+	mensaje('ERROR en la consulta SQL de cajas: '.odbc_errormsg($conn));
+	exit;
 }
 $cajas = array();
 while ($fila = odbc_fetch_array($rsCajas)) {
@@ -68,21 +188,10 @@ while ($fila = odbc_fetch_array($rsCajas)) {
 
 if (count($cajas) == 0) {
 	odbc_close($conn);
-	exit("No hay ventas registradas el ".$fecha."\n");
+	mensaje('No hay ventas registradas el '.$fecha);
+	exit;
 }
-
-// ---------------------------------------------------------------------------
-// Carpeta de salida
-// ---------------------------------------------------------------------------
-if ($esCli) {
-	$dirBase = $raiz . '/informes_caja';
-} else {
-	$dirBase = sys_get_temp_dir() . '/informes_caja_' . uniqid();
-}
-$dirFecha = $dirBase . '/' . $fecha;
-if (!is_dir($dirFecha)) {
-	mkdir($dirFecha, 0777, true);
-}
+mensaje(count($cajas).' cajas con ventas encontradas');
 
 // ---------------------------------------------------------------------------
 // Funciones
@@ -303,45 +412,41 @@ foreach ($cajas as $caja) {
 	$workstation = $caja['workstation'];
 	$moduloNombre = isset($modulos[$bodega]) ? $modulos[$bodega] : $bodega;
 
+	$etiqueta = 'modulo '.$moduloNombre.' ('.$bodega.') caja '.$workstation;
+	mensaje('Procesando '.$etiqueta.'...');
+	$inicioCaja = microtime(true);
+
 	$filas = obtenerFilas($conn, $fecha, $bodega, $workstation);
 	if ($filas === false) {
-		if ($esCli) { echo "ERROR SQL modulo ".$moduloNombre." (".$bodega.") caja ".$workstation."\n"; }
+		mensaje('  ERROR SQL '.$etiqueta.': '.odbc_errormsg($conn));
 		continue;
 	}
 
-	$nombre = 'reporte caja '.$fecha.' modulo '.$moduloNombre.' ('.$bodega.') caja '.$workstation.'.pdf';
+	$nombre = 'reporte caja '.$fecha.' '.$etiqueta.'.pdf';
 	$ruta = $dirFecha . '/' . $nombre;
 	generarPdf($filas, $fecha, $moduloNombre, $workstation, $usuario, $ruta);
 	$generados[] = $ruta;
 
-	if ($esCli) { echo "OK  ".$nombre."\n"; }
+	mensaje('  OK '.$nombre.' ('.round(microtime(true) - $inicioCaja, 1).' s)');
 }
 odbc_close($conn);
 
 // ZIP
-$rutaZip = $dirBase . '/informes_caja_' . $fecha . '.zip';
+$nombreZip = 'informes_caja_' . $fecha . '_' . $sufijo . '.zip';
+$rutaZip = $dirBase . '/' . $nombreZip;
 $zip = new ZipArchive();
 if ($zip->open($rutaZip, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
-	exit("No se pudo crear el ZIP\n");
+	mensaje('ERROR: no se pudo crear el ZIP '.$rutaZip);
+	exit;
 }
 foreach ($generados as $ruta) {
 	$zip->addFile($ruta, basename($ruta));
 }
 $zip->close();
 
-if ($esCli) {
-	echo "\n".count($generados)." PDF generados en ".$dirFecha."\n";
-	echo "ZIP: ".$rutaZip."\n";
-	exit;
+mensaje(count($generados).' PDF generados en '.$dirFecha);
+mensaje('ZIP: '.$rutaZip);
+
+if (!$esCli) {
+	echo '<br><a href="?descargar='.rawurlencode($nombreZip).'" style="font-size:16px;">Descargar '.$nombreZip.'</a>';
 }
-
-header('Content-Type: application/zip');
-header('Content-Disposition: attachment; filename="informes_caja_'.$fecha.'.zip"');
-header('Content-Length: ' . filesize($rutaZip));
-readfile($rutaZip);
-
-// Limpiar temporales
-foreach ($generados as $ruta) { @unlink($ruta); }
-@unlink($rutaZip);
-@rmdir($dirFecha);
-@rmdir($dirBase);
