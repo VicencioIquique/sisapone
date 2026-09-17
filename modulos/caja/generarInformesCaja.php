@@ -1,15 +1,15 @@
 <?php
 /*
  * Genera masivamente los informes de caja (mismo formato que reporteCajaCont.php)
- * para todas las combinaciones módulo/caja que tengan documentos en una fecha.
+ * para todas las cajas con ventas en un rango de fechas.
  *
- * Uso por consola:   php modulos/caja/generarInformesCaja.php 2026-09-15 [bodega]
- *                    -> sin bodega genera todos los módulos
+ * Uso por consola:   php modulos/caja/generarInformesCaja.php 2026-09-01 [2026-09-15] [bodega]
+ *                    -> sin fecha hasta usa la misma fecha; sin bodega genera todos los módulos
  * Uso por navegador: menú Caja > Descargar Informes de Cajas (requiere sesión)
- *                    -> rol 1 (ROOT) puede elegir un módulo o todos
- *                    -> el resto de los roles solo su módulo ($_SESSION["bodega"])
+ *                    -> rol 1 (ROOT) puede elegir un local o todos
+ *                    -> el resto de los roles solo su local ($_SESSION["bodega"])
  *
- * Los PDF quedan en /informes_caja/<fecha>/, el ZIP en /informes_caja/ y un log en /informes_caja/<fecha>/log.txt
+ * Los PDF quedan en /informes_caja/<fecha>/, el ZIP en /informes_caja/ y el log en /informes_caja/log.txt
  */
 set_time_limit(0);
 ini_set('memory_limit', '512M');
@@ -18,6 +18,7 @@ ignore_user_abort(true); // si el navegador o un proxy corta la conexión, el sc
 $esCli = (php_sapi_name() == 'cli');
 $raiz = realpath(__DIR__ . '/../..');
 $dirBase = $raiz . '/informes_caja';
+$maxDias = 92; // tope del rango para no dejar consultas eternas
 
 $modulos = array(
 	'000' => '2077', '001' => '1010', '002' => '1132', '003' => '181', '004' => '184',
@@ -32,11 +33,82 @@ $tiposDocto = array(
 );
 
 // ---------------------------------------------------------------------------
+// Página HTML con el estilo del tema minimalplomo
+// ---------------------------------------------------------------------------
+$paginaAbierta = false;
+$logAbierto = false;
+function abrirPagina() {
+	global $paginaAbierta, $usuarioSesion;
+	if ($paginaAbierta) {
+		return;
+	}
+	$paginaAbierta = true;
+	echo '<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>.: SISAP :. Descargar Informes de Cajas</title>
+<link rel="stylesheet" type="text/css" href="../../temas/minimalplomo/minimalplomo.css">
+<style>
+	#cuerpo { padding: 15px 0; }
+	#header h1 { font-size: 24px; float: left; }
+	#header .usuario { color: #3D9DE2; float: right; margin-top: 7px; margin-right: 5px; }
+	#header .usuario img { width: 16px; height: 16px; vertical-align: middle; margin-right: 4px; }
+	#horizontalForm label.first { margin: 5px 20px 0 0; line-height: 18px; }
+	#horizontalForm fieldset:after { content: ""; display: block; clear: both; }
+	#horizontalForm .moduloFijo { display: block; height: 20px; line-height: 20px; font-weight: bold; color: #649ebf; }
+	.nota { width: 95%; margin: 8px auto 0 auto; color: #7b7b7b; }
+	.aviso { width: 95%; margin: 0 auto; padding: 12px; border: 1px solid #dedede; border-radius: 5px; background-color: #F0F0F0; box-sizing: border-box; font-size: 13px; }
+	.aviso a, .volver { color: #649ebf; }
+	.log { width: 95%; margin: 0 auto; padding: 10px; border: 1px solid #dedede; border-radius: 5px; background-color: #F0F0F0; box-sizing: border-box; font-family: Consolas, monospace; font-size: 12px; line-height: 18px; }
+	.log .ok { color: #3c8d3c; }
+	.log .error { color: #cc0000; font-weight: bold; }
+	.log .dia { color: #649ebf; font-weight: bold; margin-top: 6px; }
+	.acciones { width: 95%; margin: 12px auto 0 auto; }
+	.boton { display: inline-block; background-color: #649ebf; color: #fff; border-radius: 5px; padding: 7px 14px; font-size: 15px; text-shadow: 0px 1px 1px #c0c0c0; }
+	.boton:hover { text-decoration: none; background-color: #5a8fad; }
+</style>
+</head>
+<body>
+<div id="contenedor">
+	<div id="header">
+		<h1>Descargar Informes de Cajas</h1>';
+	if ($usuarioSesion !== '') {
+		echo '<span class="usuario"><img src="../../images/user1.png">'.htmlspecialchars($usuarioSesion).'</span>';
+	}
+	echo '
+	</div>
+	<div id="cuerpo">
+';
+	register_shutdown_function(function () {
+		global $logAbierto;
+		if ($logAbierto) {
+			echo '</div><div class="acciones"><a class="volver" href="generarInformesCaja.php">&laquo; Volver</a></div>';
+		}
+		echo "\n\t</div>\n</div>\n</body>\n</html>";
+	});
+}
+
+function salir($html, $sinVolver = false) {
+	global $esCli;
+	if ($esCli) {
+		exit(strip_tags($html)."\n");
+	}
+	abrirPagina();
+	echo '<div class="aviso">'.$html.'</div>';
+	if (!$sinVolver) {
+		echo '<div class="acciones"><a class="volver" href="generarInformesCaja.php">&laquo; Volver</a></div>';
+	}
+	exit;
+}
+
+// ---------------------------------------------------------------------------
 // Parámetros y permisos
 // ---------------------------------------------------------------------------
 if ($esCli) {
-	$fecha = isset($argv[1]) ? $argv[1] : '';
-	$filtroBodega = isset($argv[2]) ? $argv[2] : '';
+	$fechaDesde = isset($argv[1]) ? $argv[1] : '';
+	$fechaHasta = isset($argv[2]) ? $argv[2] : '';
+	$filtroBodega = isset($argv[3]) ? $argv[3] : '';
 	$usuarioSesion = '';
 	$esAdmin = true;
 } else {
@@ -45,42 +117,43 @@ if ($esCli) {
 	}
 	header('Content-Type: text/html; charset=utf-8');
 
+	$usuarioSesion = isset($_SESSION['usuario_nombre']) ? $_SESSION['usuario_nombre'] : '';
 	if (empty($_SESSION['usuario_rol'])) {
-		exit('Sesión expirada. <a href="../../index.php">Ingresar al sistema</a>');
+		salir('Sesión expirada. <a href="../../index.php">Ingresar al sistema</a>', true);
 	}
 	$esAdmin = ($_SESSION['usuario_rol'] == 1);
 	$bodegaUsuario = isset($_SESSION['bodega']) ? trim($_SESSION['bodega']) : '';
-	$usuarioSesion = isset($_SESSION['usuario_nombre']) ? $_SESSION['usuario_nombre'] : '';
 	// Liberar la sesión para no bloquear otras pestañas del sistema mientras genera
 	session_write_close();
 
 	if (!$esAdmin && $bodegaUsuario === '') {
-		exit('Tu usuario no tiene un módulo asignado.');
+		salir('Tu usuario no tiene un local asignado.');
 	}
 
-	$fecha = isset($_GET['fecha']) ? $_GET['fecha'] : '';
-	// Solo ROOT elige módulo ('' = todos); el resto queda fijo en su bodega
+	$fechaDesde = isset($_GET['desde']) ? $_GET['desde'] : '';
+	$fechaHasta = isset($_GET['hasta']) ? $_GET['hasta'] : '';
+	// Solo ROOT elige local ('' = todos); el resto queda fijo en su bodega
 	$filtroBodega = $esAdmin ? (isset($_GET['modulo']) ? $_GET['modulo'] : '') : $bodegaUsuario;
 }
 
 if ($filtroBodega !== '' && !preg_match('/^\d{3}$/', $filtroBodega)) {
-	exit("Módulo inválido\n");
+	salir('Local inválido');
 }
 
 // ---------------------------------------------------------------------------
-// Descarga de un ZIP ya generado (validando que corresponda al módulo del usuario)
+// Descarga de un ZIP ya generado (validando que corresponda al local del usuario)
 // ---------------------------------------------------------------------------
 if (!$esCli && isset($_GET['descargar'])) {
 	$archivo = $_GET['descargar'];
-	if (!preg_match('/^informes_caja_\d{4}-\d{2}-\d{2}_(todos|\d{3})\.zip$/', $archivo, $m)) {
-		exit('Archivo inválido');
+	if (!preg_match('/^informes_caja_\d{4}-\d{2}-\d{2}(_a_\d{4}-\d{2}-\d{2})?_(todos|\d{3})\.zip$/', $archivo, $m)) {
+		salir('Archivo inválido');
 	}
-	if (!$esAdmin && $m[1] !== $bodegaUsuario) {
-		exit('No tienes permiso para descargar este archivo');
+	if (!$esAdmin && $m[2] !== $bodegaUsuario) {
+		salir('No tienes permiso para descargar este archivo');
 	}
 	$rutaDescarga = $dirBase . '/' . $archivo;
 	if (!is_file($rutaDescarga)) {
-		exit('El archivo no existe');
+		salir('El archivo no existe');
 	}
 	header('Content-Type: application/zip');
 	header('Content-Disposition: attachment; filename="'.$archivo.'"');
@@ -89,32 +162,67 @@ if (!$esCli && isset($_GET['descargar'])) {
 	exit;
 }
 
-if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fecha)) {
-	if ($esCli) {
-		exit("Uso: php generarInformesCaja.php AAAA-MM-DD [bodega]\n");
+// ---------------------------------------------------------------------------
+// Formulario
+// ---------------------------------------------------------------------------
+function fechaValida($f) {
+	if (!preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $f, $p)) {
+		return false;
 	}
-	echo '<title>Descargar Informes de Cajas</title>
-		<div style="font-family:Arial,sans-serif; max-width:420px; margin:40px auto;">
-		<h3>Descargar Informes de Cajas</h3>
-		<form method="GET">
-			<p>Fecha cierre de caja<br><input type="date" name="fecha" required></p>
-			<p>Módulo<br>';
+	return checkdate((int)$p[2], (int)$p[3], (int)$p[1]);
+}
+
+if ($fechaHasta === '') {
+	$fechaHasta = $fechaDesde; // un solo día
+}
+
+if (!fechaValida($fechaDesde) || !fechaValida($fechaHasta)) {
+	if ($esCli) {
+		exit("Uso: php generarInformesCaja.php AAAA-MM-DD [AAAA-MM-DD] [bodega]\n");
+	}
+	abrirPagina();
+	$ayer = date('Y-m-d', strtotime('-1 day'));
+	echo '
+		<form action="" method="GET" id="horizontalForm">
+			<fieldset>
+				<legend>Seleccionar local y rango de fechas</legend>
+				<label class="first">
+					Local';
 	if ($esAdmin) {
-		echo '<select name="modulo"><option value="">Todos los módulos</option>';
+		echo '
+					<select name="modulo" style="width:150px;">
+						<option value="">Todos los locales</option>';
 		foreach ($modulosSelect as $codigo => $nombre) {
 			echo '<option value="'.$codigo.'">'.$nombre.'</option>';
 		}
 		echo '</select>';
 	} else {
 		$nombreModulo = isset($modulos[$bodegaUsuario]) ? $modulos[$bodegaUsuario] : $bodegaUsuario;
-		echo '<b>'.htmlspecialchars($nombreModulo).'</b> (todas las cajas)';
+		echo '<span class="moduloFijo">'.htmlspecialchars($nombreModulo).' (todas las cajas)</span>';
 	}
-	echo '	</p>
-			<input type="submit" value="Generar informes">
+	echo '
+				</label>
+				<label class="first">
+					Desde
+					<input type="date" name="desde" value="'.$ayer.'" required />
+				</label>
+				<label class="first">
+					Hasta
+					<input type="date" name="hasta" value="'.$ayer.'" required />
+				</label>
+				<input type="submit" class="submit" value="Generar informes" />
+			</fieldset>
 		</form>
-		<p style="color:#666; font-size:12px;">La generación puede tardar varios minutos. No cierres la ventana.</p>
-		</div>';
+		<p class="nota">Se genera un PDF por cada caja con ventas en cada día del rango y se entregan en un archivo ZIP, con una carpeta por fecha. Máximo '.$maxDias.' días por descarga.</p>';
 	exit;
+}
+
+if ($fechaHasta < $fechaDesde) {
+	salir('La fecha "hasta" no puede ser anterior a la fecha "desde".');
+}
+$diasRango = (int)round((strtotime($fechaHasta) - strtotime($fechaDesde)) / 86400) + 1;
+if ($diasRango > $maxDias) {
+	salir('El rango no puede superar '.$maxDias.' días (pediste '.$diasRango.').');
 }
 
 if (!$esCli) {
@@ -126,8 +234,11 @@ if (!$esCli) {
 	}
 }
 
+// ---------------------------------------------------------------------------
+// Log y carpeta de salida
+// ---------------------------------------------------------------------------
 $logArchivo = null;
-function mensaje($txt) {
+function mensaje($txt, $clase = '') {
 	global $esCli, $logArchivo;
 	if ($logArchivo) {
 		file_put_contents($logArchivo, date('Y-m-d H:i:s').'  '.$txt."\n", FILE_APPEND);
@@ -135,66 +246,41 @@ function mensaje($txt) {
 	if ($esCli) {
 		echo $txt."\n";
 	} else {
-		echo htmlspecialchars($txt, ENT_QUOTES, 'UTF-8')."<br>\n";
+		if ($clase === '') {
+			$clase = (strpos($txt, 'ERROR') !== false) ? 'error' : ((strpos(ltrim($txt), 'OK ') === 0) ? 'ok' : '');
+		}
+		echo '<div class="'.$clase.'">'.htmlspecialchars($txt, ENT_QUOTES, 'UTF-8')."</div>\n";
 		flush();
 	}
 }
 
 require_once($raiz . '/clases/fpdf/fpdf.php');
 
+if (!is_dir($dirBase) && !@mkdir($dirBase, 0777, true)) {
+	salir('No se pudo crear la carpeta '.htmlspecialchars($dirBase).' (revisar permisos)');
+}
+$logArchivo = $dirBase . '/log.txt';
 $sufijo = ($filtroBodega === '') ? 'todos' : $filtroBodega;
 
-// ---------------------------------------------------------------------------
-// Carpeta de salida y log
-// ---------------------------------------------------------------------------
-$dirFecha = $dirBase . '/' . $fecha;
-if (!is_dir($dirFecha) && !@mkdir($dirFecha, 0777, true)) {
-	exit("No se pudo crear la carpeta ".$dirFecha." (revisar permisos)\n");
-}
-$logArchivo = $dirFecha . '/log.txt';
-
 if (!$esCli) {
+	abrirPagina();
 	echo str_repeat(' ', 1024); // algunos navegadores no muestran nada hasta recibir 1KB
+	echo '<div class="log">';
+	$logAbierto = true;
 }
-mensaje('Inicio generación informes de caja '.$fecha.' - módulo: '.($filtroBodega === '' ? 'todos' : (isset($modulos[$filtroBodega]) ? $modulos[$filtroBodega] : '?').' ('.$filtroBodega.')').($usuarioSesion ? ' - usuario: '.$usuarioSesion : ''));
-mensaje('Carpeta de salida: '.$dirFecha);
+
+$rangoTexto = ($fechaDesde == $fechaHasta) ? $fechaDesde : $fechaDesde.' a '.$fechaHasta;
+$localTexto = ($filtroBodega === '') ? 'todos' : (isset($modulos[$filtroBodega]) ? $modulos[$filtroBodega] : '?').' ('.$filtroBodega.')';
+mensaje('Inicio generación informes de caja '.$rangoTexto.' - local: '.$localTexto.($usuarioSesion ? ' - usuario: '.$usuarioSesion : ''));
 
 require_once($raiz . '/clases/conexionocdb.php');
 mensaje('Conectado a la base de datos');
 
 $usuario = $usuarioSesion;
+$inicioTodo = microtime(true);
 
 // ---------------------------------------------------------------------------
-// Módulos y cajas con documentos en la fecha
-// ---------------------------------------------------------------------------
-$sqlCajas = "
-	SELECT DISTINCT Bodega, Workstation
-	FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP
-	WHERE FechaDocto > '".$fecha." 00:00:00' AND
-		  FechaDocto < '".$fecha." 23:59:59' AND
-		  TipoDocto <> '99'
-		  ".($filtroBodega !== '' ? "AND Bodega = '".$filtroBodega."'" : "")."
-	ORDER BY Bodega, Workstation
-";
-$rsCajas = odbc_exec($conn, $sqlCajas);
-if (!$rsCajas) {
-	mensaje('ERROR en la consulta SQL de cajas: '.odbc_errormsg($conn));
-	exit;
-}
-$cajas = array();
-while ($fila = odbc_fetch_array($rsCajas)) {
-	$cajas[] = array('bodega' => trim($fila['Bodega']), 'workstation' => trim($fila['Workstation']));
-}
-
-if (count($cajas) == 0) {
-	odbc_close($conn);
-	mensaje('No hay ventas registradas el '.$fecha);
-	exit;
-}
-mensaje(count($cajas).' cajas con ventas encontradas');
-
-// ---------------------------------------------------------------------------
-// Funciones
+// Funciones de armado del informe
 // ---------------------------------------------------------------------------
 function fmt($n) {
 	return number_format((float)$n, 0, ',', '.');
@@ -231,58 +317,104 @@ function filaDocumento($r, $tipoTexto, $aplicaSinPago) {
 }
 
 /*
- * Replica la lógica de filas de reporteCajaCont.php (subtotales por tipo,
- * saltos de folio y totales con descuento de notas de crédito).
+ * Consulta en UNA sola pasada todos los documentos del local en el rango.
+ * Antes se hacía una consulta por caja y por día, más 6 consultas de folio anterior
+ * y 6 subconsultas por cada documento; ahora los pagos se agrupan una vez y el resto
+ * se arma en PHP.
  */
-function obtenerFilas($conn, $fecha, $bodega, $workstation) {
+function consultarDocumentos($conn, $bodega, $fechaDesde, $fechaHasta) {
 	$baseSap = ($bodega == '000')
 		? "SBO_Inv_Servimex.dbo.OINV"
 		: "[SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].OINV";
 
 	$sql = "
-		SELECT Tabla.* FROM
-		(SELECT
+		SELECT
+			CONVERT(CHAR(10), T1.FechaDocto, 120) as Dia,
 			T1.WorkStation,
 			T1.TipoDocto,
 			T1.NumeroDocto,
 			CASE WHEN T3.DocNum IS NULL THEN 'Pendiente' ELSE CONVERT(CHAR(10),T3.DocNum) END as DocNum,
 			T1.Total,
-			ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Cash' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Cash,
-			ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('DebitCard', 'GNDeb') AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_DebitCard,
-			ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago IN ('CreditCard', 'GNCred') AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_CreditCard,
-			ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Check' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Check,
-			ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'Payments' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_Payments,
-			ISNULL((SELECT SUM(Monto) FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T3 WHERE TipoPago = 'CreditStore' AND T1.ID = T3.ID GROUP BY TipoPago),'0') as Monto_StoreCredit
+			ISNULL(P.Monto_Cash,0) as Monto_Cash,
+			ISNULL(P.Monto_DebitCard,0) as Monto_DebitCard,
+			ISNULL(P.Monto_CreditCard,0) as Monto_CreditCard,
+			ISNULL(P.Monto_Check,0) as Monto_Check,
+			ISNULL(P.Monto_Payments,0) as Monto_Payments,
+			ISNULL(P.Monto_StoreCredit,0) as Monto_StoreCredit
 		FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP as T1
-		LEFT JOIN RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as T2 ON T1.ID = T2.ID
+		LEFT JOIN (
+			SELECT
+				P1.ID,
+				SUM(CASE WHEN P1.TipoPago = 'Cash' THEN P1.Monto ELSE 0 END) as Monto_Cash,
+				SUM(CASE WHEN P1.TipoPago IN ('DebitCard','GNDeb') THEN P1.Monto ELSE 0 END) as Monto_DebitCard,
+				SUM(CASE WHEN P1.TipoPago IN ('CreditCard','GNCred') THEN P1.Monto ELSE 0 END) as Monto_CreditCard,
+				SUM(CASE WHEN P1.TipoPago = 'Check' THEN P1.Monto ELSE 0 END) as Monto_Check,
+				SUM(CASE WHEN P1.TipoPago = 'Payments' THEN P1.Monto ELSE 0 END) as Monto_Payments,
+				SUM(CASE WHEN P1.TipoPago = 'CreditStore' THEN P1.Monto ELSE 0 END) as Monto_StoreCredit
+			FROM RP_VICENCIO.dbo.RP_ReceiptsPagos_SAP as P1
+			INNER JOIN RP_VICENCIO.dbo.RP_ReceiptsCab_SAP as C1 ON C1.ID = P1.ID
+			WHERE C1.FechaDocto > '".$fechaDesde." 00:00:00' AND
+				  C1.FechaDocto < '".$fechaHasta." 23:59:59' AND
+				  C1.Bodega = '".$bodega."'
+			GROUP BY P1.ID
+		) as P ON T1.ID = P.ID
 		LEFT JOIN ".$baseSap." T3 ON T1.BaseEntry = T3.DocEntry
 		WHERE
-			T1.FechaDocto > '".$fecha." 00:00:00' AND
-			T1.FechaDocto < '".$fecha." 23:59:59' AND
+			T1.FechaDocto > '".$fechaDesde." 00:00:00' AND
+			T1.FechaDocto < '".$fechaHasta." 23:59:59' AND
 			T1.Bodega = '".$bodega."' AND
-			T1.Workstation = '".$workstation."' AND
 			T1.TipoDocto <> '99'
-		) as Tabla
-		GROUP BY Tabla.Workstation, Tabla.TipoDocto, Tabla.NumeroDocto, Tabla.DocNum, Tabla.Total, Tabla.Monto_Cash, Tabla.Monto_DebitCard, Tabla.Monto_CreditCard, Tabla.Monto_Check, Tabla.Monto_Payments, Tabla.Monto_StoreCredit
-		ORDER BY Tabla.TipoDocto, Tabla.NumeroDocto ASC
+		ORDER BY Dia, T1.WorkStation, T1.TipoDocto, T1.NumeroDocto ASC
 	";
-
-	// Último folio del día anterior por tipo de documento
-	$ultimos = array();
-	foreach (array('1', '2', '3', '4', '5', '99') as $t) {
-		$sqlUlt = "SELECT TOP 1 NumeroDocto FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP
-			WHERE TipoDocto = '".$t."' AND FechaDocto > DATEADD(day,-1,'".$fecha." 00:00:00') AND FechaDocto < DATEADD(day,-1,'".$fecha." 23:59:59')
-			AND Bodega = '".$bodega."' AND Workstation = '".$workstation."' ORDER BY NumeroDocto DESC";
-		$rsUlt = odbc_exec($conn, $sqlUlt);
-		$filaUlt = $rsUlt ? odbc_fetch_array($rsUlt) : false;
-		$ultimos[$t] = $filaUlt ? $filaUlt['NumeroDocto'] : NULL;
-	}
 
 	$rs = odbc_exec($conn, $sql);
 	if (!$rs) {
 		return false;
 	}
 
+	// [dia][workstation][] = documento
+	$docs = array();
+	while ($r = odbc_fetch_array($rs)) {
+		$docs[$r['Dia']][trim($r['WorkStation'])][] = $r;
+	}
+	return $docs;
+}
+
+/*
+ * Último folio de cada día / caja / tipo de documento, en una sola consulta.
+ * Se incluye el día anterior al rango para poder comparar el primer día.
+ */
+function consultarUltimosFolios($conn, $bodega, $fechaDesde, $fechaHasta) {
+	$diaAnterior = date('Y-m-d', strtotime($fechaDesde.' -1 day'));
+	$sql = "
+		SELECT
+			CONVERT(CHAR(10), FechaDocto, 120) as Dia,
+			WorkStation,
+			TipoDocto,
+			MAX(NumeroDocto) as Ultimo
+		FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP
+		WHERE FechaDocto > '".$diaAnterior." 00:00:00' AND
+			  FechaDocto < '".$fechaHasta." 23:59:59' AND
+			  Bodega = '".$bodega."'
+		GROUP BY CONVERT(CHAR(10), FechaDocto, 120), WorkStation, TipoDocto
+	";
+	$rs = odbc_exec($conn, $sql);
+	if (!$rs) {
+		return false;
+	}
+	$ultimos = array();
+	while ($r = odbc_fetch_array($rs)) {
+		$ultimos[$r['Dia']][trim($r['WorkStation'])][trim($r['TipoDocto'])] = $r['Ultimo'];
+	}
+	return $ultimos;
+}
+
+/*
+ * Replica la lógica de filas de reporteCajaCont.php (subtotales por tipo,
+ * saltos de folio y totales con descuento de notas de crédito).
+ * $ultimosDiaAnterior = array(tipoDocto => último folio del día anterior)
+ */
+function construirFilas($documentos, $ultimosDiaAnterior) {
 	$filas = array();
 	$acum = array('Total' => 0, 'Monto_Cash' => 0, 'Monto_DebitCard' => 0, 'Monto_CreditCard' => 0, 'Monto_Check' => 0, 'Monto_Payments' => 0, 'Monto_StoreCredit' => 0);
 	$sub = $acum;
@@ -292,15 +424,15 @@ function obtenerFilas($conn, $fecha, $bodega, $workstation) {
 	$tipoDoctoAnte = "";
 	$primeraFila = true;
 
-	while ($r = odbc_fetch_array($rs)) {
+	foreach ($documentos as $r) {
 		if ($tipoDoctoAnt != "" && $tipoDoctoAnt != $r['TipoDocto']) {
 			$numeroDoctoAnt = "";
 		}
 
 		// Salto de folio respecto al último documento del día anterior (solo primera fila, igual que el reporte)
 		if ($primeraFila) {
-			$t = $r['TipoDocto'];
-			if (array_key_exists($t, $ultimos) && $ultimos[$t] !== NULL && ($r['NumeroDocto'] - 1) != $ultimos[$t]) {
+			$t = trim($r['TipoDocto']);
+			if (isset($ultimosDiaAnterior[$t]) && ($r['NumeroDocto'] - 1) != $ultimosDiaAnterior[$t]) {
 				$filas[] = filaSaltoFolio();
 			}
 			$primeraFila = false;
@@ -404,49 +536,110 @@ function generarPdf($filas, $fecha, $moduloNombre, $workstation, $usuario, $ruta
 }
 
 // ---------------------------------------------------------------------------
+// Locales a procesar
+// ---------------------------------------------------------------------------
+if ($filtroBodega !== '') {
+	$bodegas = array($filtroBodega);
+} else {
+	$sqlBodegas = "
+		SELECT DISTINCT Bodega
+		FROM RP_VICENCIO.dbo.RP_ReceiptsCab_SAP
+		WHERE FechaDocto > '".$fechaDesde." 00:00:00' AND
+			  FechaDocto < '".$fechaHasta." 23:59:59' AND
+			  TipoDocto <> '99'
+		ORDER BY Bodega
+	";
+	$rsBodegas = odbc_exec($conn, $sqlBodegas);
+	if (!$rsBodegas) {
+		mensaje('ERROR en la consulta de locales: '.odbc_errormsg($conn));
+		exit;
+	}
+	$bodegas = array();
+	while ($r = odbc_fetch_array($rsBodegas)) {
+		$bodegas[] = trim($r['Bodega']);
+	}
+}
+
+// ---------------------------------------------------------------------------
 // Generación
 // ---------------------------------------------------------------------------
-$generados = array();
-foreach ($cajas as $caja) {
-	$bodega = $caja['bodega'];
-	$workstation = $caja['workstation'];
+$generados = array(); // ruta => nombre dentro del ZIP
+foreach ($bodegas as $bodega) {
 	$moduloNombre = isset($modulos[$bodega]) ? $modulos[$bodega] : $bodega;
+	mensaje('Local '.$moduloNombre.' ('.$bodega.')', 'dia');
 
-	$etiqueta = 'modulo '.$moduloNombre.' ('.$bodega.') caja '.$workstation;
-	mensaje('Procesando '.$etiqueta.'...');
-	$inicioCaja = microtime(true);
+	$inicioConsulta = microtime(true);
+	$docsPorDia = consultarDocumentos($conn, $bodega, $fechaDesde, $fechaHasta);
+	if ($docsPorDia === false) {
+		mensaje('  ERROR SQL en documentos del local '.$moduloNombre.': '.odbc_errormsg($conn));
+		continue;
+	}
+	$ultimos = consultarUltimosFolios($conn, $bodega, $fechaDesde, $fechaHasta);
+	if ($ultimos === false) {
+		mensaje('  ERROR SQL en folios del local '.$moduloNombre.': '.odbc_errormsg($conn));
+		continue;
+	}
+	mensaje('  Datos leídos en '.round(microtime(true) - $inicioConsulta, 1).' s');
 
-	$filas = obtenerFilas($conn, $fecha, $bodega, $workstation);
-	if ($filas === false) {
-		mensaje('  ERROR SQL '.$etiqueta.': '.odbc_errormsg($conn));
+	if (count($docsPorDia) == 0) {
+		mensaje('  Sin ventas en el rango');
 		continue;
 	}
 
-	$nombre = 'reporte caja '.$fecha.' '.$etiqueta.'.pdf';
-	$ruta = $dirFecha . '/' . $nombre;
-	generarPdf($filas, $fecha, $moduloNombre, $workstation, $usuario, $ruta);
-	$generados[] = $ruta;
+	ksort($docsPorDia);
+	foreach ($docsPorDia as $dia => $cajas) {
+		$dirDia = $dirBase . '/' . $dia;
+		if (!is_dir($dirDia) && !@mkdir($dirDia, 0777, true)) {
+			mensaje('  ERROR: no se pudo crear la carpeta '.$dirDia);
+			continue;
+		}
+		$diaAnterior = date('Y-m-d', strtotime($dia.' -1 day'));
 
-	mensaje('  OK '.$nombre.' ('.round(microtime(true) - $inicioCaja, 1).' s)');
+		ksort($cajas);
+		foreach ($cajas as $workstation => $documentos) {
+			$inicioCaja = microtime(true);
+			$ultimosCaja = isset($ultimos[$diaAnterior][$workstation]) ? $ultimos[$diaAnterior][$workstation] : array();
+			$filas = construirFilas($documentos, $ultimosCaja);
+
+			$nombre = 'reporte caja '.$dia.' modulo '.$moduloNombre.' ('.$bodega.') caja '.$workstation.'.pdf';
+			$ruta = $dirDia . '/' . $nombre;
+			generarPdf($filas, $dia, $moduloNombre, $workstation, $usuario, $ruta);
+			$generados[$ruta] = ($fechaDesde == $fechaHasta) ? $nombre : $dia.'/'.$nombre;
+
+			mensaje('  OK '.$nombre.' ('.round(microtime(true) - $inicioCaja, 1).' s)');
+		}
+	}
 }
 odbc_close($conn);
 
+if (count($generados) == 0) {
+	mensaje('No se generó ningún informe: no hay ventas en el rango '.$rangoTexto);
+	exit;
+}
+
+// ---------------------------------------------------------------------------
 // ZIP
-$nombreZip = 'informes_caja_' . $fecha . '_' . $sufijo . '.zip';
+// ---------------------------------------------------------------------------
+$nombreZip = 'informes_caja_' . $fechaDesde . (($fechaDesde == $fechaHasta) ? '' : '_a_'.$fechaHasta) . '_' . $sufijo . '.zip';
 $rutaZip = $dirBase . '/' . $nombreZip;
 $zip = new ZipArchive();
 if ($zip->open($rutaZip, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
 	mensaje('ERROR: no se pudo crear el ZIP '.$rutaZip);
 	exit;
 }
-foreach ($generados as $ruta) {
-	$zip->addFile($ruta, basename($ruta));
+foreach ($generados as $ruta => $nombreEnZip) {
+	$zip->addFile($ruta, $nombreEnZip);
 }
 $zip->close();
 
-mensaje(count($generados).' PDF generados en '.$dirFecha);
+mensaje(count($generados).' PDF generados en '.round(microtime(true) - $inicioTodo, 1).' s');
 mensaje('ZIP: '.$rutaZip);
 
 if (!$esCli) {
-	echo '<br><a href="?descargar='.rawurlencode($nombreZip).'" style="font-size:16px;">Descargar '.$nombreZip.'</a>';
+	$logAbierto = false;
+	echo '</div>
+		<div class="acciones">
+			<a class="boton" href="?descargar='.rawurlencode($nombreZip).'">Descargar '.$nombreZip.'</a>
+			&nbsp;&nbsp;<a class="volver" href="generarInformesCaja.php">Generar otro rango</a>
+		</div>';
 }
