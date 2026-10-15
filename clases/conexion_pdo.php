@@ -1,5 +1,5 @@
 <?php
-// En: clases/conexion_pdo.php
+
 $host = '192.168.3.40';
 $dbName = 'RP_VICENCIO';
 $user = 'sa';

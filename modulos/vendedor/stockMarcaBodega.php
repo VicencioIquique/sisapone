@@ -23,7 +23,7 @@ if(!$finicio)
  $sql2= "SELECT   [Code]
       ,[Name]
       ,[U_Marca]
-  FROM [RP_VICENCIO].[dbo].[View_OMAR] ORDER BY U_Marca
+  FROM [RP_VICENCIO].[dbo].[View_OMAR] ORDER BY Name
 ";
 							$rs3 = odbc_exec( $conn, $sql2 );
 							if ( !$rs3 )
