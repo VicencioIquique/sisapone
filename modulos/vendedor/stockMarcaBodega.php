@@ -79,7 +79,7 @@ $sql="SELECT
      
       ,SUM([Quantity])AS Cantidad
       
-  FROM [SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON]
+  FROM [SAPSQL.DHN.CL].[SBO_Imp_Eximben_SAC].[dbo].[SI_StockBodegasMarcaReferencia_ON]
   WHERE ".$conMarca."  ".$conModulo."  ".$conuNegocio."
   GROUP BY [WhsCode],ItemCode,ItemName,Name,Code 
 
