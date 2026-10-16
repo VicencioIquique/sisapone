@@ -22,7 +22,7 @@ if(!$finicio)
  $sql2= "SELECT   [Code]
       ,[Name]
       ,[U_Marca]
-  FROM [RP_VICENCIO].[dbo].[View_OMAR] ORDER BY U_Marca ASC
+  FROM [RP_VICENCIO].[dbo].[View_OMAR] ORDER BY Name ASC
 ";
 							$rs3 = odbc_exec( $conn, $sql2 );
 							if ( !$rs3 )
@@ -77,13 +77,13 @@ $sql="SELECT
 	  ,[Cantidad]
 	  ,[TipoProducto]
   FROM [RP_VICENCIO].[dbo].[SI_LotesDisponibles]
- WHERE  (Bodega LIKE '".$modulo."')  ".$conMarca."
-
+ WHERE 1=1 ".($modulo ? " AND ".$conModulo : "")." ".$conMarca."
+ ORDER BY Bodega, Name, ItemName
   ";
 
 
 
-echo $sql;
+//echo $sql;
 
 							
 	echo'  <script src="graficos/amcharts/amcharts.js" type="text/javascript"></script>   ';	
@@ -207,23 +207,25 @@ $(document).ready(function() {
   <ul> 
   <?php 
   
+  if ($modulo || $marca)
+	{
+	echo'<li ><a id="tabdua" href="#tab3" class="selected">Detalle</a></li> ';
+	}
   if ($modulo)
 	{
-
-	echo'<li ><a id="tabdua" href="#tab3" class="selected">Detalle</a></li> 
-    <li ><a id="tabdua" href="#" > Hoy '.$Hoy.' a las '.date("G:i").' el Modulo ha emitido hasta la boleta '.getLastBoleta($modulo,"RP_VICENCIO") .' y ha recibido hasta la E.M. '.getLastDSM($modulo,"RP_VICENCIO").'</a></li> ';
+	echo'<li ><a id="tabdua" href="#" > Hoy '.$Hoy.' a las '.date("G:i").' el Modulo ha emitido hasta la boleta '.getLastBoleta($modulo,"RP_VICENCIO") .' y ha recibido hasta la E.M. '.getLastDSM($modulo,"RP_VICENCIO").'</a></li> ';
     }
   
   ?>    
   </ul> 
  
 
-<?php 
-if ($modulo)
+<?php
+if ($modulo || $marca)
 	{
 
-  
-  echo'<div id="tab3"> 
+
+  echo'<div id="tab3">
   <table  id="ssptable2" class="lista">
               <thead>
                     <tr>
@@ -247,15 +249,19 @@ if ($modulo)
 								
 							
 							
-							//echo $sql;	
-							$rs = odbc_exec( $conn, $sql );
-							if ( !$rs )
+							//echo $sql;
+							$rs = false;
+							if ($modulo || $marca)
 							{
-							exit( "Error en la consulta SQL" );
+								$rs = odbc_exec( $conn, $sql );
+								if ( !$rs )
+								{
+								exit( "Error en la consulta SQL" );
+								}
 							}
-							
+
 							$i=1;
-							while($resultado = odbc_fetch_array($rs)){ 
+							while($rs && $resultado = odbc_fetch_array($rs)){
 							  
 							   echo '<tr>
 							 		<td style="background-color:#6C6B6B;color:#fff;font-weight:bold; font-size:15px; width:23px; text-align:center;" >'.$i.'</td>
@@ -277,7 +283,7 @@ if ($modulo)
 							
 
 				
- if ($modulo)
+ if ($modulo || $marca)
 	{
                 echo'</tbody>
                 <tfoot>
