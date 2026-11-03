@@ -24,7 +24,7 @@ if(!$finicio)
  $sql2= "SELECT   [Code]
       ,[Name]
       ,[U_Marca]
-  FROM [RP_VICENCIO].[dbo].[View_OMAR] ORDER BY U_Marca ASC
+  FROM [SBO_Imp_Eximben_SAC].[dbo].[@VK_OMAR] ORDER BY U_Marca ASC
 ";
 
 
@@ -103,8 +103,8 @@ if ($uNegocio)
   FROM [SBO_Imp_Eximben_SAC].[dbo].[Stock_Bodegas_SAPJPL]
   WHERE [WhsCode] = '".$modulo."' ".$conMarca."    ".$conuNegocio." ";
 
-echo $sql;
-							
+//echo $sql;
+
 	echo'  <script src="graficos/amcharts/amcharts.js" type="text/javascript"></script>   ';	
 	
 	
