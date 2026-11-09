@@ -360,6 +360,9 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2026.xlsx'>Jul. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Ago2026.xlsx'>Ago. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Sep2026.xlsx'>Sep. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2026.xlsx'>Oct. 2026</a></li>
 													</ul>
 												</li>
 
@@ -799,6 +802,9 @@ class menu{
 													  <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
 													  <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
 													  <li><a target'_blank' href='../sisapone/archivos/Jul2026.xlsx'>Jul. 2026</a></li>
+													  <li><a target'_blank' href='../sisapone/archivos/Ago2026.xlsx'>Ago. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Sep2026.xlsx'>Sep. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2026.xlsx'>Oct. 2026</a></li>
 													</ul>
 												</li>
 										    </ul>
@@ -1372,7 +1378,9 @@ class menu{
 													 <li><a target'_blank' href='../sisapone/archivos/May2026.xlsx'>May. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jun2026.xlsx'>Jun. 2026</a></li>
 													 <li><a target'_blank' href='../sisapone/archivos/Jul2026.xlsx'>Jul. 2026</a></li>
-														</ul>
+													<li><a target'_blank' href='../sisapone/archivos/Ago2026.xlsx'>Ago. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Sep2026.xlsx'>Sep. 2026</a></li>
+													 <li><a target'_blank' href='../sisapone/archivos/Oct2026.xlsx'>Oct. 2026</a></li>	</ul>
 										</li>
 										<li><a href='../sisap/archivos/ComMarcas.xlsx'>Comparativo Marcas</a></li>
 										<li><a href='index.php?opc=ventasPorHistorico'>Informe Historico</a></li>

@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "PowerShell(php \"C:\\\\Users\\\\Franco\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--laragon-www-sisapone\\\\c7c3f383-889b-4de3-a8a0-267264ad5468\\\\scratchpad\\\\q.php\")",
+      "PowerShell(php -l modulos/vendedor/stockMarca.php)",
+      "PowerShell(php -l modulos/vendedor/stockMarcaBodega.php)",
+      "PowerShell(php \"C:\\\\Users\\\\Franco\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\0d2ab5981329ce3b\\\\c7c3f383-889b-4de3-a8a0-267264ad5468\\\\scratchpad\\\\q.php\")",
+      "PowerShell(php \"C:\\\\Users\\\\Franco\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\0d2ab5981329ce3b\\\\c7c3f383-889b-4de3-a8a0-267264ad5468\\\\scratchpad\\\\q2.php\")",
+      "PowerShell(git checkout fd51037 -- modulos/vendedor/stockMarcaBodega.php)",
+      "PowerShell(php -l modulos/vendedor/stockMarcaBodegaLote.php)"
     ]
   }
 }
